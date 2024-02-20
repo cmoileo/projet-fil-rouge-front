@@ -1,0 +1,17 @@
+@each $color-name, $color-value in $colors {
+  .#{$color-name} {
+    color: $color-value;
+  }
+  .bg-#{$color-name} {
+    background-color: $color-value;
+  }
+  .border-#{$color-name} {
+    border-color: $color-value;
+  }
+  .fill-#{$color-name} {
+    fill: $color-value;
+  }
+  .stroke-#{$color-name} {
+    stroke: $color-value;
+  }
+}

@@ -1,0 +1,12 @@
+@each $breakpoints, $value in $spacings {
+  @each $spacing, $spacingValue in $value {
+    @each $property, $propertyValue in $spacingValue {
+      $number: str-slice("#{ $propertyValue }", 0, str-index("#{ $propertyValue }", "px") - 1);
+      @include min($breakpoints) {
+        .#{$spacing}-#{$property} {
+          #{$spacing}: ptr($number, $breakpoints);
+        }
+      }
+    }
+  }
+}

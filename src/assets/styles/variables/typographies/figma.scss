@@ -1,0 +1,179 @@
+@mixin text-style-headings-heading-h-1() {
+  font-family: "Josefin Sans";
+  font-weight: 700;
+  font-style: normal;
+  text-decoration: none;
+  text-transform: none;
+  @include min(mobile) {
+    font-size: ptr(40, mobile)
+  }
+  @include min(tablet) {
+    font-size: ptr(40, tablet)
+  }
+  @include min(desktop) {
+    font-size: ptr(80, desktop)
+  }
+}
+@mixin text-style-headings-heading-h-2() {
+  font-family: "Josefin Sans";
+  font-weight: 700;
+  font-style: normal;
+  text-decoration: none;
+  text-transform: none;
+  @include min(mobile) {
+    font-size: ptr(36, mobile)
+  }
+  @include min(tablet) {
+    font-size: ptr(36, tablet)
+  }
+  @include min(desktop) {
+    font-size: ptr(72, desktop)
+  }
+}
+@mixin text-style-headings-heading-h-3() {
+  font-family: "Josefin Sans";
+  font-weight: 600;
+  font-style: normal;
+  text-decoration: none;
+  text-transform: none;
+  @include min(mobile) {
+    font-size: ptr(32, mobile)
+  }
+  @include min(tablet) {
+    font-size: ptr(32, tablet)
+  }
+  @include min(desktop) {
+    font-size: ptr(64, desktop)
+  }
+}
+@mixin text-style-headings-heading-h-4() {
+  font-family: "Josefin Sans";
+  font-weight: 500;
+  font-style: normal;
+  text-decoration: none;
+  text-transform: none;
+    @include min(mobile) {
+        font-size: ptr(28, mobile)
+    }
+    @include min(tablet) {
+        font-size: ptr(28, tablet)
+    }
+    @include min(desktop) {
+        font-size: ptr(56, desktop)
+    }
+}
+@mixin text-style-headings-heading-h-5() {
+  font-family: "Josefin Sans";
+  font-weight: 400;
+  font-style: normal;
+  text-decoration: none;
+  text-transform: none;
+    @include min(mobile) {
+        font-size: ptr(24, mobile)
+    }
+    @include min(tablet) {
+        font-size: ptr(24, tablet)
+    }
+    @include min(desktop) {
+        font-size: ptr(48, desktop)
+    }
+}
+@mixin text-style-headings-heading-h-6() {
+  font-family: "Josefin Sans";
+  font-weight: 400;
+  font-style: normal;
+  text-decoration: none;
+  text-transform: none;
+    @include min(mobile) {
+        font-size: ptr(20, mobile)
+    }
+    @include min(tablet) {
+        font-size: ptr(20, tablet)
+    }
+    @include min(desktop) {
+        font-size: ptr(40, desktop)
+    }
+}
+@mixin text-style-paragraphs-paragraph-xl() {
+  font-family: "Roboto";
+  font-weight: 500;
+  font-style: normal;
+  text-decoration: none;
+  text-transform: none;
+    @include min(mobile) {
+        font-size: ptr(18, mobile)
+    }
+    @include min(tablet) {
+        font-size: ptr(18, tablet)
+    }
+    @include min(desktop) {
+        font-size: ptr(36, desktop)
+    }
+}
+@mixin text-style-paragraphs-paragraph-l() {
+  font-family: "Roboto";
+  font-weight: 500;
+  font-style: normal;
+  text-decoration: none;
+  text-transform: none;
+    @include min(mobile) {
+        font-size: ptr(16, mobile)
+    }
+    @include min(tablet) {
+        font-size: ptr(16, tablet)
+    }
+    @include min(desktop) {
+        font-size: ptr(32, desktop)
+    }
+}
+@mixin text-style-paragraphs-paragraph-m() {
+  font-family: "Roboto";
+  font-weight: 400;
+  font-style: normal;
+  text-decoration: none;
+  text-transform: none;
+    @include min(mobile) {
+        font-size: ptr(14, mobile)
+    }
+    @include min(tablet) {
+        font-size: ptr(14, tablet)
+    }
+    @include min(desktop) {
+        font-size: ptr(28, desktop)
+    }
+}
+@mixin text-style-paragraphs-paragraph-s() {
+  font-family: "Roboto";
+  font-weight: 400;
+  font-style: normal;
+  text-decoration: none;
+  text-transform: none;
+    @include min(mobile) {
+        font-size: ptr(12, mobile)
+    }
+    @include min(tablet) {
+        font-size: ptr(12, tablet)
+    }
+    @include min(desktop) {
+        font-size: ptr(24, desktop)
+    }
+}
+@mixin text-style-paragraphs-paragraph-xs() {
+  font-family: "Roboto";
+  font-weight: 300;
+  font-style: normal;
+  text-decoration: none;
+  text-transform: none;
+    @include min(mobile) {
+        font-size: ptr(10, mobile)
+    }
+    @include min(tablet) {
+        font-size: ptr(10, tablet)
+    }
+    @include min(desktop) {
+        font-size: ptr(20, desktop)
+    }
+}
+@mixin effect-style-main-shaddow() {
+  box-shadow: 0px 0px 20px 2px rgba(0,0,0,0.250);
+}

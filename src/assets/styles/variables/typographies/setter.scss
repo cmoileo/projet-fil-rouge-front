@@ -1,0 +1,33 @@
+.h1 {
+  @include text-style-headings-heading-h-1();
+}
+.h2 {
+    @include text-style-headings-heading-h-2();
+}
+.h3 {
+    @include text-style-headings-heading-h-3();
+}
+.h4 {
+    @include text-style-headings-heading-h-4();
+}
+.h5 {
+    @include text-style-headings-heading-h-5();
+}
+.h6 {
+    @include text-style-headings-heading-h-6();
+}
+.p-xl {
+    @include text-style-paragraphs-paragraph-xl();
+}
+.p-l {
+    @include text-style-paragraphs-paragraph-l();
+}
+.p-m {
+    @include text-style-paragraphs-paragraph-m();
+}
+.p-s {
+    @include text-style-paragraphs-paragraph-s();
+}
+.p-xs {
+    @include text-style-paragraphs-paragraph-xs();
+}
