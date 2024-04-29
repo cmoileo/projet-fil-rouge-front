@@ -1,5 +1,7 @@
 import * as React from "react"
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-expect-error
 import { cn } from '@/lib/utils.ts'
 
 export interface InputProps

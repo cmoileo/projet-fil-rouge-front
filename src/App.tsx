@@ -7,7 +7,7 @@ function App() {
 
   return (
     <>
-        <h1 className="h1 padding-300">Hello world</h1>
+        <h1 className="h1 padding-300 grid">Hello world</h1>
         <Input />
     </>
   )
