@@ -7,7 +7,7 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
-      '@cmoileo': path.resolve(__dirname, 'node_modules/cmoileo/src/components'),
+      '@': path.resolve(__dirname, './'),
     },
   },
 })

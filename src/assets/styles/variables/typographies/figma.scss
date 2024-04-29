@@ -164,15 +164,15 @@
   font-style: normal;
   text-decoration: none;
   text-transform: none;
-    @include min(mobile) {
-        font-size: ptr(10, mobile)
-    }
-    @include min(tablet) {
-        font-size: ptr(10, tablet)
-    }
-    @include min(desktop) {
-        font-size: ptr(20, desktop)
-    }
+  @include min(mobile) {
+    font-size: ptr(10, mobile)
+  }
+  @include min(tablet) {
+    font-size: ptr(10, tablet)
+  }
+  @include min(desktop) {
+    font-size: ptr(20, desktop)
+  }
 }
 @mixin effect-style-main-shaddow() {
   box-shadow: 0px 0px 20px 2px rgba(0,0,0,0.250);
