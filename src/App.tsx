@@ -1,12 +1,23 @@
 import "./assets/styles/main.scss"
-
+import {createBrowserRouter, RouterProvider} from "react-router-dom"
+import {OnBoardingPage} from "./modules/auth/presentation/page/OnBoarding.page.tsx";
 
 
 function App() {
+    const router = createBrowserRouter([
+        {
+            path: "/",
+            element: <div>Hello world!</div>,
+        },
+        {
+            path: "/onboarding",
+            element: <OnBoardingPage />,
+        }
+    ]);
 
   return (
     <>
-        <h1 className="h1 padding-300">Hello world</h1>
+        <RouterProvider router={router} />
     </>
   )
 }
