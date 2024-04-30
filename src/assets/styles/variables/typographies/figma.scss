@@ -1,5 +1,52 @@
+@font-face {
+  font-family: "Roboto Regular";
+  font-weight: 500;
+  src: url("../../../fonts/roboto/Roboto-Regular.ttf");
+}
+@font-face {
+  font-family: "Roboto Medium";
+  font-weight: 400;
+  src: url("../../../fonts/roboto/Roboto-Medium.ttf");
+}
+@font-face {
+  font-family: "Roboto Bold";
+  font-weight: 700;
+  src: url("../../../fonts/roboto/Roboto-Bold.ttf");
+}
+@font-face {
+  font-family: "Roboto Light";
+  font-weight: 300;
+  src: url("../../../fonts/roboto/Roboto-Light.ttf");
+}
+
+@font-face {
+  font-family: "Josefin Sans Regular";
+  font-weight: 400;
+  src: url("../../../fonts/josefin/static/JosefinSans-Regular.ttf");
+}
+@font-face {
+  font-family: "Josefin Sans Medium";
+  font-weight: 500;
+  src: url("../../../fonts/josefin/static/JosefinSans-Medium.ttf");
+}
+@font-face {
+  font-family: "Josefin Sans Bold";
+  font-weight: 700;
+  src: url("../../../fonts/josefin/static/JosefinSans-Bold.ttf");
+}
+@font-face {
+  font-family: "Josefin Sans SemiBold";
+  font-weight: 600;
+  src: url("../../../fonts/josefin/static/JosefinSans-SemiBold.ttf");
+}
+@font-face {
+  font-family: "Josefin Sans Light";
+  font-weight: 300;
+  src: url("../../../fonts/josefin/static/JosefinSans-Light.ttf");
+}
+
 @mixin text-style-headings-heading-h-1() {
-  font-family: "Josefin Sans";
+  font-family: "Josefin Sans Bold";
   font-weight: 700;
   font-style: normal;
   @include min(mobile) {
@@ -13,7 +60,7 @@
   }
 }
 @mixin text-style-headings-heading-h-2() {
-  font-family: "Josefin Sans";
+  font-family: "Josefin Sans Bold";
   font-weight: 700;
   font-style: normal;
   text-decoration: none;
@@ -29,7 +76,7 @@
   }
 }
 @mixin text-style-headings-heading-h-3() {
-  font-family: "Josefin Sans";
+  font-family: "Josefin Sans SemiBold";
   font-weight: 600;
   font-style: normal;
   text-decoration: none;
@@ -45,7 +92,7 @@
   }
 }
 @mixin text-style-headings-heading-h-4() {
-  font-family: "Josefin Sans";
+  font-family: "Josefin Sans Medium";
   font-weight: 500;
   font-style: normal;
   text-decoration: none;
@@ -61,7 +108,7 @@
     }
 }
 @mixin text-style-headings-heading-h-5() {
-  font-family: "Josefin Sans";
+  font-family: "Josefin Sans Regular";
   font-weight: 400;
   font-style: normal;
   text-decoration: none;
@@ -77,7 +124,7 @@
     }
 }
 @mixin text-style-headings-heading-h-6() {
-  font-family: "Josefin Sans";
+  font-family: "Josefin Sans Regular";
   font-weight: 400;
   font-style: normal;
   text-decoration: none;
@@ -93,7 +140,7 @@
     }
 }
 @mixin text-style-paragraphs-paragraph-xl() {
-  font-family: "Roboto";
+  font-family: "Roboto Medium";
   font-weight: 500;
   font-style: normal;
   text-decoration: none;
@@ -109,7 +156,7 @@
     }
 }
 @mixin text-style-paragraphs-paragraph-l() {
-  font-family: "Roboto";
+  font-family: "Roboto Medium";
   font-weight: 500;
   font-style: normal;
   text-decoration: none;
@@ -125,7 +172,7 @@
     }
 }
 @mixin text-style-paragraphs-paragraph-m() {
-  font-family: "Roboto";
+  font-family: "Roboto Regular";
   font-weight: 400;
   font-style: normal;
   text-decoration: none;
@@ -141,7 +188,7 @@
     }
 }
 @mixin text-style-paragraphs-paragraph-s() {
-  font-family: "Roboto";
+  font-family: "Roboto Regular";
   font-weight: 400;
   font-style: normal;
   text-decoration: none;
@@ -157,7 +204,7 @@
     }
 }
 @mixin text-style-paragraphs-paragraph-xs() {
-  font-family: "Roboto";
+  font-family: "Roboto Light";
   font-weight: 300;
   font-style: normal;
   text-decoration: none;
