@@ -8,7 +8,7 @@ const buttonVariants = cva(
     {
         variants: {
             variant: {
-                default: "bg-blue-600 text-primary-foreground hover:bg-blue-700 active:bg-blue-800",
+                default: "grey-400 hover:grey-900 hover-bg-grey-200 text-primary-foreground",
                 destructive:
                     "bg-destructive text-destructive-foreground hover:bg-destructive/90",
                 outline:
@@ -38,7 +38,7 @@ export interface ButtonProps
     asChild?: boolean
 }
 
-const MainButton = React.forwardRef<HTMLButtonElement, ButtonProps>(
+const SecondaryButton = React.forwardRef<HTMLButtonElement, ButtonProps>(
     ({ className, variant, size, ...props }, ref) => {
         return (
             <button
@@ -49,6 +49,6 @@ const MainButton = React.forwardRef<HTMLButtonElement, ButtonProps>(
         )
     }
 )
-MainButton.displayName = "Button"
+SecondaryButton.displayName = "Button"
 
-export { MainButton, buttonVariants }
+export { SecondaryButton, buttonVariants }

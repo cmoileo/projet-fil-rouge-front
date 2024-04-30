@@ -1,10 +1,12 @@
-import {Button} from "../../../../../ui/components/mainButton.tsx";
+import {MainButton} from "../../../../../ui/components/mainButton.tsx";
+import {SecondaryButton} from "../../../../../ui/components/secondaryButton.tsx";
 
 const OnboardingLayout = () => {
     return (
         <>
-            <Button>Click me!</Button>
+            <MainButton>Click me!</MainButton>
             <h1 className={"h1"}>test</h1>
+            <SecondaryButton>Click me!</SecondaryButton>
         </>
     );
 }
