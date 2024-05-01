@@ -6,6 +6,26 @@
         .#{$spacing}-#{$property} {
           #{$spacing}: ptr($number, $breakpoints);
         }
+        .#{$spacing}-#{$property}-x {
+          #{$spacing}-left: ptr($number, $breakpoints);
+          #{$spacing}-right: ptr($number, $breakpoints);
+        }
+        .#{$spacing}-#{$property}-y {
+          #{$spacing}-top: ptr($number, $breakpoints);
+          #{$spacing}-bottom: ptr($number, $breakpoints);
+        }
+        .#{$spacing}-#{$property}-top {
+          #{$spacing}-top: ptr($number, $breakpoints);
+        }
+        .#{$spacing}-#{$property}-right {
+          #{$spacing}-right: ptr($number, $breakpoints);
+        }
+        .#{$spacing}-#{$property}-bottom {
+          #{$spacing}-bottom: ptr($number, $breakpoints);
+        }
+        .#{$spacing}-#{$property}-left {
+          #{$spacing}-left: ptr($number, $breakpoints);
+        }
       }
     }
   }
