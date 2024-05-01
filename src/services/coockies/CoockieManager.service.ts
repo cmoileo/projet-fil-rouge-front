@@ -1,9 +1,11 @@
-export class CookieManager {
-    setCookie(key: string, value: string, expiryDays: number = 1) {
+class CookieManagerService {
+    private readonly cookieName = 'token';
+    private readonly expiryDays = 30;
+    setCookie(value: string) {
         const date = new Date();
-        date.setTime(date.getTime() + (expiryDays * 24 * 60 * 60 * 1000));
+        date.setTime(date.getTime() + (this.expiryDays * 24 * 60 * 60 * 1000));
         const expires = "expires=" + date.toUTCString();
-        document.cookie = key + "=" + value + ";" + expires + ";path=/";
+        document.cookie = this.cookieName + "=" + value + ";" + expires + ";path=/";
     }
 
     getCookie(key: string): string | null {
@@ -22,3 +24,5 @@ export class CookieManager {
         return null;
     }
 }
+
+export const cookieManager = new CookieManagerService();

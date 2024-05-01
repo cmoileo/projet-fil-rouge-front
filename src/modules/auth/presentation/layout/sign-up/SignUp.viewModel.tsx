@@ -1,7 +1,7 @@
 import {FormEvent} from "react";
 import {SignUpDto} from "../../../domain/dto/Signup.dto.ts";
 import { ApiUrl } from "../../../../../const/ApiUrl.ts";
-import {CookieManager} from "../../../../../services/coockies/CoockieManager.service.ts";
+import {cookieManager } from "../../../../../services/coockies/CoockieManager.service.ts";
 import {useNavigate} from "react-router-dom";
 
 export const useSignUpViewModel = () => {
@@ -39,7 +39,7 @@ export const useSignUpViewModel = () => {
             if (!token) {
                 throw new Error('Token not found')
             }
-            new CookieManager().setCookie("token", token)
+            cookieManager.setCookie(token)
             return navigate('/')
         } catch (err) {
             console.error(err)
