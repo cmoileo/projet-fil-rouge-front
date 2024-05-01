@@ -11,6 +11,12 @@
   .hover-bg-#{$color-name}:hover {
     background-color: $color-value;
   }
+  .active-#{$color-name}:active {
+    color: $color-value;
+  }
+  .active-bg-#{$color-name}:active {
+    background-color: $color-value;
+  }
   .border-#{$color-name} {
     border-color: $color-value;
   }
