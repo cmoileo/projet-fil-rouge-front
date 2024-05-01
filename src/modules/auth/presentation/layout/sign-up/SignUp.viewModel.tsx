@@ -1,7 +1,7 @@
 import {FormEvent} from "react";
 import {SignUpDto} from "../../../domain/dto/Signup.dto.ts";
 import {useNavigate} from "react-router-dom";
-import {handleSignup} from "../../../domain/use-case/handleSignup.service.ts";
+import {handleSignup} from "../../../domain/use-case/handleSignup.usecase.ts";
 
 export const useSignUpViewModel = () => {
     const navigate = useNavigate()
