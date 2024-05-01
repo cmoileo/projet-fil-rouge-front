@@ -8,8 +8,8 @@ class CookieManagerService {
         document.cookie = this.cookieName + "=" + value + ";" + expires + ";path=/";
     }
 
-    getCookie(key: string): string | null {
-        const name = key + "=";
+    getCookie(): string | null {
+        const name = this.cookieName + "=";
         const decodedCookie = decodeURIComponent(document.cookie);
         const cookieArray = decodedCookie.split(';');
         for(let i = 0; i < cookieArray.length; i++) {

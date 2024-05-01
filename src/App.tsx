@@ -1,14 +1,15 @@
 import "./assets/styles/main.scss"
 import {createBrowserRouter, RouterProvider} from "react-router-dom"
-import {OnBoardingPage} from "./modules/auth/presentation/page/OnBoarding.page.tsx";
+import OnBoardingPage from "./modules/auth/presentation/page/OnBoarding.page.tsx";
 import SignupPage from "./modules/auth/presentation/page/Signup.page.tsx";
+import SigninPage from "./modules/auth/presentation/page/Signin.page.tsx";
 
 
 function App() {
     const router = createBrowserRouter([
         {
-            path: "/",
-            element: <div>Hello world!</div>,
+            path: "/signin",
+            element: <SigninPage />,
         },
         {
             path: "/onboarding",

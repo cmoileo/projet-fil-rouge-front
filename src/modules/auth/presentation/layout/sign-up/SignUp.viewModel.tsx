@@ -1,8 +1,7 @@
 import {FormEvent} from "react";
 import {SignUpDto} from "../../../domain/dto/Signup.dto.ts";
-import { ApiUrl } from "../../../../../const/ApiUrl.ts";
-import {cookieManager } from "../../../../../services/coockies/CoockieManager.service.ts";
 import {useNavigate} from "react-router-dom";
+import {handleSignup} from "../../../domain/use-case/handleSignup.service.ts";
 
 export const useSignUpViewModel = () => {
     const navigate = useNavigate()
@@ -23,27 +22,11 @@ export const useSignUpViewModel = () => {
             firstname: form.firstname.value,
             lastname: form.lastname.value,
         }
-
-        console.log(data)
-
-        try {
-            const res = await fetch (ApiUrl.Auth.Signup, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data),
-            })
-            const json = await res.json()
-            const token = json.token
-            if (!token) {
-                throw new Error('Token not found')
-            }
-            cookieManager.setCookie(token)
-            return navigate('/')
-        } catch (err) {
-            console.error(err)
+        const submitedForm = await handleSignup(data)
+        if (!submitedForm) {
+            return console.error('Form not submited')
         }
+        navigate('/dashboard')
     }
 
     return {

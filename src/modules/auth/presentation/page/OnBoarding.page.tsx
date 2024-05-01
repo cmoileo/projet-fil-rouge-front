@@ -1,9 +1,11 @@
 import OnboardingLayout from "../layout/onboarding/Onboarding.layout.tsx";
 
-export const OnBoardingPage = () => {
+const OnBoardingPage = () => {
     return (
         <>
             <OnboardingLayout />
         </>
     )
 }
+
+export default OnBoardingPage;
