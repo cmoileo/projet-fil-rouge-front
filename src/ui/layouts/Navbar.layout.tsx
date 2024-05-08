@@ -33,10 +33,11 @@ export const Navbar = () => {
 
     const renderFolderItems = (folder: FolderType): JSX.Element => {
         return (
-            <ul className={"flex flex-col gap-100"}>
-                <NavItem key={folder.id} name={folder.name} className={`padding-400-left p-m`} isPlusIcon={true} />
+            <ul className={"flex flex-col gap-100 select-none"}>
+                <NavItem key={folder.id} name={folder.name} className={`padding-400-left p-m`} isPlusIcon={true}/>
                 {folder.projects && folder.projects.map(project => (
-                    <NavItem key={project.id} name={project.name} path={`/dashboard/projects/${project.id}`} className={`padding-600-left p-s`} isPlusIcon={false} />
+                    <NavItem key={project.id} name={project.name} path={`/dashboard/projects/${project.id}`}
+                             className={`padding-600-left p-s`} isPlusIcon={false}/>
                 ))}
                 {folder.children && folder.children.map(child => (
                     <ul className={"flex flex-col w-full gap-100 padding-400-left margin-200-top"} key={child.id}>
