@@ -14,8 +14,7 @@ export const getFolders = async (): Promise<FolderType[] | undefined> => {
         });
         const data = await res.json();
         const sortedData = getSortedFolders(data)
-        console.log(sortedData)
-        return data;
+        return sortedData;
     } catch (error) {
         console.log(error);
     }

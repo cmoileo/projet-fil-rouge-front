@@ -5,7 +5,7 @@ export const DashboardPage = () => {
     useProtectedRoute();
     return (
         <div>
-            <Navbar/>
+            <Navbar />
         </div>
     )
 }
