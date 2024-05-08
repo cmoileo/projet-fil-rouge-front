@@ -32,20 +32,21 @@ export const Navbar = () => {
     ]
 
     const renderFolderItems = (folder: FolderType): JSX.Element => {
+        const size = folder.parent_folder_id ? "p-s" : "p-m";
         return (
-            <>
-                <NavItem key={folder.id} name={folder.name} path={`/dashboard/folder/${folder.id}`} className={"padding-400-left p-m"} isPlusIcon={false} />
+            <ul className={"flex flex-col gap-100"}>
+                <NavItem key={folder.id} name={folder.name} path={`/dashboard/folder/${folder.id}`} className={`padding-400-left ${size}`} isPlusIcon={true} />
                 {folder.children && folder.children.map(child => (
-                    <ul className={"flex flex-col w-60 gap-300 padding-400-left"} key={child.id}>
+                    <ul className={"flex flex-col w-full gap-100 padding-400-left margin-200-top"} key={child.id}>
                         {renderFolderItems(child)}
                     </ul>
                 ))}
-            </>
+            </ul>
         );
     };
 
     return (
-        <nav className={"bg-grey-100 h-screen w-fit padding-200 flex flex-col gap-1000"}>
+        <nav className={"bg-grey-100 h-screen w-fit padding-200 flex flex-col gap-1000 overflow-y-auto overflow-x-hidden scrollbar-hide"}>
             <ul className={"flex flex-col w-60 gap-300"}>
                 {
                     navItems1.map((item, index) => (
@@ -53,7 +54,7 @@ export const Navbar = () => {
                     ))}
             </ul>
             <ul className={"flex flex-col w-60 gap-300"}>
-                <NavItem name={"Projects"} path={"/dashboard/projects/"} className={""} isPlusIcon={true} />
+                <NavItem name={"Projects"} path={"/dashboard/projects/"} className={"margin-300-bottom"} isPlusIcon={true} />
                 {folders?.map(folder => (
                     <li key={folder.id}>
                         {renderFolderItems(folder)}

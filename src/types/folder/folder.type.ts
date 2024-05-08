@@ -2,7 +2,7 @@ export type FolderType = {
     id: string;
     name: string;
     agency_id: string;
-    parent_folder_id: string;
+    parent_folder_id: string | null;
     children: FolderType[];
     createdAt: Date;
     updatedAt: Date;
