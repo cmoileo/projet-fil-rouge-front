@@ -1,4 +1,5 @@
 import {NavItem} from "../components/navItem.tsx";
+import {getFolders} from "../../repository/folder/getAll.data.ts";
 
 export const Navbar = () => {
     const navItems1 = [
@@ -11,6 +12,7 @@ export const Navbar = () => {
         {name: "Signup", path: "/dashboard/", className: ""},
         {name: "Dashboard", path: "/dashboard/", className: ""},
     ]
+    getFolders();
     return (
         <nav className={"bg-grey-100 h-screen w-fit padding-200 flex flex-col gap-1000"}>
             <ul className={"flex flex-col w-60 gap-300"}>
