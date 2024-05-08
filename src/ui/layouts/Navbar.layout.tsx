@@ -1,16 +1,20 @@
 import {NavItem} from "../components/navItem.tsx";
 import {getFolders} from "../../repository/folder/getAll.data.ts";
 
+type NavItemType = {
+    name: string;
+    path: string;
+    className: string;
+    isPlusIcon: boolean;
+}
+
 export const Navbar = () => {
-    const navItems1 = [
-        {name: "Signin", path: "/dashboard/", className: ""},
-        {name: "Signup", path: "/dashboard/", className: ""},
-        {name: "Dashboard", path: "/dashboard/", className: ""},
+    const navItems1: NavItemType[] = [
+        {name: "Home", path: "/dashboard/", className: "", isPlusIcon: false},
+        {name: "Employees", path: "/dashboard/employees/", className: "", isPlusIcon: false},
     ]
-    const navItems2 = [
-        {name: "Projects", path: "/dashboard/", className: "", isPlusIcon: true},
-        {name: "Signup", path: "/dashboard/", className: "", isPlusIcon: true},
-        {name: "Dashboard", path: "/dashboard/", className: "", isPlusIcon: true},
+    const navItems2: NavItemType[] = [
+        {name: "Projects", path: "/dashboard/projects/", className: "", isPlusIcon: true},
     ]
     getFolders();
     return (
