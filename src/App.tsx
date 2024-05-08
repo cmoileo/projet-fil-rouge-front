@@ -3,6 +3,7 @@ import {createBrowserRouter, RouterProvider} from "react-router-dom"
 import OnBoardingPage from "./modules/auth/presentation/page/OnBoarding.page.tsx";
 import SignupPage from "./modules/auth/presentation/page/Signup.page.tsx";
 import SigninPage from "./modules/auth/presentation/page/Signin.page.tsx";
+import {DashboardPage} from "./modules/protected/dashboard/presentation/page/Page.tsx";
 
 
 function App() {
@@ -18,7 +19,11 @@ function App() {
         {
             path: "/signup",
             element: <SignupPage />,
-        }
+        },
+        {
+            path: "/dashboard",
+            element: <DashboardPage/>
+        },
     ]);
 
   return (

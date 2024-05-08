@@ -13,7 +13,7 @@ const SignInLayout = () => {
                 <label className={"p-m"} htmlFor="password">Password*</label>
                 <Input name={"password"} type={"password"} placeholder={"Enter your password"} required/>
             </div>
-            <MainButton className={"w-1/2"} type={"submit"}>Signup</MainButton>
+            <MainButton className={"w-1/2"} type={"submit"}>Signin</MainButton>
         </form>
     );
 }
