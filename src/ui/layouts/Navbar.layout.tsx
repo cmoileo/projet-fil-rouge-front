@@ -35,7 +35,7 @@ export const Navbar = () => {
         const size = folder.parent_folder_id ? "p-s" : "p-m";
         return (
             <ul className={"flex flex-col gap-100"}>
-                <NavItem key={folder.id} name={folder.name} path={`/dashboard/folder/${folder.id}`} className={`padding-400-left ${size}`} isPlusIcon={true} />
+                <NavItem key={folder.id} name={folder.name} className={`padding-400-left ${size}`} isPlusIcon={true} />
                 {folder.children && folder.children.map(child => (
                     <ul className={"flex flex-col w-full gap-100 padding-400-left margin-200-top"} key={child.id}>
                         {renderFolderItems(child)}
@@ -47,7 +47,7 @@ export const Navbar = () => {
 
     return (
         <nav className={"bg-grey-100 h-screen w-fit padding-200 flex flex-col gap-1000 overflow-y-auto overflow-x-hidden scrollbar-hide"}>
-            <ul className={"flex flex-col w-60 gap-300"}>
+            <ul className={"flex flex-col w-60 gap-300 margin-600-top"}>
                 {
                     navItems1.map((item, index) => (
                         <NavItem key={index} name={item.name} path={item.path} className={item.className} isPlusIcon={false} />
