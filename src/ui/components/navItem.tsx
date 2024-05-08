@@ -1,13 +1,14 @@
-import React from 'react';
+import React, {Ref} from 'react';
 import { Link } from 'react-router-dom';
 import { cn } from '../../services/shadcn/utils.ts';
-import { PlusIcon, ChevronDownIcon } from 'lucide-react'; // Assurez-vous d'importer l'icône ChevronDownIcon
+import { PlusIcon, ChevronDownIcon } from 'lucide-react';
 
 interface NavItemProps {
     name: string;
     path?: string;
     className: string;
     isPlusIcon: boolean;
+    parentUl?: Ref<HTMLDivElement>;
 }
 
 export const NavItem: React.FC<NavItemProps> = ({ name, path, className, isPlusIcon }) => {
@@ -17,11 +18,15 @@ export const NavItem: React.FC<NavItemProps> = ({ name, path, className, isPlusI
 
     const chevronClickHandler = () => {
         if (!chevronIconRef.current) return;
+        const parentUl = chevronIconRef.current.parentElement?.parentElement?.parentElement;
+        if (!parentUl) return;
         const el = chevronIconRef.current.children[0]
         if (el.classList.contains("-rotate-90")) {
             el.classList.remove("-rotate-90");
+            parentUl.classList.remove("h-10");
         } else {
             el.classList.add("-rotate-90");
+            parentUl.classList.add("h-10");
         }
     }
 
