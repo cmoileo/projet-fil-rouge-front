@@ -5,7 +5,7 @@ import {PlusIcon} from "lucide-react";
 
 interface NavItemProps {
     name: string;
-    path: string | undefined;
+    path?: string;
     className: string;
     isPlusIcon: boolean;
 }
