@@ -1,4 +1,4 @@
-import {NavItem} from "../components/navItem.tsx";
+import {NavItem} from "../components/navItem/navItem.tsx";
 import {useEffect, useState} from "react";
 import {FolderType} from "../../types/folder/folder.type.ts";
 import {getFolders} from "../../repository/folder/getAll.data.ts";
@@ -29,6 +29,7 @@ export const Navbar = () => {
     const navItems1: NavItemType[] = [
         {name: "Home", path: "/dashboard/", className: "", isPlusIcon: false},
         {name: "Employees", path: "/dashboard/employees/", className: "", isPlusIcon: false},
+        {name: "Projects", path: "/dashboard/projects/", className: "", isPlusIcon: false},
     ]
 
     const renderFolderItems = (folder: FolderType): JSX.Element => {
@@ -57,7 +58,6 @@ export const Navbar = () => {
                     ))}
             </ul>
             <ul className={"flex flex-col w-60 gap-300"}>
-                <NavItem name={"Projects"} path={"/dashboard/projects/"} className={"margin-300-bottom"} isPlusIcon={true} />
                 {folders?.map(folder => (
                     <li key={folder.id}>
                         {renderFolderItems(folder)}
