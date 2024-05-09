@@ -2,7 +2,8 @@ import React, {Ref} from 'react';
 import { Link } from 'react-router-dom';
 import { cn } from '../../../services/shadcn/utils.ts';
 import { PlusIcon, ChevronDownIcon } from 'lucide-react';
-import {useNavitem} from "./navItem.viewModel.tsx";
+import {useNavitem} from "./navItem.viewModel.tsx"
+import {useDrag} from 'react-dnd';
 
 interface NavItemProps {
     name: string;
@@ -18,6 +19,15 @@ export const NavItem: React.FC<NavItemProps> = ({ name, path, className, isPlusI
     const chevronIconRef = React.useRef<HTMLDivElement>(null);
     const { chevronClickHandler } = useNavitem({ chevronIconRef });
 
+    const ItemType = 'LI';
+    const [{ isDragging }, drag] = useDrag({
+        type: ItemType,
+        item: { name, type: ItemType },
+        collect: monitor => ({
+            isDragging: !!monitor.isDragging(),
+        }),
+    });
+
     const linkElement = path ? (
         <Link to={path} className={cn(baseStyle, className)}>
             <div className={"flex gap-200 items-center"}>
@@ -26,7 +36,7 @@ export const NavItem: React.FC<NavItemProps> = ({ name, path, className, isPlusI
             {isPlusIcon && <PlusIcon className="hidden group-hover:block text-200 transition hover-bg-grey-300 border-radius-200" />}
         </Link>
     ) : (
-        <li className={cn(baseStyle, className)}>
+        <li ref={drag} className={cn(baseStyle, className)} style={{ opacity: isDragging ? 0.5 : 1 }}>
             <div className={"flex gap-200 items-center"}>
                 <div ref={chevronIconRef} onClick={chevronClickHandler} className={iconStyle}>
                     <ChevronDownIcon className={"transition -rotate-90"} />
