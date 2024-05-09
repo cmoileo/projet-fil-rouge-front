@@ -1,5 +1,6 @@
+import {useDrag, useDrop} from "react-dnd";
 
-export const useNavitem = ({chevronIconRef }: {chevronIconRef:  React.RefObject<HTMLDivElement>}) => {
+export const useNavitem = ({chevronIconRef, id }: {chevronIconRef:  React.RefObject<HTMLDivElement>, id: string}) => {
     const chevronClickHandler = () => {
         if (!chevronIconRef || !chevronIconRef.current) return;
         const parentUl = chevronIconRef.current.parentElement?.parentElement?.parentElement;
@@ -14,7 +15,34 @@ export const useNavitem = ({chevronIconRef }: {chevronIconRef:  React.RefObject<
         }
     }
 
+    const ItemType = 'LI';
+    const [{ isDragging }, drag] = useDrag({
+        type: ItemType,
+        item: { name, type: ItemType },
+        collect: monitor => ({
+            isDragging: !!monitor.isDragging(),
+        }),
+    });
+
+    const [{ isOver }, drop] = useDrop({
+        accept: 'LI',
+        drop: () => {
+            const itemId = id;
+            console.log(itemId, isDragging);
+        },
+        collect: monitor => ({
+            isOver: !!monitor.isOver(),
+        }),
+    });
+
+    const style = {
+        backgroundColor: isOver ? '#c7cbd1' : 'transparent',
+    };
+
     return {
         chevronClickHandler,
+        drag,
+        drop,
+        style
     }
 }
