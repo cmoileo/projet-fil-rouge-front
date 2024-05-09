@@ -11,13 +11,15 @@ export const useNavitem = (
         id,
         project,
         folders,
-        setFolders
+        setFolders,
+        formRef
     }: {
         chevronIconRef:  React.RefObject<HTMLDivElement>,
         id: string,
         project: ProjectType | undefined
         folders: FolderType[] | undefined,
-        setFolders?: React.Dispatch<React.SetStateAction<FolderType[]>>
+        setFolders?: React.Dispatch<React.SetStateAction<FolderType[]>>,
+        formRef: React.RefObject<HTMLFormElement>
     }) => {
     const projectId = project?.id;
     const projectName = project?.name;
@@ -72,14 +74,27 @@ export const useNavitem = (
         if (!updatedFolder) return console.error("Error updating folder");
         const newFolders: FolderType[] | undefined = await getFolders();
         if (!newFolders) return console.error("Error sorting folders");
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         setFolders(newFolders)
+    }
+
+    const handleOpenForm = () => {
+        if (!formRef || !formRef.current) return;
+        if (formRef.current.classList.contains("hidden")) {
+            formRef.current.classList.remove("hidden");
+            formRef.current.classList.add("flex");
+        } else {
+            formRef.current.classList.add("hidden");
+            formRef.current.classList.remove("flex");
+        }
     }
 
     return {
         chevronClickHandler,
         drag,
         drop,
-        style
+        style,
+        handleOpenForm
     }
 }
