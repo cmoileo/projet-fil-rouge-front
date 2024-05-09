@@ -1,40 +1,65 @@
 import {useDrag, useDrop} from "react-dnd";
 import {ProjectType} from "../../../types/project/projet.type.ts";
 import {FolderType} from "../../../types/folder/folder.type.ts";
-import React from "react";
+import React, {useEffect} from "react";
 import {changeProjectParentFolderData} from "../../../repository/project/changeProjectParentFolder.data.ts";
 import {getFolders} from "../../../repository/folder/getAll.data.ts";
 
 export const useNavitem = (
     {
         chevronIconRef,
+        plusIconRef,
         id,
         project,
         folders,
         setFolders,
-        formRef
+        formRef,
+        navbarRef
     }: {
         chevronIconRef:  React.RefObject<HTMLDivElement>,
+        plusIconRef: React.RefObject<SVGSVGElement>,
         id: string,
         project: ProjectType | undefined
         folders: FolderType[] | undefined,
         setFolders?: React.Dispatch<React.SetStateAction<FolderType[]>>,
-        formRef: React.RefObject<HTMLFormElement>
+        formRef: React.RefObject<HTMLFormElement>,
+        navbarRef: React.RefObject<HTMLDivElement> | undefined
     }) => {
     const projectId = project?.id;
     const projectName = project?.name;
+
+    useEffect(() => {
+        const handleClickOutside = (e: any) => {
+            if (plusIconRef.current && plusIconRef.current.contains(e.target)) return;
+            if (formRef.current && chevronIconRef.current && !formRef.current.contains(e.target)) {
+                formRef.current.classList.add("hidden");
+                formRef.current.classList.remove("flex");
+            }
+        };
+        document.addEventListener("click", handleClickOutside);
+        return () => {
+            document.removeEventListener("click", handleClickOutside);
+        };
+    }, [formRef]);
     const chevronClickHandler = () => {
         if (!chevronIconRef || !chevronIconRef.current) return;
         const parentUl = chevronIconRef.current.parentElement?.parentElement?.parentElement;
         if (!parentUl) return;
-        const el = chevronIconRef.current.children[0]
+        const el: Element = chevronIconRef.current.children[0]
         if (el.classList.contains("-rotate-90")) {
-            el.classList.remove("-rotate-90");
-            parentUl.classList.remove("h-10");
+            openChevron(el, parentUl);
         } else {
-            el.classList.add("-rotate-90");
-            parentUl.classList.add("h-10");
+            closeChevron(el, parentUl);
         }
+    }
+
+    const openChevron = (el: Element, parentUl: HTMLElement) => {
+        el.classList.remove("-rotate-90");
+        parentUl.classList.remove("h-10");
+    }
+    const closeChevron = (el: Element, parentUl: HTMLElement) => {
+        el.classList.add("-rotate-90");
+        parentUl.classList.add("h-10");
     }
 
     const ItemType = 'LI';
@@ -81,6 +106,13 @@ export const useNavitem = (
 
     const handleOpenForm = () => {
         if (!formRef || !formRef.current) return;
+        if (!navbarRef || !navbarRef.current) return;
+        const allForms = navbarRef.current.querySelectorAll("form");
+        allForms.forEach((form: HTMLFormElement) => {
+            if (form.id === id) return;
+            form.classList.add("hidden");
+            form.classList.remove("flex");
+        })
         if (formRef.current.classList.contains("hidden")) {
             formRef.current.classList.remove("hidden");
             formRef.current.classList.add("flex");
@@ -90,11 +122,17 @@ export const useNavitem = (
         }
     }
 
+    const submitForm = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
+    }
+
     return {
         chevronClickHandler,
         drag,
         drop,
         style,
-        handleOpenForm
+        handleOpenForm,
+        submitForm
     }
 }

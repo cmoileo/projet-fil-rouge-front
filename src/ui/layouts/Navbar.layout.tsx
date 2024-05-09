@@ -1,5 +1,5 @@
 import {NavItem} from "../components/navItem/navItem.tsx";
-import {useEffect, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import {FolderType} from "../../types/folder/folder.type.ts";
 import {getFolders} from "../../repository/folder/getAll.data.ts";
 
@@ -12,6 +12,7 @@ type NavItemType = {
 
 export const Navbar = () => {
     const [folders, setFolders] = useState<FolderType[]>([]);
+    const navbarRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         const fetchFolders = async () => {
@@ -35,7 +36,7 @@ export const Navbar = () => {
     const renderFolderItems = (folder: FolderType): JSX.Element => {
         return (
             <ul className={"flex flex-col gap-100 select-none h-10 overflow-hidden"}>
-                <NavItem id={folder.id} key={folder.id} name={folder.name} className={`padding-400-left p-m`} isPlusIcon={true}/>
+                <NavItem navbarRef={navbarRef} id={folder.id} key={folder.id} name={folder.name} className={`padding-400-left p-m`} isPlusIcon={true}/>
                 {folder.projects && folder.projects.map(project => (
                     <NavItem folders={folders} setFolders={setFolders} project={project} id={folder.id} key={project.id} name={project.name} path={`/dashboard/project/${project.id}`}
                              className={`padding-600-left p-s`} isPlusIcon={false}/>
@@ -51,7 +52,7 @@ export const Navbar = () => {
 
 
     return (
-        <nav className={"bg-grey-100 h-screen w-fit padding-200 flex flex-col gap-1000 overflow-y-auto overflow-x-hidden scrollbar-hide"}>
+        <nav ref={navbarRef} className={"bg-grey-100 h-screen w-fit padding-200 flex flex-col gap-1000 overflow-y-auto overflow-x-hidden scrollbar-hide"}>
             <ul className={"flex flex-col w-60 gap-300 margin-600-top"}>
                 {
                     navItems1.map((item, index) => (
