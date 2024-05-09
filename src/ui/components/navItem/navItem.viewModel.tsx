@@ -4,6 +4,7 @@ import {FolderType} from "../../../types/folder/folder.type.ts";
 import React, {useEffect} from "react";
 import {changeProjectParentFolderData} from "../../../repository/project/changeProjectParentFolder.data.ts";
 import {getFolders} from "../../../repository/folder/getAll.data.ts";
+import {createProject} from "../../../repository/project/createProject.data.ts";
 
 export const useNavitem = (
     {
@@ -78,6 +79,7 @@ export const useNavitem = (
         }
     });
 
+
     const [{ isOver }, drop] = useDrop({
         accept: 'LI',
         drop: () => {
@@ -93,15 +95,34 @@ export const useNavitem = (
         backgroundColor: isOver ? '#c7cbd1' : 'transparent',
     };
 
+    const submitForm = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        if (!formRef.current) return;
+        const formTarget = e.target as HTMLFormElement;
+        const data = {
+            name: formTarget.projectTitle.value,
+            folder_id: id
+        }
+        const createdProject = await createProject(data);
+        formRef.current.reset();
+        closeForm();
+        if (!createdProject) return console.error("Error creating project");
+        updateFolders(setFolders);
+    }
+
     const handleDrop = async (folderId: string) => {
         if (!folders || !projectId || !projectName) return;
         const updatedFolder = await changeProjectParentFolderData(projectId, folderId, projectName)
         if (!updatedFolder) return console.error("Error updating folder");
+        updateFolders(setFolders)
+    }
+
+    const updateFolders = async (setFolders: React.Dispatch<React.SetStateAction<FolderType[]>> | undefined) => {
         const newFolders: FolderType[] | undefined = await getFolders();
         if (!newFolders) return console.error("Error sorting folders");
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        setFolders(newFolders)
+        if (setFolders) setFolders(newFolders);
+        console.log(folders)
+        console.log(newFolders)
     }
 
     const handleOpenForm = () => {
@@ -114,17 +135,20 @@ export const useNavitem = (
             form.classList.remove("flex");
         })
         if (formRef.current.classList.contains("hidden")) {
-            formRef.current.classList.remove("hidden");
-            formRef.current.classList.add("flex");
+            openForm()
         } else {
-            formRef.current.classList.add("hidden");
-            formRef.current.classList.remove("flex");
+            closeForm()
         }
     }
-
-    const submitForm = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-
+    const closeForm = () => {
+        if (!formRef || !formRef.current) return;
+        formRef.current.classList.add("hidden");
+        formRef.current.classList.remove("flex");
+    }
+    const openForm = () => {
+        if (!formRef || !formRef.current) return;
+        formRef.current.classList.remove("hidden");
+        formRef.current.classList.add("flex");
     }
 
     return {

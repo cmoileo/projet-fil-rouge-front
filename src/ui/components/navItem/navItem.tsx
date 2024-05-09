@@ -38,7 +38,7 @@ export const NavItem: React.FC<NavItemProps> = (
     const chevronIconRef = React.useRef<HTMLDivElement>(null);
     const formRef = React.useRef<HTMLFormElement>(null);
     const plusIconRef = React.useRef<SVGSVGElement>(null);
-    const { chevronClickHandler, drop, style, drag, handleOpenForm } = useNavitem({ chevronIconRef, plusIconRef, id, project, folders, setFolders, formRef, navbarRef });
+    const { chevronClickHandler, drop, style, drag, handleOpenForm, submitForm } = useNavitem({ chevronIconRef, plusIconRef, id, project, folders, setFolders, formRef, navbarRef });
 
 
     const linkElement = path ? (
@@ -56,7 +56,7 @@ export const NavItem: React.FC<NavItemProps> = (
                 </div>
                 {name}
             </div>
-            <form id={id} ref={formRef} className={"z-10 shadow-[rgba(0,_0,_0,_0.25)_0px_0px_50px_0px] flex-col gap-700 fixed translate-x-full padding-500 border-radius-300 bg-white hidden"} action="submit">
+            <form onSubmit={submitForm} id={id} ref={formRef} className={"z-10 shadow-[rgba(0,_0,_0,_0.25)_0px_0px_50px_0px] flex-col gap-700 fixed translate-x-full padding-500 border-radius-300 bg-white hidden"} action="submit">
                 <label htmlFor="name">Project name</label>
                 <Input name={"projectTitle"} type={"text"} placeholder={"Enter the project name"}
                        required/>
