@@ -1,10 +1,11 @@
 import {useProtectedRoute} from "../../../../../services/protectedRoute/ProtectedRoute.service.ts";
+import {Navbar} from "../../../../../ui/layouts/Navbar.layout.tsx";
 
 export const DashboardPage = () => {
     useProtectedRoute();
     return (
         <div>
-            <h1>Dashboard</h1>
+            <Navbar />
         </div>
     )
 }
