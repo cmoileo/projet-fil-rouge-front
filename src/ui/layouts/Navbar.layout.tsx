@@ -36,7 +36,7 @@ export const Navbar = () => {
     const renderFolderItems = (folder: FolderType): JSX.Element => {
         return (
             <ul className={"flex flex-col gap-100 select-none h-10 overflow-hidden"}>
-                <NavItem navbarRef={navbarRef} id={folder.id} key={folder.id} name={folder.name} className={`padding-400-left p-m`} isPlusIcon={true}/>
+                <NavItem setFolders={setFolders} navbarRef={navbarRef} id={folder.id} key={folder.id} name={folder.name} className={`padding-400-left p-m`} isPlusIcon={true}/>
                 {folder.projects && folder.projects.map(project => (
                     <NavItem folders={folders} setFolders={setFolders} project={project} id={folder.id} key={project.id} name={project.name} path={`/dashboard/project/${project.id}`}
                              className={`padding-600-left p-s`} isPlusIcon={false}/>

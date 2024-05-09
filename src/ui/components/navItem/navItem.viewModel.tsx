@@ -121,8 +121,6 @@ export const useNavitem = (
         const newFolders: FolderType[] | undefined = await getFolders();
         if (!newFolders) return console.error("Error sorting folders");
         if (setFolders) setFolders(newFolders);
-        console.log(folders)
-        console.log(newFolders)
     }
 
     const handleOpenForm = () => {
