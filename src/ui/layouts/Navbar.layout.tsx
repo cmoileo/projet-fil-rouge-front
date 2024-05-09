@@ -11,14 +11,14 @@ type NavItemType = {
 }
 
 export const Navbar = () => {
-    const [folders, setFolders] = useState<FolderType[] | undefined>([]);
+    const [folders, setFolders] = useState<FolderType[]>([]);
 
     useEffect(() => {
         const fetchFolders = async () => {
             try {
                 const fetchedFolders = await getFolders();
+                if (!fetchedFolders) return;
                 setFolders(fetchedFolders);
-
             } catch (error) {
                 console.error("Error fetching folders:", error);
             }
@@ -37,7 +37,7 @@ export const Navbar = () => {
             <ul className={"flex flex-col gap-100 select-none h-10 overflow-hidden"}>
                 <NavItem id={folder.id} key={folder.id} name={folder.name} className={`padding-400-left p-m`} isPlusIcon={true}/>
                 {folder.projects && folder.projects.map(project => (
-                    <NavItem id={project.id} key={project.id} name={project.name} path={`/dashboard/projects/${project.id}`}
+                    <NavItem folders={folders} setFolders={setFolders} project={project} id={folder.id} key={project.id} name={project.name} path={`/dashboard/project/${project.id}`}
                              className={`padding-600-left p-s`} isPlusIcon={false}/>
                 ))}
                 {folder.children && folder.children.map((child) => (
