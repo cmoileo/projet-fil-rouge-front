@@ -52,7 +52,7 @@ export const Navbar = () => {
 
 
     return (
-        <nav ref={navbarRef} className={"bg-grey-100 h-screen w-fit padding-200 flex flex-col gap-1000 overflow-y-auto overflow-x-hidden scrollbar-hide"}>
+        <nav ref={navbarRef} className={"sticky top-0 bg-grey-100 h-screen w-fit padding-200 flex flex-col gap-1000 overflow-y-auto overflow-x-hidden scrollbar-hide"}>
             <ul className={"flex flex-col w-60 gap-300 margin-600-top"}>
                 {
                     navItems1.map((item, index) => (

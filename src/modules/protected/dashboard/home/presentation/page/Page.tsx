@@ -5,9 +5,11 @@ import {Outlet} from "react-router-dom";
 export const DashboardPage = () => {
     useProtectedRoute();
     return (
-        <div>
+        <div className={"flex gap-1000"}>
             <Navbar/>
-            <Outlet/>
+            <main className={"margin-600-top"}>
+                <Outlet/>
+            </main>
         </div>
     );
 };
