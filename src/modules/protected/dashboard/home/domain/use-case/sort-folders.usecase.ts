@@ -1,4 +1,4 @@
-import {FolderType} from "../../../../../types/folder/folder.type.ts";
+import {FolderType} from "../../../../../../types/folder/folder.type.ts";
 
 export const getSortedFolders = (folders: FolderType[]): FolderType[] => {
     const foldersByParentId: Record<string, FolderType[]> = {};

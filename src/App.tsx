@@ -1,10 +1,11 @@
-import "./assets/styles/main.scss"
-import {createBrowserRouter, RouterProvider} from "react-router-dom"
+// Dans votre fichier App.tsx
+
+import "./assets/styles/main.scss";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import OnBoardingPage from "./modules/auth/presentation/page/OnBoarding.page.tsx";
 import SignupPage from "./modules/auth/presentation/page/Signup.page.tsx";
 import SigninPage from "./modules/auth/presentation/page/Signin.page.tsx";
-import {DashboardPage} from "./modules/protected/dashboard/presentation/page/Page.tsx";
-
+import { DashboardPage } from "./modules/protected/dashboard/home/presentation/page/Page.tsx";
 
 function App() {
     const router = createBrowserRouter([
@@ -21,16 +22,16 @@ function App() {
             element: <SignupPage />,
         },
         {
-            path: "/dashboard",
-            element: <DashboardPage/>
+            path: "/dashboard/*",
+            element: <DashboardPage />,
         },
     ]);
 
-  return (
-    <>
-        <RouterProvider router={router} />
-    </>
-  )
+    return (
+        <>
+            <RouterProvider router={router} />
+        </>
+    );
 }
 
-export default App
+export default App;
