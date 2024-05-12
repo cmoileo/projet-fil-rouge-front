@@ -11,10 +11,10 @@ export const AddEmployeeViewModel = () => {
             email: target.email.value,
             role: target.employeeRole.value.length > 1 ? target.employeeRole.value : undefined
         }
-        const res = await addEmployeeData(data);
-        console.log(res)
+        await addEmployeeData(data);
     }
+
     return {
-        handleSubmit
+        handleSubmit,
     }
 }
