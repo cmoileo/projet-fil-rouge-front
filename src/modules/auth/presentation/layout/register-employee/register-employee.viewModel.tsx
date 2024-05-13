@@ -10,7 +10,6 @@ export const useRegisterEmployee = () => {
     const handleSubmitForm = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const formData = new FormData(e.currentTarget);
-        console.log(e.target)
         if (formData.get('password') !== formData.get('passwordConfirm') || !formData.get('password') || !formData.get('passwordConfirm') || !formData.get('email')
             || !formData.get('firstname') || !formData.get('lastname') || !params) return;
         const data: RegisterEmployeeDto = {
@@ -21,7 +20,6 @@ export const useRegisterEmployee = () => {
             lastname: formData.get('lastname') as string,
             avatar: formData.get('profilePicture') as File || null,
         }
-        console.log(data.avatar)
         const registeredEmployee: string | boolean = await registerEmployeeData(data, params)
         if (registeredEmployee) {
             cookieManager.setCookie(registeredEmployee)
