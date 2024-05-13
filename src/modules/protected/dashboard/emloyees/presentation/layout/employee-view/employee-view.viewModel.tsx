@@ -1,9 +1,9 @@
 import {useEffect, useState} from "react";
-import {RegisterEmployeeDto} from "../../../../../../auth/domain/dto/RegisterEmployee.dto.ts";
 import {getEmployeeData} from "../../../../../../../repository/employee/get-employee.data.ts";
+import {EmployeeDto} from "../../../domain/dto/employee.dto.ts";
 
 export const useEmployeeView = () => {
-    const [employees, setEmployees] = useState<RegisterEmployeeDto[] | null>(null);
+    const [employees, setEmployees] = useState<EmployeeDto[] | null>(null);
     useEffect(() => {
         const fetchEmployee = async () => {
             const employees = await getEmployeeData();

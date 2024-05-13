@@ -1,8 +1,8 @@
-import {RegisterEmployeeDto} from "../../modules/auth/domain/dto/RegisterEmployee.dto.ts";
 import {ApiUrl} from "../../const/ApiUrl.ts";
 import {cookieManager} from "../../services/coockies/CoockieManager.service.ts";
+import {EmployeeDto} from "../../modules/protected/dashboard/emloyees/domain/dto/employee.dto.ts";
 
-export const getEmployeeData = async (): Promise<RegisterEmployeeDto[] | null> => {
+export const getEmployeeData = async (): Promise<EmployeeDto[] | null> => {
     try {
         const res = await fetch(`${ApiUrl.Auth.GetEmployee}`, {
             method: 'GET',
@@ -13,7 +13,7 @@ export const getEmployeeData = async (): Promise<RegisterEmployeeDto[] | null> =
         });
         const json = await res.json();
         if (!json) return null
-        const employee: RegisterEmployeeDto[] = json;
+        const employee: EmployeeDto[] = json;
         return employee;
     } catch (error) {
         console.error(error);

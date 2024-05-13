@@ -4,15 +4,14 @@ import {RegisterEmployeeDto} from "../../../../../../auth/domain/dto/RegisterEmp
 export const EmployeeViewLayout = () => {
     const {employees} = useEmployeeView();
     return (
-        <div>
+        <div className={'grid grid-cols-3 gap-600'}>
             {
                 employees && employees.map((employee: RegisterEmployeeDto, index: number) => {
                     return (
-                        <div key={index}>
-                            <p>{employee.firstname}</p>
-                            <p>{employee.lastname}</p>
-                            <p>{employee.email}</p>
-                        </div>
+                        <article key={index} className={"flex flex-col gap-400 items-center padding-300 border-radius-300 shadow-[rgba(0,_0,_0,_0.15)_0px_0px_20px_0px]"}>
+                            <p className={'p-s'}>{employee.firstname}</p>
+                            <p className={'p-xs'}>{employee.email}</p>
+                        </article>
                     );
                 })
             }
