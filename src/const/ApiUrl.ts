@@ -1,4 +1,4 @@
-const BaseUrl = 'https://fil-rouge-api.onrender.com';
+const BaseUrl = 'http://localhost:3000';
 
 export const ApiUrl = {
     Auth: {
@@ -7,6 +7,7 @@ export const ApiUrl = {
         AddEmployee: BaseUrl + '/auth/agency/add-employee',
         RegisterEmployee: BaseUrl + '/auth/employee/register',
         GetEmployee: BaseUrl + '/account/get-users',
+        AddAvatar: BaseUrl + '/auth/employee/add-avatar',
     },
     Folder: {
         Get: BaseUrl + '/folders/get',

@@ -6,20 +6,21 @@ import {cookieManager} from "../../../../../services/coockies/CoockieManager.ser
 export const useRegisterEmployee = () => {
     const params = useParams().id;
     const navigate = useNavigate();
-    console.log(params)
-    const handleSubmitForm = async (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmitForm = async (e: any) => {
         e.preventDefault();
-        const formData = new FormData(e.currentTarget);
+        const formData = new FormData(e.target);
         if (formData.get('password') !== formData.get('passwordConfirm') || !formData.get('password') || !formData.get('passwordConfirm') || !formData.get('email')
             || !formData.get('firstname') || !formData.get('lastname') || !params) return;
+
         const data: RegisterEmployeeDto = {
             email: formData.get('email') as string,
             password: formData.get('password') as string,
             passwordConfirm: formData.get('passwordConfirm') as string,
             firstname: formData.get('firstname') as string,
             lastname: formData.get('lastname') as string,
-            avatar: formData.get('profilePicture') as File || null,
+            avatar: e.target.profilePicture.files[0] as File || null,
         }
+
         const registeredEmployee: string | boolean = await registerEmployeeData(data, params)
         if (registeredEmployee) {
             cookieManager.setCookie(registeredEmployee)

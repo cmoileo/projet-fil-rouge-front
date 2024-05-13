@@ -1,6 +1,6 @@
-import {RegisterEmployeeDto} from "../../modules/auth/domain/dto/RegisterEmployee.dto.ts";
 import {ApiUrl} from "../../const/ApiUrl.ts";
 import {cookieManager} from "../../services/coockies/CoockieManager.service.ts";
+import {RegisterEmployeeDto} from "../../modules/auth/domain/dto/RegisterEmployee.dto.ts";
 
 export const registerEmployeeData = async (data: RegisterEmployeeDto, id: string): Promise<string | false> => {
     try {
@@ -10,7 +10,7 @@ export const registerEmployeeData = async (data: RegisterEmployeeDto, id: string
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${cookieManager.getCookie()}`
             },
-            body: JSON.stringify(data),
+            body: JSON.stringify(data)
         });
         const json = await res.json();
         if (json) {
