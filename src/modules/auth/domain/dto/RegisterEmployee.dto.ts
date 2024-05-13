@@ -4,5 +4,5 @@ export type RegisterEmployeeDto = {
     passwordConfirm: string;
     firstname: string;
     lastname: string;
-    avatar?: File | null;
+    avatar?: string | null;
 }
