@@ -5,6 +5,7 @@ import SignupPage from "./modules/auth/presentation/page/Signup.page.tsx";
 import SigninPage from "./modules/auth/presentation/page/Signin.page.tsx";
 import { DashboardPage } from "./modules/protected/dashboard/home/presentation/page/Page.tsx";
 import {EmployeesPage} from "./modules/protected/dashboard/emloyees/presentation/page/Page.tsx";
+import {RegisterEmployeePage} from "./modules/auth/presentation/page/RegisterEmployee.page.tsx";
 
 function App() {
     const router = createBrowserRouter([
@@ -33,6 +34,10 @@ function App() {
         {
             path: "/dashboard/employees",
             element: <SigninPage />,
+        },
+        {
+            path: "/register-employee/:id",
+            element: <RegisterEmployeePage />
         }
     ]);
 
