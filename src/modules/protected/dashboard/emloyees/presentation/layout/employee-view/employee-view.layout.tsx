@@ -1,8 +1,8 @@
-import {useEmployeeView} from "./employee-view.viewModel.tsx";
-import {EmployeeDto} from "../../../domain/dto/employee.dto.ts";
+import { useEmployeeView } from "./employee-view.viewModel.tsx";
+import { EmployeeDto } from "../../../domain/dto/employee.dto.ts";
 
 export const EmployeeViewLayout = () => {
-    const {employees} = useEmployeeView();
+    const { employees } = useEmployeeView();
     return (
         <div className={'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-600'}>
             {
