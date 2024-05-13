@@ -1,6 +1,7 @@
 import {useProtectedRoute} from "../../../../../../services/protectedRoute/ProtectedRoute.service.ts";
 import {AddEmployeeLayout} from "../layout/add-employee/AddEmployee.layout.tsx";
 import {EmployeeViewLayout} from "../layout/employee-view/employee-view.layout.tsx";
+import {JobsViewLayout} from "../layout/jobs-view/jobs-view.layout.tsx";
 
 export const EmployeesPage = () => {
     useProtectedRoute();
@@ -8,6 +9,7 @@ export const EmployeesPage = () => {
         <div className={"flex flex-col gap-800"}>
             <AddEmployeeLayout />
             <EmployeeViewLayout />
+            <JobsViewLayout />
         </div>
     );
 }
