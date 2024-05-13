@@ -2,13 +2,13 @@ import {useEmployeeView} from "./employee-view.viewModel.tsx";
 import {RegisterEmployeeDto} from "../../../../../../auth/domain/dto/RegisterEmployee.dto.ts";
 
 export const EmployeeViewLayout = () => {
-    const {employee} = useEmployeeView();
+    const {employees} = useEmployeeView();
     return (
         <div>
             {
-                employee && employee.map((employee: RegisterEmployeeDto) => {
+                employees && employees.map((employee: RegisterEmployeeDto, index: number) => {
                     return (
-                        <div>
+                        <div key={index}>
                             <p>{employee.firstname}</p>
                             <p>{employee.lastname}</p>
                             <p>{employee.email}</p>

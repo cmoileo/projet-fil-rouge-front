@@ -11,11 +11,9 @@ export const getEmployeeData = async (): Promise<RegisterEmployeeDto[] | null> =
                 'Authorization': `Bearer ${cookieManager.getCookie()}`,
             },
         });
-        console.log(`Bearer ${cookieManager.getCookie()}`)
         const json = await res.json();
         if (!json) return null
-        console.log(json)
-        const employee: RegisterEmployeeDto[] = json.employee;
+        const employee: RegisterEmployeeDto[] = json;
         return employee;
     } catch (error) {
         console.error(error);
