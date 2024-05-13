@@ -6,7 +6,6 @@ export const AddEmployeeViewModel = () => {
     const [isOpen, setIsOpen] = useState(false);
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault()
-        console.log('form submitted !')
         const target = e.target as HTMLFormElement
         if (!target) return;
         setIsOpen(false)
