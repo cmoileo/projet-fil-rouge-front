@@ -6,7 +6,7 @@ export const useEmployeeView = () => {
     const [employees, setEmployees] = useState<EmployeeDto[] | null>(null);
     useEffect(() => {
         const fetchEmployee = async () => {
-            const employees = await getEmployeeData();
+            const employees: EmployeeDto[] | null = await getEmployeeData();
             if (!employees) return;
             setEmployees(employees);
         }

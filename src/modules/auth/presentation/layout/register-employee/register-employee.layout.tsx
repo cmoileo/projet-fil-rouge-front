@@ -31,6 +31,10 @@ export const RegisterEmployeeLayout = () => {
                     <Input autoComplete={'family-name'} name={"lastname"} type={"text"}
                            placeholder={"Enter your lastname"} required/>
                 </div>
+                <div className="flex flex-col gap-300">
+                    <label className={"p-m"} htmlFor="profile picture">Profile picture</label>
+                    <Input id={"profilePicture"} name={"profilePicture"} accept={"image/png, image/jpeg, image/jpg"} type={"file"} placeholder={"Profile picture"}/>
+                </div>
             </div>
             <MainButton className={"w-1/2 mx-auto"} type={"submit"}>Signup</MainButton>
         </form>

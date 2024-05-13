@@ -13,8 +13,8 @@ export const getEmployeeData = async (): Promise<EmployeeDto[] | null> => {
         });
         const json = await res.json();
         if (!json) return null
-        const employee: EmployeeDto[] = json;
-        return employee;
+        const employees: EmployeeDto[] = json;
+        return employees;
     } catch (error) {
         console.error(error);
         return null

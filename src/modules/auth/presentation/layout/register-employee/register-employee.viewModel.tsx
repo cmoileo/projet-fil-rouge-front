@@ -6,6 +6,7 @@ import {cookieManager} from "../../../../../services/coockies/CoockieManager.ser
 export const useRegisterEmployee = () => {
     const params = useParams().id;
     const navigate = useNavigate();
+    console.log(params)
     const handleSubmitForm = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const formData = new FormData(e.currentTarget);
@@ -17,6 +18,7 @@ export const useRegisterEmployee = () => {
             passwordConfirm: formData.get('passwordConfirm') as string,
             firstname: formData.get('firstname') as string,
             lastname: formData.get('lastname') as string,
+            avatar: formData.get('profilePicture') as File || null,
         }
         const registeredEmployee: string | boolean = await registerEmployeeData(data, params)
         if (registeredEmployee) {
