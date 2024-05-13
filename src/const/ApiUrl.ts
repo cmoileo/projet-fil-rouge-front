@@ -5,6 +5,7 @@ export const ApiUrl = {
         Signin: BaseUrl + '/auth/employee/login',
         Signup: BaseUrl + '/auth/agency/register',
         AddEmployee: BaseUrl + '/auth/agency/add-employee',
+        RegisterEmployee: BaseUrl + '/auth/employee/register',
     },
     Folder: {
         Get: BaseUrl + '/folders/get',

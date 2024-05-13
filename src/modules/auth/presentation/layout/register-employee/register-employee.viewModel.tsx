@@ -1,18 +1,28 @@
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
+import {RegisterEmployeeDto} from "../../../domain/dto/RegisterEmployee.dto.ts";
+import {registerEmployeeData} from "../../../../../repository/employee/register-employee.data.ts";
+import {cookieManager} from "../../../../../services/coockies/CoockieManager.service.ts";
 
 export const useRegisterEmployee = () => {
     const params = useParams().id;
-    const handleSubmitForm = (e: React.FormEvent<HTMLFormElement>) => {
+    const navigate = useNavigate();
+    const handleSubmitForm = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const formData = new FormData(e.currentTarget);
-        const data = {
-            email: formData.get('email'),
-            password: formData.get('password'),
-            passwordConfirm: formData.get('passwordConfirm'),
-            firstname: formData.get('firstname'),
-            lastname: formData.get('lastname'),
+        if (formData.get('password') !== formData.get('passwordConfirm') || !formData.get('password') || !formData.get('passwordConfirm') || !formData.get('email')
+            || !formData.get('firstname') || !formData.get('lastname') || !params) return;
+        const data: RegisterEmployeeDto = {
+            email: formData.get('email') as string,
+            password: formData.get('password') as string,
+            passwordConfirm: formData.get('passwordConfirm') as string,
+            firstname: formData.get('firstname') as string,
+            lastname: formData.get('lastname') as string,
         }
-        console.log('Form submitted', params, data);
+        const registeredEmployee: string | boolean = await registerEmployeeData(data, params)
+        if (registeredEmployee) {
+            cookieManager.setCookie(registeredEmployee)
+            navigate('/dashboard')
+        }
     }
     return {
         handleSubmitForm,
