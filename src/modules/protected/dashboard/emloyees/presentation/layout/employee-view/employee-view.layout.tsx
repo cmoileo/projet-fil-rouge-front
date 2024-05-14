@@ -11,7 +11,7 @@ export const EmployeeViewLayout = () => {
             {
                 employees && employees.map((employee: EmployeeDto, index: number) => {
                     return (
-                        <article key={index} className={"flex justify-end flex-col gap-400 items-center padding-300 border-radius-300 shadow-[rgba(0,_0,_0,_0.15)_0px_0px_20px_0px]"}>
+                        <article key={index} className={"flex flex-col gap-400 items-center padding-300 border-radius-300 shadow-[rgba(0,_0,_0,_0.15)_0px_0px_20px_0px]"}>
                             {
                                 employee.profile_picture_url ? <img className={'w-32 h-32 rounded-full'} src={employee.profile_picture_url} alt={'avatar'}/> : <div className={'w-32 h-32 rounded-full bg-gray-200'}></div>
                             }

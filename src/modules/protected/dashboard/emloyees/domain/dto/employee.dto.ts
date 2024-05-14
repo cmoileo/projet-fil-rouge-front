@@ -6,4 +6,5 @@ export type EmployeeDto = {
     lastname: string;
     profile_picture_url?: string | null;
     role: RolesEnum;
+    job: string;
 }
