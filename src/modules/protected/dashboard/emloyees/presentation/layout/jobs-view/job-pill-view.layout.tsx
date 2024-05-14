@@ -1,7 +1,7 @@
 import {JobDto} from "../../../domain/dto/job.dto.ts";
 import {CheckIcon, PenIcon, TrashIcon} from "lucide-react";
 import {useJobPillViewModel} from "./use-job-pill.viewModel.tsx";
-import {Dispatch, SetStateAction, useState} from "react";
+import React, {Dispatch, SetStateAction, useState} from "react";
 
 export const JobPillViewLayout = (
     {
@@ -16,13 +16,14 @@ export const JobPillViewLayout = (
     ) => {
     const [isEdit, setIsEdit] = useState(false)
     const jobId = job.id
-    const {handleEdit, handleValidateEdit, handleDelete} = useJobPillViewModel({isEdit, setIsEdit, jobId, setJobs, jobs})
+    const inputRef = React.useRef<HTMLInputElement>(null)
+    const {handleEdit, handleValidateEdit, handleDelete} = useJobPillViewModel({setIsEdit, jobId, setJobs, jobs, inputRef})
   return (
-      <form>
+      <form onSubmit={handleValidateEdit}>
           <div className={"flex items-center gap-400 w-fit"} key={job.id}>
               {
                   isEdit ? (
-                      <input style={{backgroundColor: job.color}}
+                      <input id={jobId} ref={inputRef} style={{backgroundColor: job.color}}
                              className={"border-radius-full flex justify-center padding-500-x padding-200-y white p-xs w-28 text-center"}
                              type={"text"} defaultValue={job.name}/>
                   ) : (
