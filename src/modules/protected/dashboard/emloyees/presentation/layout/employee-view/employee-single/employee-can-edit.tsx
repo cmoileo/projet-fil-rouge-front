@@ -28,8 +28,14 @@ export const EmployeeCanEdit = ({employee}: { employee: EmployeeDto }) => {
                     <SelectValue placeholder={employee.role} />
                 </SelectTrigger>
                 <SelectContent id={"role"} defaultValue={employee.role}>
-                    <SelectItem defaultChecked={employee.role == RolesEnum.EMPLOYEE} key={RolesEnum.EMPLOYEE} value={RolesEnum.EMPLOYEE}>Employee</SelectItem>
-                    <SelectItem defaultChecked={employee.role == RolesEnum.ADMIN} key={RolesEnum.ADMIN} value={RolesEnum.ADMIN}>Admin</SelectItem>
+                    {
+                        employee.role !== "OWNER" ? (
+                            <>
+                                <SelectItem defaultChecked={employee.role == RolesEnum.EMPLOYEE} key={RolesEnum.EMPLOYEE} value={RolesEnum.EMPLOYEE}>Employee</SelectItem>
+                                <SelectItem defaultChecked={employee.role == RolesEnum.ADMIN} key={RolesEnum.ADMIN} value={RolesEnum.ADMIN}>Admin</SelectItem>
+                            </>
+                        ) : null
+                    }
                 </SelectContent>
             </Select>
 

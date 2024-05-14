@@ -7,9 +7,9 @@ export const DashboardPage = () => {
     useProtectedRoute();
     return (
         <DashboardProvider>
-            <div className={"flex gap-1000 w-full"}>
+            <div className={"flex gap-1000"}>
                 <Navbar/>
-                <main className={"margin-600-top margin-500-right margin-1000-bottom"}>
+                <main className={"margin-600-top w-full margin-1000-right margin-1000-bottom"}>
                     <Outlet/>
                 </main>
             </div>

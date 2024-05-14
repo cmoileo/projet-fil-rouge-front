@@ -8,7 +8,7 @@ import {JobPillViewLayout} from "./job-pill-view.layout.tsx";
 export const JobsViewLayout = () => {
     const {jobs, handleSubmit, isOpen, setIsOpen, setJobs} = useJobs();
     return (
-        <div className={"margin-700-top"}>
+        <div className={"sticky top-0"}>
             <Popover open={isOpen} onOpenChange={setIsOpen}>
                 <PopoverTrigger asChild>
                     <MainButton children={"Add a job"} />
@@ -25,7 +25,7 @@ export const JobsViewLayout = () => {
                     </form>
                 </PopoverContent>
             </Popover>
-            <div className={"grid grid-cols-4 gap-500 margin-500-top"}>
+            <div className={"grid flex-col gap-500 margin-500-top"}>
                 {
                     jobs && jobs.map((job: JobDto) => (
                         <JobPillViewLayout key={job.id} jobs={jobs} job={job} setJobs={setJobs}/>

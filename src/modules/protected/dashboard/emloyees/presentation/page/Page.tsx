@@ -6,10 +6,14 @@ import {JobsViewLayout} from "../layout/jobs-view/jobs-view.layout.tsx";
 export const EmployeesPage = () => {
     useProtectedRoute();
     return (
-        <div className={"flex flex-col gap-800"}>
-            <AddEmployeeLayout />
-            <EmployeeViewLayout />
-            <JobsViewLayout />
+        <div className={"flex justify-between gap-700 w-full"}>
+            <div className="flex w-full gap-900 flex-col">
+                <AddEmployeeLayout />
+                <EmployeeViewLayout />
+            </div>
+            <div>
+                <JobsViewLayout />
+            </div>
         </div>
     );
 }
