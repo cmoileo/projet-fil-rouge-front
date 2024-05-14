@@ -1,15 +1,13 @@
 class CookieManagerService {
-    private readonly cookieName = 'token';
-    private readonly expiryDays = 30;
-    setCookie(value: string) {
+    setCookie(value: string, cookieName: string, expiryDays: number) {
         const date = new Date();
-        date.setTime(date.getTime() + (this.expiryDays * 24 * 60 * 60 * 1000));
+        date.setTime(date.getTime() + (expiryDays * 24 * 60 * 60 * 1000));
         const expires = "expires=" + date.toUTCString();
-        document.cookie = this.cookieName + "=" + value + ";" + expires + ";path=/";
+        document.cookie = cookieName + "=" + value + ";" + expires + ";path=/";
     }
 
-    getCookie(): string | null {
-        const name = this.cookieName + "=";
+    getCookie(cookieName: string): string | null {
+        const name = cookieName + "=";
         const decodedCookie = decodeURIComponent(document.cookie);
         const cookieArray = decodedCookie.split(';');
         for(let i = 0; i < cookieArray.length; i++) {

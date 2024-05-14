@@ -7,7 +7,7 @@ export const editJobData = async (id: string, name: string, color: string) => {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + cookieManager.getCookie()
+                'Authorization': 'Bearer ' + cookieManager.getCookie("token")
             },
             body: JSON.stringify({
                 id: id,

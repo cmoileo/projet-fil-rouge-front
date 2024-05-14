@@ -8,7 +8,7 @@ export const getEmployeeData = async (): Promise<EmployeeDto[] | null> => {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${cookieManager.getCookie()}`,
+                'Authorization': `Bearer ${cookieManager.getCookie("token")}`,
             },
         });
         const json = await res.json();

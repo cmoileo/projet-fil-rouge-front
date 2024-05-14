@@ -8,7 +8,7 @@ export const createProject = async (data: ProjectType) => {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${cookieManager.getCookie()}`
+                'Authorization': `Bearer ${cookieManager.getCookie("token")}`
             },
             body: JSON.stringify(data)
         });

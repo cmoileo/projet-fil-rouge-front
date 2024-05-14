@@ -14,7 +14,7 @@ export const useJobPillViewModel = (
         setIsEdit: (isOpen: boolean) => void;
         jobId: string;
         jobs: JobDto[] | null;
-        setJobs: Dispatch<SetStateAction<JobDto[] | null>>;
+        setJobs: Dispatch<SetStateAction<JobDto[]>>;
         inputRef: React.RefObject<HTMLInputElement>;
     }
 ) => {

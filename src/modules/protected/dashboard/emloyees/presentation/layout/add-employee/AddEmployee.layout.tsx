@@ -10,6 +10,7 @@ import {
     SelectTrigger,
     SelectValue,
 } from "../../../../../../../ui/components/select";
+import {cookieManager} from "../../../../../../../services/coockies/CoockieManager.service.ts";
 export const AddEmployeeLayout = () => {
     const {handleSubmit, isOpen, setIsOpen} = AddEmployeeViewModel();
     return (
@@ -21,15 +22,19 @@ export const AddEmployeeLayout = () => {
                 <PopoverContent align={"start"} className="w-80 bg-white">
                     <form onSubmit={handleSubmit} className={"w-full flex flex-col gap-400 padding-400 border-radius-300 z-10 shadow-[rgba(0,_0,_0,_0.25)_0px_0px_50px_0px]"}>
                         <Input required id={"email"} type={"email"} placeholder={"Email"}/>
-                        <Select>
-                            <SelectTrigger className="w-[180px]">
-                                <SelectValue placeholder="Role" />
-                            </SelectTrigger>
-                            <SelectContent id={"role"}>
-                                  <SelectItem key={RolesEnum.EMPLOYEE} value={RolesEnum.EMPLOYEE}>Employee</SelectItem>
-                                <SelectItem key={RolesEnum.ADMIN} value={RolesEnum.ADMIN}>Admin</SelectItem>
-                            </SelectContent>
-                        </Select>
+                        {
+                            cookieManager.getCookie("role") !== "EMPLOYEE" ? (
+                                <Select>
+                                    <SelectTrigger className="w-[180px]">
+                                        <SelectValue placeholder="Role" />
+                                    </SelectTrigger>
+                                    <SelectContent id={"role"}>
+                                        <SelectItem key={RolesEnum.EMPLOYEE} value={RolesEnum.EMPLOYEE}>Employee</SelectItem>
+                                        <SelectItem key={RolesEnum.ADMIN} value={RolesEnum.ADMIN}>Admin</SelectItem>
+                                    </SelectContent>
+                                </Select>
+                            ) : null
+                        }
                         <MainButton type={"submit"} children={"Add"}/>
                     </form>
                 </PopoverContent>

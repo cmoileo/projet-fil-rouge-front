@@ -7,7 +7,7 @@ export const changeProjectParentFolderData = async (projectId: string, folderId:
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + cookieManager.getCookie()
+                'Authorization': 'Bearer ' + cookieManager.getCookie("token")
             },
             body: JSON.stringify({
                 "name": name,

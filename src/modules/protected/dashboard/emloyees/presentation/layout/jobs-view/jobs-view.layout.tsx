@@ -25,7 +25,7 @@ export const JobsViewLayout = () => {
                     </form>
                 </PopoverContent>
             </Popover>
-            <div className={"grid grid-cols-6 gap-500 margin-500-top"}>
+            <div className={"grid grid-cols-4 gap-500 margin-500-top"}>
                 {
                     jobs && jobs.map((job: JobDto) => (
                         <JobPillViewLayout key={job.id} jobs={jobs} job={job} setJobs={setJobs}/>

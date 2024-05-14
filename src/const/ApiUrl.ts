@@ -26,5 +26,10 @@ export const ApiUrl = {
         Create: BaseUrl + '/jobs/create',
         Update: BaseUrl + '/jobs/update',
         Delete: BaseUrl + '/jobs/delete',
+        RemoveEmployee: BaseUrl + '/jobs/employee/remove',
+        AddEmployee: BaseUrl + '/jobs/employee/assign',
     },
+    Roles: {
+        Assign: BaseUrl + '/jobs/role/assign',
+    }
 }
