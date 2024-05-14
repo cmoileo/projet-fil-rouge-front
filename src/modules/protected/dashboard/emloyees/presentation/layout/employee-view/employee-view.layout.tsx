@@ -19,7 +19,7 @@ export const EmployeeViewLayout = () => {
                                 <p className={'p-s'}>{employee.firstname}</p>
                                 <p className={'p-xs'}>{employee.email}</p>
                                 {
-                                    employee.role === "OWNER" ? (
+                                    employee.role === "OWNER" && cookieManager.getCookie("role") !== "OWNER" ? (
                                         <EmployeeCantEdit employee={employee} />
                                     ) : cookieManager.getCookie("role") !== "EMPLOYEE" ? (
                                         <EmployeeCanEdit employee={employee} />

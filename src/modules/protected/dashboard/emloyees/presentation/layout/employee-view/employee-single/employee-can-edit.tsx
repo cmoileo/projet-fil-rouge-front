@@ -17,11 +17,17 @@ export const EmployeeCanEdit = ({employee}: { employee: EmployeeDto }) => {
     const {editEmployeeRole, editEmployeeJob} = EditEmployeeViewModel({employee});
     return (
         <div className={"flex flex-col gap-400"}>
-            <Select>
+            <Select onValueChange={(value: RolesEnum) => {
+                console.log(value, employee.id)
+                editEmployeeRole(
+                    value,
+                    employee.id
+                );
+            }}>
                 <SelectTrigger className="w-[180px]">
                     <SelectValue placeholder={employee.role} />
                 </SelectTrigger>
-                <SelectContent onVolumeChange={() => editEmployeeRole(employee.job?.id || null)} id={"role"} defaultValue={employee.role}>
+                <SelectContent id={"role"} defaultValue={employee.role}>
                     <SelectItem defaultChecked={employee.role == RolesEnum.EMPLOYEE} key={RolesEnum.EMPLOYEE} value={RolesEnum.EMPLOYEE}>Employee</SelectItem>
                     <SelectItem defaultChecked={employee.role == RolesEnum.ADMIN} key={RolesEnum.ADMIN} value={RolesEnum.ADMIN}>Admin</SelectItem>
                 </SelectContent>
