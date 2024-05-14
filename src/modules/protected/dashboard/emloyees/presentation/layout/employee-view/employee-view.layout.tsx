@@ -1,14 +1,8 @@
 import {useEmployeeView} from "./employee-view.viewModel.tsx";
 import {EmployeeDto} from "../../../domain/dto/employee.dto.ts";
 import {cookieManager} from "../../../../../../../services/coockies/CoockieManager.service.ts";
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue
-} from "../../../../../../../ui/components/select.tsx";
-import {RolesEnum} from "../../../../../../../const/roles.enum.ts";
+import {EmployeeCantEdit} from "./employee-single/employee-cant-edit.tsx";
+import {EmployeeCanEdit} from "./employee-single/employee-can-edit.tsx";
 
 export const EmployeeViewLayout = () => {
     const { employees } = useEmployeeView();
@@ -26,33 +20,11 @@ export const EmployeeViewLayout = () => {
                                 <p className={'p-xs'}>{employee.email}</p>
                                 {
                                     employee.role === "OWNER" ? (
-                                            <Select>
-                                                <SelectTrigger className="w-[180px]">
-                                                    <SelectValue placeholder={employee.role} />
-                                                </SelectTrigger>
-                                                <SelectContent id={"role"} defaultValue={employee.role}>
-                                                    <SelectItem defaultChecked={true} key={RolesEnum.OWNER} value={RolesEnum.OWNER}>Owner</SelectItem>
-                                                </SelectContent>
-                                            </Select>
+                                        <EmployeeCantEdit employee={employee} />
                                     ) : cookieManager.getCookie("role") !== "EMPLOYEE" ? (
-                                        <Select>
-                                            <SelectTrigger className="w-[180px]">
-                                                <SelectValue placeholder={employee.role} />
-                                            </SelectTrigger>
-                                            <SelectContent id={"role"} defaultValue={employee.role}>
-                                                <SelectItem defaultChecked={employee.role == RolesEnum.EMPLOYEE} key={RolesEnum.EMPLOYEE} value={RolesEnum.EMPLOYEE}>Employee</SelectItem>
-                                                <SelectItem defaultChecked={employee.role == RolesEnum.ADMIN} key={RolesEnum.ADMIN} value={RolesEnum.ADMIN}>Admin</SelectItem>
-                                            </SelectContent>
-                                        </Select>
+                                        <EmployeeCanEdit employee={employee} />
                                     ) : (
-                                        <Select>
-                                            <SelectTrigger className="w-[180px]">
-                                                <SelectValue placeholder={employee.role} />
-                                            </SelectTrigger>
-                                            <SelectContent aria-disabled={true} id={"role"}>
-                                                <SelectItem defaultChecked={true} key={employee.role} value={employee.role}>{employee.role}</SelectItem>
-                                            </SelectContent>
-                                        </Select>
+                                        <EmployeeCantEdit employee={employee} />
                                     )
                                 }
                             </div>
