@@ -20,5 +20,11 @@ export const ApiUrl = {
         Create: BaseUrl + '/projects/create',
         Update: BaseUrl + '/projects/update',
         Delete: BaseUrl + '/projects/delete',
-    }
+    },
+    Jobs: {
+        Get: BaseUrl + '/jobs',
+        Create: BaseUrl + '/jobs/create',
+        Update: BaseUrl + '/jobs/update',
+        Delete: BaseUrl + '/jobs/delete',
+    },
 }
