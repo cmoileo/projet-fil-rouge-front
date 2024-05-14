@@ -8,7 +8,7 @@ export const addEmployeeData = async (data: AddEmployeeDto) => {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + cookieManager.getCookie(),
+                'Authorization': 'Bearer ' + cookieManager.getCookie("token"),
             },
             body: JSON.stringify(data),
         })

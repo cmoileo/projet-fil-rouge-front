@@ -8,7 +8,7 @@ export const getJobsData = async (): Promise<JobDto[] | undefined> => {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + cookieManager.getCookie()
+                'Authorization': 'Bearer ' + cookieManager.getCookie("token")
             },
         }))
         const data: JobDto[] = await res.json()

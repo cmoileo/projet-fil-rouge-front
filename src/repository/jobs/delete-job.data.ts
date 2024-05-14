@@ -7,7 +7,7 @@ export const deleteJobData = async (id: string): Promise<void> => {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${cookieManager.getCookie()}`
+                'Authorization': `Bearer ${cookieManager.getCookie("token")}`
             }
         })
     } catch (error) {
