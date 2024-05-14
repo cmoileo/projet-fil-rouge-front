@@ -29,8 +29,11 @@ export const useJobs = () => {
         if (!createdJob) return
         target.reset()
         setIsOpen(false)
-        if (!jobs) return
-        setJobs([...jobs, createdJob])
+        if (jobs) {
+            setJobs([...jobs, createdJob])
+        } else {
+            setJobs([createdJob])
+        }
     }
 
     return {
