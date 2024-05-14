@@ -6,17 +6,20 @@ import {Input} from "../../../../../../../ui/components/input.tsx";
 import {TrashIcon} from "lucide-react";
 
 export const JobsViewLayout = () => {
-    const {jobs, handleSubmit, isOpen, setIsOpen} = useJobs();
+    const {jobs, handleSubmit, isOpen, setIsOpen, handleDelete} = useJobs();
     return (
         <div className={"margin-700-top"}>
             <Popover open={isOpen} onOpenChange={setIsOpen}>
                 <PopoverTrigger asChild>
                     <MainButton children={"Add a job"} />
                 </PopoverTrigger>
-                <PopoverContent>
+                <PopoverContent className={"bg-white"}>
                     <form onSubmit={handleSubmit}
                           className={"w-full flex flex-col gap-400 padding-400 border-radius-300 z-10 shadow-[rgba(0,_0,_0,_0.25)_0px_0px_50px_0px]"}>
-                        <Input name={"color"} id={"color"} type={"color"} placeholder={"Color"}/>
+                        <div className="flex justify-between gap-400">
+                            <label className={"p-s"} htmlFor="color">Color</label>
+                            <Input name={"color"} id={"color"} type={"color"} placeholder={"Color"}/>
+                        </div>
                         <Input name={"jobTitle"} id={"jobTitle"} type={"text"} placeholder={"Job title"}/>
                         <MainButton type={"submit"} children={"Add"}/>
                     </form>
@@ -27,7 +30,7 @@ export const JobsViewLayout = () => {
                     jobs && jobs.map((job: JobDto) => (
                         <div className={"flex items-center gap-400"} key={job.id}>
                             <p style={{backgroundColor: job.color}} className={"border-radius-full flex justify-center padding-500-x padding-200-y white p-xs w-fit"}>{job.name}</p>
-                            <TrashIcon className={"cursor-pointer"}></TrashIcon>
+                            <TrashIcon onClick={() => handleDelete(job.id)} className={"cursor-pointer"}></TrashIcon>
                         </div>
                     ))
                 }

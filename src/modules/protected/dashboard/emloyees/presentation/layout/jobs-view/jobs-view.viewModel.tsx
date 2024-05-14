@@ -3,6 +3,7 @@ import {getJobsData} from "../../../../../../../repository/jobs/get-jobs.data.ts
 import {JobDto} from "../../../domain/dto/job.dto.ts";
 import {AddJobDto} from "../../../domain/dto/add-job.dto.ts";
 import {createJobData} from "../../../../../../../repository/jobs/create-job.data.ts";
+import {deleteJobData} from "../../../../../../../repository/jobs/delete-job.data.ts";
 
 export const useJobs = () => {
     const [jobs, setJobs] = useState<JobDto[] | null>(null);
@@ -36,10 +37,19 @@ export const useJobs = () => {
         }
     }
 
+    const handleDelete = async (id: string) => {
+        await deleteJobData(id)
+        const updatedJobs = jobs?.filter(job => job.id !== id)
+        if (updatedJobs) {
+            setJobs(updatedJobs)
+        }
+    }
+
     return {
         jobs,
         handleSubmit,
         isOpen,
-        setIsOpen
+        setIsOpen,
+        handleDelete
     }
 }
