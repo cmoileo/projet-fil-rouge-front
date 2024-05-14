@@ -1,11 +1,12 @@
-import {FormEvent, useEffect, useState} from "react";
+import {FormEvent, useContext, useEffect, useState} from "react";
 import {getJobsData} from "../../../../../../../repository/jobs/get-jobs.data.ts";
 import {JobDto} from "../../../domain/dto/job.dto.ts";
 import {AddJobDto} from "../../../domain/dto/add-job.dto.ts";
 import {createJobData} from "../../../../../../../repository/jobs/create-job.data.ts";
+import {DashboardContext} from "../../../../../../../contexts/dashboard.context.tsx";
 
 export const useJobs = () => {
-    const [jobs, setJobs] = useState<JobDto[] | null>(null);
+   const {jobs, setJobs} = useContext(DashboardContext)
     const [isOpen, setIsOpen] = useState(false)
 
     useEffect(() => {
