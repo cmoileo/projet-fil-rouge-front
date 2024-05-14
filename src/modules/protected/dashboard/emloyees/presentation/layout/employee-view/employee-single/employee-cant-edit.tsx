@@ -4,12 +4,12 @@ import {useContext} from "react";
 
 export const EmployeeCantEdit = ({employee}: { employee: EmployeeDto }) => {
     const {jobs} = useContext(DashboardContext);
-    const jobColor = jobs.find(job => job.name === employee.job)?.color;
+    const jobColor = jobs.find(job => job.name === employee.job?.name)?.color || "white";
     return (
         <div className={"flex flex-col gap-300"}>
             <p className={"p-m"}>{employee.role}</p>
             <p style={{backgroundColor: jobColor}} className="p-m">
-                {employee.job}
+                {employee.job?.name}
             </p>
         </div>
     );
