@@ -1,7 +1,7 @@
 import React, {Ref} from 'react';
 import { Link } from 'react-router-dom';
 import { cn } from '../../../services/shadcn/utils.ts';
-import { PlusIcon, ChevronDownIcon } from 'lucide-react';
+import {PlusIcon, ChevronDownIcon, TrashIcon, PenIcon} from 'lucide-react';
 import {useNavitem} from "./navItem.viewModel.tsx"
 import {ProjectType} from "../../../types/project/projet.type.ts";
 import {FolderType} from "../../../types/folder/folder.type.ts";
@@ -9,6 +9,13 @@ import {MainButton} from "../mainButton.tsx";
 import {Input} from "../input.tsx";
 import {Popover, PopoverContent, PopoverTrigger} from "../Popup.tsx";
 import {ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuTrigger} from "../contextMenu.tsx";
+import {
+    AlertDialog,
+    AlertDialogAction, AlertDialogCancel,
+    AlertDialogContent, AlertDialogDescription, AlertDialogFooter,
+    AlertDialogHeader, AlertDialogTitle,
+    AlertDialogTrigger
+} from "../altertDialog.tsx";
 
 interface NavItemProps {
     name: string;
@@ -40,12 +47,13 @@ export const NavItem: React.FC<NavItemProps> = (
     const chevronIconRef = React.useRef<HTMLDivElement>(null);
     const formRef = React.useRef<HTMLFormElement>(null);
     const plusIconRef = React.useRef<SVGSVGElement>(null);
+    const [isAltertDialogOpen, setIsAltertDialogOpen] = React.useState<boolean>(false);
     const { chevronClickHandler, drop, style, drag, handleOpenForm, submitForm } = useNavitem({ chevronIconRef, plusIconRef, id, project, folders, setFolders, formRef, navbarRef });
 
 
     const linkElement = path ? (
         <Link  ref={drag} to={path} className={cn(baseStyle, className)}>
-            <div className={"flex gap-200 items-center"}>
+            <div className={"gap-200 items-center"}>
                 {name}
             </div>
             {isPlusIcon && <PlusIcon className="hidden group-hover:block text-200 transition hover-bg-grey-300 border-radius-200" />}
@@ -53,8 +61,8 @@ export const NavItem: React.FC<NavItemProps> = (
     ) : (
         <ContextMenu>
             <li style={style} ref={drop} className={cn(baseStyle, className)}>
-                <ContextMenuTrigger>
-                    <div className={"flex gap-200 items-center"}>
+                <ContextMenuTrigger >
+                    <div className={"flex min-w-[200%] gap-200 items-center"}>
                         <div ref={chevronIconRef} onClick={chevronClickHandler} className={iconStyle}>
                             <ChevronDownIcon className={"transition -rotate-90"}/>
                         </div>
@@ -62,10 +70,45 @@ export const NavItem: React.FC<NavItemProps> = (
                     </div>
                 </ContextMenuTrigger>
                 <ContextMenuContent>
-                    <ContextMenuItem>Profile</ContextMenuItem>
-                    <ContextMenuItem>Billing</ContextMenuItem>
-                    <ContextMenuItem>Team</ContextMenuItem>
-                    <ContextMenuItem>Subscription</ContextMenuItem>
+                    <AlertDialog open={isAltertDialogOpen}>
+                        <AlertDialogTrigger className={"w-full"}>
+                            <ContextMenuItem onClick={(e) => {
+                                e.preventDefault();
+                                setIsAltertDialogOpen(true);
+                            }}  className={"justify-between w-full gap-400"}>
+                                <TrashIcon strokeWidth={1}></TrashIcon>
+                                Delete folder
+                            </ContextMenuItem>
+                        </AlertDialogTrigger>
+                        <AlertDialogContent>
+                            <AlertDialogHeader>
+                                <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                                <AlertDialogDescription>
+                                    This action will permanently delete the folder and all projects in it.
+                                </AlertDialogDescription>
+                            </AlertDialogHeader>
+                            <AlertDialogFooter>
+                                <AlertDialogCancel onClick={() => {
+                                    setIsAltertDialogOpen(false)
+                                }}>
+                                    Cancel
+                                </AlertDialogCancel>
+                                <AlertDialogAction asChild onClick={() => {
+                                    setIsAltertDialogOpen(false)
+                                }}>
+                                    <MainButton className={"danger"} variant="danger">Continue</MainButton>
+                                </AlertDialogAction>
+                            </AlertDialogFooter>
+                        </AlertDialogContent>
+                    </AlertDialog>
+                    <ContextMenuItem className={"justify-between gap-400"}>
+                        <PlusIcon strokeWidth={1}></PlusIcon>
+                        Create subfolder
+                    </ContextMenuItem>
+                    <ContextMenuItem className={"justify-between gap-400"}>
+                        <PenIcon strokeWidth={1} width={24}></PenIcon>
+                        Edit folder name
+                    </ContextMenuItem>
                 </ContextMenuContent>
                 <Popover>
                     <PopoverTrigger>
