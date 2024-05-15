@@ -56,7 +56,7 @@ export const Navbar = () => {
 
 
     return (
-        <nav ref={navbarRef} className={"sticky overflow-y-hidden top-0 bg-grey-100 h-screen min-w-fit padding-200 flex flex-col justify-between overflow-x-hidden scrollbar-hide"}>
+        <nav ref={navbarRef} className={"sticky overflow-y-hidden top-0 bg-grey-100 h-screen min-w-fit padding-1000-bottom padding-200 flex flex-col justify-between overflow-x-hidden scrollbar-hide"}>
             <div className="flex flex-col gap-1000">
                 <ul className={"flex flex-col w-60 gap-300 margin-600-top overflow-x-hidden scrollbar-hide"}>
                     {
@@ -65,7 +65,7 @@ export const Navbar = () => {
                                      className={item.className} isPlusIcon={false}/>
                         ))}
                 </ul>
-                <ul className={"flex max-h-[55%] overflow-y-auto padding-200-bottom flex-col w-60 gap-300"}>
+                <ul className={"flex max-h-[70vh] overflow-y-auto padding-1000-bottom scrollbar-hide flex-col w-60 gap-300"}>
                     {folders?.map((folder) => (
                         <li key={folder.id}>
                             {renderFolderItems(folder)}
