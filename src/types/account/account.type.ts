@@ -3,4 +3,5 @@ export type AccountType = {
     firstname: string;
     lastname: string;
     profile_picture_url?: string;
+    avatar?: string | null;
 }

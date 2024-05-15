@@ -34,5 +34,6 @@ export const ApiUrl = {
     },
     Account: {
         GetByUserId: BaseUrl + '/account/get-user',
+        Update: BaseUrl + '/account/update',
     }
 }

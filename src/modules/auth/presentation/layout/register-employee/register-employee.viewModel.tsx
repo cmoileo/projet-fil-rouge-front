@@ -3,17 +3,11 @@ import {RegisterEmployeeDto} from "../../../domain/dto/RegisterEmployee.dto.ts";
 import {registerEmployeeData} from "../../../../../repository/employee/register-employee.data.ts";
 import {cookieManager} from "../../../../../services/coockies/CoockieManager.service.ts";
 import {FormEvent} from "react";
+import {toBase64} from "../../../../../services/toBas64.service.ts";
 
 export const useRegisterEmployee = () => {
     const params = useParams().id;
     const navigate = useNavigate();
-
-    const toBase64 = (file: Blob) => new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = () => resolve(reader.result);
-        reader.onerror = reject;
-    });
     const handleSubmitForm = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (!params) return console.error('No params')
