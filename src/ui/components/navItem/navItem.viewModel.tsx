@@ -44,7 +44,7 @@ export const useNavitem = (
     }, [formRef]);
     const chevronClickHandler = () => {
         if (!chevronIconRef || !chevronIconRef.current) return;
-        const parentUl = chevronIconRef.current.parentElement?.parentElement?.parentElement;
+        const parentUl = chevronIconRef.current.parentElement?.parentElement?.parentElement?.parentElement;
         if (!parentUl) return;
         const el: Element = chevronIconRef.current.children[0]
         if (el.classList.contains("-rotate-90")) {

@@ -8,6 +8,7 @@ import {FolderType} from "../../../types/folder/folder.type.ts";
 import {MainButton} from "../mainButton.tsx";
 import {Input} from "../input.tsx";
 import {Popover, PopoverContent, PopoverTrigger} from "../Popup.tsx";
+import {ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuTrigger} from "../contextMenu.tsx";
 
 interface NavItemProps {
     name: string;
@@ -50,29 +51,39 @@ export const NavItem: React.FC<NavItemProps> = (
             {isPlusIcon && <PlusIcon className="hidden group-hover:block text-200 transition hover-bg-grey-300 border-radius-200" />}
         </Link>
     ) : (
-        <li style={style} ref={drop} className={cn(baseStyle, className)}>
-            <div className={"flex gap-200 items-center"}>
-                <div ref={chevronIconRef} onClick={chevronClickHandler} className={iconStyle}>
-                    <ChevronDownIcon className={"transition -rotate-90"}/>
-                </div>
-                {name}
-            </div>
-            <Popover>
-                <PopoverTrigger>
-                    {isPlusIcon && <PlusIcon ref={plusIconRef} onClick={handleOpenForm}
-                                             className="group-hover:block text-200 transition hover-bg-grey-300 border-radius-200"/>}
-                </PopoverTrigger>
-                <PopoverContent className={'p-0'}>
-                    <form onSubmit={submitForm} id={id} ref={formRef}
-                          className={"z-10 shadow-[rgba(0,_0,_0,_0.25)_0px_0px_50px_0px] flex flex-col gap-700 padding-500 border-radius-300 bg-white"}
-                          action="submit">
-                        <Input name={"projectTitle"} type={"text"} placeholder={"Enter the project name"}
-                               required/>
-                        <MainButton className={"w-full"} type={"submit"}>Create project</MainButton>
-                    </form>
-                </PopoverContent>
-            </Popover>
-        </li>
+        <ContextMenu>
+            <li style={style} ref={drop} className={cn(baseStyle, className)}>
+                <ContextMenuTrigger>
+                    <div className={"flex gap-200 items-center"}>
+                        <div ref={chevronIconRef} onClick={chevronClickHandler} className={iconStyle}>
+                            <ChevronDownIcon className={"transition -rotate-90"}/>
+                        </div>
+                        {name}
+                    </div>
+                </ContextMenuTrigger>
+                <ContextMenuContent>
+                    <ContextMenuItem>Profile</ContextMenuItem>
+                    <ContextMenuItem>Billing</ContextMenuItem>
+                    <ContextMenuItem>Team</ContextMenuItem>
+                    <ContextMenuItem>Subscription</ContextMenuItem>
+                </ContextMenuContent>
+                <Popover>
+                    <PopoverTrigger>
+                        {isPlusIcon && <PlusIcon ref={plusIconRef} onClick={handleOpenForm}
+                                                 className="group-hover:block text-200 transition hover-bg-grey-300 border-radius-200"/>}
+                    </PopoverTrigger>
+                    <PopoverContent className={'p-0'}>
+                        <form onSubmit={submitForm} id={id} ref={formRef}
+                              className={"z-10 shadow-[rgba(0,_0,_0,_0.25)_0px_0px_50px_0px] flex flex-col gap-700 padding-500 border-radius-300 bg-white"}
+                              action="submit">
+                            <Input name={"projectTitle"} type={"text"} placeholder={"Enter the project name"}
+                                   required/>
+                            <MainButton className={"w-full"} type={"submit"}>Create project</MainButton>
+                        </form>
+                    </PopoverContent>
+                </Popover>
+            </li>
+        </ContextMenu>
     );
 
     return linkElement;
