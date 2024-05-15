@@ -28,9 +28,9 @@ export const useAccountLayout = () => {
 
             reader.onload = function (e) {
                 if (!e.target) return;
-                console.log(e.target)
                 if (typeof e.target.result !== "string") return;
                 setIsAvatar(e.target.result);
+                console.log(isAvatar)
             };
 
             reader.readAsDataURL(e.target.files[0]);

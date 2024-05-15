@@ -5,7 +5,6 @@ import { MainButton } from "../../../../../../ui/components/mainButton.tsx";
 
 export const AccountLayout = () => {
     const { account, handleSaveChanges, isAvatar, handleAvatarChange, imageInputRef } = useAccountLayout();
-    console.log(account);
 
     return (
         <div>
@@ -28,7 +27,7 @@ export const AccountLayout = () => {
                     <div className="flex items-center gap-500 margin-600-top">
                         <div className={"relative"}>
                             {account.profile_picture_url || isAvatar ? (
-                                <img src={account.profile_picture_url || isAvatar} alt={"profile picture"} className={"w-36 rounded-full object-cover h-36"} />
+                                <img src={isAvatar || account.profile_picture_url} alt={"profile picture"} className={"w-36 rounded-full object-cover h-36"} />
                             ) : (
                                 <div className={"w-36 rounded-full h-36 bg-grey-200"} />
                             )}
