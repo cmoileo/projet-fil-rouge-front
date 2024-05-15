@@ -3,7 +3,7 @@ import {getEmployeeData} from "../../../../../../../repository/employee/get-empl
 import {EmployeeDto} from "../../../domain/dto/employee.dto.ts";
 
 export const useEmployeeView = () => {
-    const [employees, setEmployees] = useState<EmployeeDto[] | null>(null);
+    const [employees, setEmployees] = useState<EmployeeDto[]>([]);
     useEffect(() => {
         const fetchEmployee = async () => {
             const employees: EmployeeDto[] | null = await getEmployeeData();

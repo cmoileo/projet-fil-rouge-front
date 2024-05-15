@@ -7,6 +7,7 @@ import {ProjectType} from "../../../types/project/projet.type.ts";
 import {FolderType} from "../../../types/folder/folder.type.ts";
 import {MainButton} from "../mainButton.tsx";
 import {Input} from "../input.tsx";
+import {Popover, PopoverContent, PopoverTrigger} from "../Popup.tsx";
 
 interface NavItemProps {
     name: string;
@@ -33,7 +34,7 @@ export const NavItem: React.FC<NavItemProps> = (
         setFolders,
         navbarRef
     }) => {
-    const baseStyle = "select-none grow p-m transition blue-1000 border-radius-100 padding-200-x cursor-pointer padding-100-y flex justify-between hover-bg-grey-200 items-center relative group";
+    const baseStyle = "select-none grow p-m transition blue-1000 border-radius-100 padding-200-x cursor-pointer padding-100-y flex justify-between hover-bg-grey-200 items-center group";
     const iconStyle = "text-200 transition hover-bg-grey-300 border-radius-200";
     const chevronIconRef = React.useRef<HTMLDivElement>(null);
     const formRef = React.useRef<HTMLFormElement>(null);
@@ -56,14 +57,21 @@ export const NavItem: React.FC<NavItemProps> = (
                 </div>
                 {name}
             </div>
-            <form onSubmit={submitForm} id={id} ref={formRef} className={"z-10 shadow-[rgba(0,_0,_0,_0.25)_0px_0px_50px_0px] flex-col gap-700 fixed translate-x-full padding-500 border-radius-300 bg-white hidden"} action="submit">
-                <label htmlFor="name">Project name</label>
-                <Input name={"projectTitle"} type={"text"} placeholder={"Enter the project name"}
-                       required/>
-                <MainButton className={"w-full"} type={"submit"}>Create project</MainButton>
-            </form>
-            {isPlusIcon && <PlusIcon ref={plusIconRef} onClick={handleOpenForm}
-                className="hidden group-hover:block text-200 transition hover-bg-grey-300 border-radius-200"/>}
+            <Popover>
+                <PopoverTrigger>
+                    {isPlusIcon && <PlusIcon ref={plusIconRef} onClick={handleOpenForm}
+                                             className="group-hover:block text-200 transition hover-bg-grey-300 border-radius-200"/>}
+                </PopoverTrigger>
+                <PopoverContent className={'p-0'}>
+                    <form onSubmit={submitForm} id={id} ref={formRef}
+                          className={"z-10 shadow-[rgba(0,_0,_0,_0.25)_0px_0px_50px_0px] flex flex-col gap-700 padding-500 border-radius-300 bg-white"}
+                          action="submit">
+                        <Input name={"projectTitle"} type={"text"} placeholder={"Enter the project name"}
+                               required/>
+                        <MainButton className={"w-full"} type={"submit"}>Create project</MainButton>
+                    </form>
+                </PopoverContent>
+            </Popover>
         </li>
     );
 
