@@ -73,7 +73,7 @@ export const Navbar = () => {
                     ))}
                 </ul>
             </div>
-            <Link className={"absolute bg-grey-100 padding-200-top bottom-0 left-0"} to={"/dashboard/account"}>
+            <Link className={"absolute transition hover-bg-grey-200 w-full bg-grey-100 padding-200-top bottom-0 left-0"} to={"/dashboard/account"}>
                 <div className="flex items-center gap-400 padding-300-bottom padding-300-left">
                          <CircleUserRound className={"cursor-pointer w-8 h-8"} />
                          <p className="p-xs">{account?.email}</p>

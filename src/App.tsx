@@ -6,6 +6,7 @@ import SigninPage from "./modules/auth/presentation/page/Signin.page.tsx";
 import { DashboardPage } from "./modules/protected/dashboard/home/presentation/page/Page.tsx";
 import {EmployeesPage} from "./modules/protected/dashboard/emloyees/presentation/page/Page.tsx";
 import {RegisterEmployeePage} from "./modules/auth/presentation/page/RegisterEmployee.page.tsx";
+import {AccountPage} from "./modules/protected/dashboard/account/presentation/page/Page.tsx";
 
 function App() {
     const router = createBrowserRouter([
@@ -29,6 +30,10 @@ function App() {
                     path: "employees",
                     element: <EmployeesPage />,
                 },
+                {
+                    path: "account",
+                    element: <AccountPage />,
+                }
             ],
         },
         {
