@@ -24,7 +24,6 @@ export const DashboardProvider: React.FC<{ children: React.ReactNode }> = ({ chi
             const account = await getUserByIdData();
             if (account) {
                 setAccount(account);
-                console.log('account', account);
             }
         }
         getAccount();
