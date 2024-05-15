@@ -8,13 +8,11 @@ export const DashboardContext =
         jobs: JobDto[];
         setJobs: React.Dispatch<React.SetStateAction<JobDto[]>>;
         account: AccountType | null;
-        setAccount: React.Dispatch<React.SetStateAction<AccountType | null>>;
     }>(
         {
             jobs: [],
             setJobs: () => {},
             account: null,
-            setAccount: () => {},
         });
 
 export const DashboardProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -33,7 +31,7 @@ export const DashboardProvider: React.FC<{ children: React.ReactNode }> = ({ chi
     }, []);
 
     return (
-        <DashboardContext.Provider value={{ jobs, setJobs, account, setAccount }}>
+        <DashboardContext.Provider value={{ jobs, setJobs, account }}>
             {children}
         </DashboardContext.Provider>
     );

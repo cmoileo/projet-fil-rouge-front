@@ -1,8 +1,10 @@
 import {NavItem} from "../components/navItem/navItem.tsx";
-import {useEffect, useRef, useState} from "react";
+import {useContext, useEffect, useRef, useState} from "react";
 import {FolderType} from "../../types/folder/folder.type.ts";
 import {getFolders} from "../../repository/folder/getAll.data.ts";
 import {CircleUserRound} from "lucide-react";
+import {DashboardContext} from "../../contexts/dashboard.context.tsx";
+import {Link} from "react-router-dom";
 
 type NavItemType = {
     name: string;
@@ -14,6 +16,7 @@ type NavItemType = {
 export const Navbar = () => {
     const [folders, setFolders] = useState<FolderType[]>([]);
     const navbarRef = useRef<HTMLDivElement>(null);
+    const {account} = useContext(DashboardContext);
 
     useEffect(() => {
         const fetchFolders = async () => {
@@ -70,9 +73,12 @@ export const Navbar = () => {
                     ))}
                 </ul>
             </div>
-            <div className="flex flex-col padding-300-bottom padding-300-left">
-                 <CircleUserRound className={"cursor-pointer w-8 h-8"} />
-            </div>
+            <Link to={"/dashboard/account"}>
+                <div className="flex items-center gap-400 padding-300-bottom padding-300-left">
+                         <CircleUserRound className={"cursor-pointer w-8 h-8"} />
+                         <p className="p-xs">{account?.email}</p>
+                </div>
+            </Link>
         </nav>
     );
 };
