@@ -2,6 +2,7 @@ import {NavItem} from "../components/navItem/navItem.tsx";
 import {useEffect, useRef, useState} from "react";
 import {FolderType} from "../../types/folder/folder.type.ts";
 import {getFolders} from "../../repository/folder/getAll.data.ts";
+import {CircleUserRound} from "lucide-react";
 
 type NavItemType = {
     name: string;
@@ -52,20 +53,26 @@ export const Navbar = () => {
 
 
     return (
-        <nav ref={navbarRef} className={"sticky top-0 bg-grey-100 h-screen min-w-fit padding-200 flex flex-col gap-1000 overflow-y-auto overflow-x-hidden scrollbar-hide"}>
-            <ul className={"flex flex-col w-60 gap-300 margin-600-top"}>
-                {
-                    navItems1.map((item, index) => (
-                        <NavItem id={`nav-item-${index}`} key={index} name={item.name} path={item.path} className={item.className} isPlusIcon={false} />
+        <nav ref={navbarRef} className={"sticky top-0 bg-grey-100 h-screen min-w-fit padding-200 flex flex-col justify-between overflow-y-auto overflow-x-hidden scrollbar-hide"}>
+            <div className="flex flex-col gap-1000">
+                <ul className={"flex flex-col w-60 gap-300 margin-600-top overflow-y-auto overflow-x-hidden scrollbar-hide"}>
+                    {
+                        navItems1.map((item, index) => (
+                            <NavItem id={`nav-item-${index}`} key={index} name={item.name} path={item.path}
+                                     className={item.className} isPlusIcon={false}/>
+                        ))}
+                </ul>
+                <ul className={"flex flex-col w-60 gap-300"}>
+                    {folders?.map((folder) => (
+                        <li key={folder.id}>
+                            {renderFolderItems(folder)}
+                        </li>
                     ))}
-            </ul>
-            <ul className={"flex flex-col w-60 gap-300"}>
-                {folders?.map((folder) => (
-                    <li key={folder.id}>
-                        {renderFolderItems(folder)}
-                    </li>
-                ))}
-            </ul>
+                </ul>
+            </div>
+            <div className="flex flex-col padding-300-bottom padding-300-left">
+                 <CircleUserRound className={"cursor-pointer w-8 h-8"} />
+            </div>
         </nav>
     );
 };

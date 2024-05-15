@@ -31,5 +31,8 @@ export const ApiUrl = {
     },
     Roles: {
         Assign: BaseUrl + '/jobs/role/assign',
+    },
+    Account: {
+        GetByUserId: BaseUrl + '/account/get-user',
     }
 }
