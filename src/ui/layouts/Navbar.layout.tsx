@@ -56,16 +56,16 @@ export const Navbar = () => {
 
 
     return (
-        <nav ref={navbarRef} className={"sticky top-0 bg-grey-100 h-screen min-w-fit padding-200 flex flex-col justify-between overflow-y-auto overflow-x-hidden scrollbar-hide"}>
+        <nav ref={navbarRef} className={"sticky overflow-y-hidden top-0 bg-grey-100 h-screen min-w-fit padding-200 flex flex-col justify-between overflow-x-hidden scrollbar-hide"}>
             <div className="flex flex-col gap-1000">
-                <ul className={"flex flex-col w-60 gap-300 margin-600-top overflow-y-auto overflow-x-hidden scrollbar-hide"}>
+                <ul className={"flex flex-col w-60 gap-300 margin-600-top overflow-x-hidden scrollbar-hide"}>
                     {
                         navItems1.map((item, index) => (
                             <NavItem id={`nav-item-${index}`} key={index} name={item.name} path={item.path}
                                      className={item.className} isPlusIcon={false}/>
                         ))}
                 </ul>
-                <ul className={"flex flex-col w-60 gap-300"}>
+                <ul className={"flex max-h-[55%] overflow-y-auto padding-200-bottom flex-col w-60 gap-300"}>
                     {folders?.map((folder) => (
                         <li key={folder.id}>
                             {renderFolderItems(folder)}
@@ -73,7 +73,7 @@ export const Navbar = () => {
                     ))}
                 </ul>
             </div>
-            <Link to={"/dashboard/account"}>
+            <Link className={"absolute bg-grey-100 padding-200-top bottom-0 left-0"} to={"/dashboard/account"}>
                 <div className="flex items-center gap-400 padding-300-bottom padding-300-left">
                          <CircleUserRound className={"cursor-pointer w-8 h-8"} />
                          <p className="p-xs">{account?.email}</p>
