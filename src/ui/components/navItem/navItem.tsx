@@ -48,7 +48,7 @@ export const NavItem: React.FC<NavItemProps> = (
     const formRef = React.useRef<HTMLFormElement>(null);
     const plusIconRef = React.useRef<SVGSVGElement>(null);
     const [isAltertDialogOpen, setIsAltertDialogOpen] = React.useState<boolean>(false);
-    const { chevronClickHandler, drop, style, drag, handleOpenForm, submitForm, handleDeleteFolder, isPopoverOpen, setIsPopoverOpen } = useNavitem({ chevronIconRef, plusIconRef, id, project, folders, setFolders, formRef, navbarRef });
+    const { chevronClickHandler, drop, style, drag, handleOpenForm, submitForm, handleDeleteFolder, isPopoverOpen, setIsPopoverOpen, handleDeleteProject } = useNavitem({ chevronIconRef, plusIconRef, id, project, folders, setFolders, formRef, navbarRef });
 
 
     const linkElement = path ? (
@@ -58,7 +58,7 @@ export const NavItem: React.FC<NavItemProps> = (
                     {name}
                 </p>
             </Link>
-            <TrashIcon className={"transition padding-100 border-radius-200 hover-bg-grey-300"}></TrashIcon>
+            <TrashIcon onClick={() => handleDeleteProject(project?.id || null)} className={"transition padding-100 border-radius-200 hover-bg-grey-300"}></TrashIcon>
         </div>
     ) : (
         <ContextMenu>

@@ -6,6 +6,7 @@ import {changeProjectParentFolderData} from "../../../repository/project/changeP
 import {getFolders} from "../../../repository/folder/getAll.data.ts";
 import {createProject} from "../../../repository/project/createProject.data.ts";
 import {deleteFolderData} from "../../../repository/folder/delete-folder.data.ts";
+import {deleteProjectData} from "../../../repository/project/delete-project.data.ts";
 
 export const useNavitem = (
     {
@@ -121,6 +122,14 @@ export const useNavitem = (
         updateFolders(setFolders)
     }
 
+    const handleDeleteProject = async (projectId: string | null) => {
+        if (!projectId) return console.error("Project not found");
+        await deleteProjectData(projectId)
+        const updatedFolders = await getFolders();
+        if (!setFolders || !updatedFolders) return console.error("Error deleting project");
+        setFolders(updatedFolders);
+    }
+
     const updateFolders = async (setFolders: React.Dispatch<React.SetStateAction<FolderType[]>> | undefined) => {
         const newFolders: FolderType[] | undefined = await getFolders();
         if (!newFolders) return console.error("Error sorting folders");
@@ -208,6 +217,7 @@ export const useNavitem = (
         submitForm,
         handleDeleteFolder,
         isPopoverOpen,
-        setIsPopoverOpen
+        setIsPopoverOpen,
+        handleDeleteProject
     }
 }
