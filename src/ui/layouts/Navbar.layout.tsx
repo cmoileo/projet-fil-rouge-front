@@ -2,9 +2,13 @@ import {NavItem} from "../components/navItem/navItem.tsx";
 import {useContext, useEffect, useRef, useState} from "react";
 import {FolderType} from "../../types/folder/folder.type.ts";
 import {getFolders} from "../../repository/folder/getAll.data.ts";
-import {CircleUserRound} from "lucide-react";
+import {CircleUserRound, PlusIcon} from "lucide-react";
 import {DashboardContext} from "../../contexts/dashboard.context.tsx";
 import {Link} from "react-router-dom";
+import {Popover, PopoverContent, PopoverTrigger} from "../components/Popup.tsx";
+import {Input} from "../components/input.tsx";
+import {MainButton} from "../components/mainButton.tsx";
+import {useNavLayout} from "./navbar.viewModel.tsx";
 
 type NavItemType = {
     name: string;
@@ -17,6 +21,7 @@ export const Navbar = () => {
     const [folders, setFolders] = useState<FolderType[]>([]);
     const navbarRef = useRef<HTMLDivElement>(null);
     const {account} = useContext(DashboardContext);
+    const { handleCreateFolder, isPopoverOpen, setIsPopoverOpen } = useNavLayout({setFolders});
 
     useEffect(() => {
         const fetchFolders = async () => {
@@ -39,8 +44,8 @@ export const Navbar = () => {
 
     const renderFolderItems = (folder: FolderType): JSX.Element => {
         return (
-            <ul className={"flex flex-col gap-100 select-none h-10 overflow-hidden"}>
-                <NavItem setFolders={setFolders} navbarRef={navbarRef} id={folder.id} key={folder.id} name={folder.name} className={`padding-400-left p-m`} isPlusIcon={true}/>
+            <ul className={"flex flex-col gap-100 select-none h-[37.5px] overflow-hidden"}>
+                <NavItem folders={folders} setFolders={setFolders} navbarRef={navbarRef} id={folder.id} key={folder.id} name={folder.name} className={`padding-400-left p-m`} isPlusIcon={true}/>
                 {folder.projects && folder.projects.map(project => (
                     <NavItem folders={folders} setFolders={setFolders} project={project} id={folder.id} key={project.id} name={project.name} path={`/dashboard/project/${project.id}`}
                              className={`padding-600-left p-s`} isPlusIcon={false}/>
@@ -65,7 +70,24 @@ export const Navbar = () => {
                                      className={item.className} isPlusIcon={false}/>
                         ))}
                 </ul>
+                <div>
+                </div>
                 <ul className={"flex max-h-[70vh] overflow-y-auto padding-1000-bottom scrollbar-hide flex-col w-60 gap-300"}>
+                    <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
+                        <PopoverTrigger>
+                            <div
+                                className={"transition padding-200-x padding-300-left hover-bg-grey-200 border-radius-200 cursor-pointer flex justify-between items-center"}>
+                                <p className="p-m">Folders</p>
+                                <PlusIcon className={"transition hover-bg-grey-300 border-radius-200"}></PlusIcon>
+                            </div>
+                        </PopoverTrigger>
+                        <PopoverContent align={"end"}>
+                            <form onSubmit={handleCreateFolder} className={"flex flex-col gap-300"}>
+                                <Input name={"folderTitle"} type={"text"} placeholder={"Folder name"} />
+                                <MainButton type={"submit"}>Create folder</MainButton>
+                            </form>
+                        </PopoverContent>
+                    </Popover>
                     {folders?.map((folder) => (
                         <li key={folder.id}>
                             {renderFolderItems(folder)}

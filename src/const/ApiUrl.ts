@@ -11,9 +11,9 @@ export const ApiUrl = {
     },
     Folder: {
         Get: BaseUrl + '/folders/get',
-        Create: BaseUrl + '/folders',
-        Update: BaseUrl + '/folders',
-        Delete: BaseUrl + '/folders',
+        Create: BaseUrl + '/folders/create',
+        Update: BaseUrl + '/folders/update',
+        Delete: BaseUrl + '/folders/delete',
     },
     Projects: {
         Get: BaseUrl + '/projects/get',

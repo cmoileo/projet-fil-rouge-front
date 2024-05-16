@@ -5,6 +5,10 @@ import React, {useEffect} from "react";
 import {changeProjectParentFolderData} from "../../../repository/project/changeProjectParentFolder.data.ts";
 import {getFolders} from "../../../repository/folder/getAll.data.ts";
 import {createProject} from "../../../repository/project/createProject.data.ts";
+import {deleteFolderData} from "../../../repository/folder/delete-folder.data.ts";
+import {deleteProjectData} from "../../../repository/project/delete-project.data.ts";
+import {createFolderData} from "../../../repository/folder/createFodler.data.ts";
+import {editFolderData} from "../../../repository/folder/edit-folder.data.ts";
 
 export const useNavitem = (
     {
@@ -28,6 +32,10 @@ export const useNavitem = (
     }) => {
     const projectId = project?.id;
     const projectName = project?.name;
+    const [isPopoverOpen, setIsPopoverOpen] = React.useState<boolean>(false);
+    const [isEditFolderName, setIsEditFolderName] = React.useState<boolean>(false);
+    let projects: ProjectType[] = [];
+    let subfolders: FolderType[] = [];
 
     useEffect(() => {
         const handleClickOutside = (e: any) => {
@@ -44,7 +52,7 @@ export const useNavitem = (
     }, [formRef]);
     const chevronClickHandler = () => {
         if (!chevronIconRef || !chevronIconRef.current) return;
-        const parentUl = chevronIconRef.current.parentElement?.parentElement?.parentElement;
+        const parentUl = chevronIconRef.current.parentElement?.parentElement?.parentElement?.parentElement;
         if (!parentUl) return;
         const el: Element = chevronIconRef.current.children[0]
         if (el.classList.contains("-rotate-90")) {
@@ -56,11 +64,11 @@ export const useNavitem = (
 
     const openChevron = (el: Element, parentUl: HTMLElement) => {
         el.classList.remove("-rotate-90");
-        parentUl.classList.remove("h-10");
+        parentUl.classList.remove("h-[37.5px]");
     }
     const closeChevron = (el: Element, parentUl: HTMLElement) => {
         el.classList.add("-rotate-90");
-        parentUl.classList.add("h-10");
+        parentUl.classList.add("h-[37.5px]");
     }
 
     const ItemType = 'LI';
@@ -105,9 +113,9 @@ export const useNavitem = (
         }
         const createdProject = await createProject(data);
         formRef.current.reset();
-        closeForm();
         if (!createdProject) return console.error("Error creating project");
         updateFolders(setFolders);
+        setIsPopoverOpen(false)
     }
 
     const handleDrop = async (folderId: string) => {
@@ -115,6 +123,23 @@ export const useNavitem = (
         const updatedFolder = await changeProjectParentFolderData(projectId, folderId, projectName)
         if (!updatedFolder) return console.error("Error updating folder");
         updateFolders(setFolders)
+    }
+
+    const handleDeleteProject = async (projectId: string | null) => {
+        if (!projectId) return console.error("Project not found");
+        await deleteProjectData(projectId)
+        const updatedFolders = await getFolders();
+        if (!setFolders || !updatedFolders) return console.error("Error deleting project");
+        setFolders(updatedFolders);
+    }
+
+    const handleCreateFolder = async (e:React.FormEvent<HTMLFormElement>, folderId: string | null) => {
+        e.preventDefault()
+        const formTarget = e.target as HTMLFormElement;
+        await createFolderData(formTarget.folderTitle.value, folderId);
+        const updatedFolders = await getFolders();
+        if (!setFolders || !updatedFolders) return console.error("Error creating folder");
+        setFolders(updatedFolders);
     }
 
     const updateFolders = async (setFolders: React.Dispatch<React.SetStateAction<FolderType[]>> | undefined) => {
@@ -149,12 +174,87 @@ export const useNavitem = (
         formRef.current.classList.add("flex");
     }
 
+    const storeProjects = (folder: FolderType) => {
+        if (!folder.projects) return false;
+        folder.projects.map(project => {
+            projects.push(project);
+        })
+        if (folder.children) {
+            folder.children.map(child => {
+                storeProjects(child);
+            })
+        }
+    }
+
+    const storeSubfolders = (folder: FolderType) => {
+        if (folder.children) {
+            folder.children.map(child => {
+                subfolders.push(child);
+                storeSubfolders(child);
+            })
+        } else return;
+    }
+
+    const findSubfolders = (folderId: string): FolderType | undefined | void => {
+        if (!folders) return;
+        storeSubfolders(folders[0])
+        const subfolder = subfolders.find(subfolder => subfolder.id === folderId);
+        if (!subfolder) return console.error("Subfolder not found");
+        subfolders = []
+        return subfolder;
+    }
+
+    const handleDeleteFolder = async (folderId: string) => {
+        if (!folders) return console.error("Error deleting folder");
+        let folder = findSubfolders(folderId);
+        if (!folder) {
+            folder = folders.find(folder => folder.id === folderId);
+        }
+        if (!folder) return console.error("Folder not found");
+        storeProjects(folder);
+        storeSubfolders(folder);
+        await deleteFolderData(folder.id)
+        for (const subfolder of subfolders) {
+            await deleteFolderData(subfolder.id)
+        }
+        const updatedFolders = await getFolders();
+        if (!setFolders || !updatedFolders) return console.error("Error deleting folder");
+        setFolders(updatedFolders);
+        projects = []
+        subfolders = []
+    }
+
+    const handleEditFolderName = async (e:  React.FormEvent<HTMLFormElement>, folderId: string) => {
+        e.preventDefault();
+        const folder = folders?.find(folder => folder.id === folderId);
+        if (!folder) return console.error("Folder not found");
+        const formTarget = e.target as HTMLFormElement;
+        const data = {
+            id: folderId,
+            name: formTarget.folderTitle.value,
+            parent_folder_id: folder.parent_folder_id
+        }
+        await editFolderData(data);
+        const updatedFolders = await getFolders();
+        if (!setFolders || !updatedFolders) return console.error("Error editing folder");
+        setFolders(updatedFolders);
+        setIsEditFolderName(false);
+    }
+
     return {
         chevronClickHandler,
         drag,
         drop,
         style,
         handleOpenForm,
-        submitForm
+        submitForm,
+        handleDeleteFolder,
+        isPopoverOpen,
+        setIsPopoverOpen,
+        handleDeleteProject,
+        handleCreateFolder,
+        handleEditFolderName,
+        isEditFolderName,
+        setIsEditFolderName
     }
 }
