@@ -29,6 +29,7 @@ export const useNavitem = (
     }) => {
     const projectId = project?.id;
     const projectName = project?.name;
+    const [isPopoverOpen, setIsPopoverOpen] = React.useState<boolean>(false);
     let projects: ProjectType[] = [];
     let subfolders: FolderType[] = [];
 
@@ -108,9 +109,9 @@ export const useNavitem = (
         }
         const createdProject = await createProject(data);
         formRef.current.reset();
-        closeForm();
         if (!createdProject) return console.error("Error creating project");
         updateFolders(setFolders);
+        setIsPopoverOpen(false)
     }
 
     const handleDrop = async (folderId: string) => {
@@ -205,6 +206,8 @@ export const useNavitem = (
         style,
         handleOpenForm,
         submitForm,
-        handleDeleteFolder
+        handleDeleteFolder,
+        isPopoverOpen,
+        setIsPopoverOpen
     }
 }

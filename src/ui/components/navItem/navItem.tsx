@@ -42,22 +42,24 @@ export const NavItem: React.FC<NavItemProps> = (
         setFolders,
         navbarRef
     }) => {
-    const baseStyle = "select-none grow p-m transition blue-1000 border-radius-100 padding-200-x cursor-pointer padding-100-y flex justify-between hover-bg-grey-200 items-center group";
+    const baseStyle = "select-none grow transition blue-1000 border-radius-100 padding-200-x cursor-pointer padding-100-y flex justify-between hover-bg-grey-200 items-center group";
     const iconStyle = "text-200 transition hover-bg-grey-300 border-radius-200";
     const chevronIconRef = React.useRef<HTMLDivElement>(null);
     const formRef = React.useRef<HTMLFormElement>(null);
     const plusIconRef = React.useRef<SVGSVGElement>(null);
     const [isAltertDialogOpen, setIsAltertDialogOpen] = React.useState<boolean>(false);
-    const { chevronClickHandler, drop, style, drag, handleOpenForm, submitForm, handleDeleteFolder } = useNavitem({ chevronIconRef, plusIconRef, id, project, folders, setFolders, formRef, navbarRef });
+    const { chevronClickHandler, drop, style, drag, handleOpenForm, submitForm, handleDeleteFolder, isPopoverOpen, setIsPopoverOpen } = useNavitem({ chevronIconRef, plusIconRef, id, project, folders, setFolders, formRef, navbarRef });
 
 
     const linkElement = path ? (
-        <Link  ref={drag} to={path} className={cn(baseStyle, className)}>
-            <div className={"gap-200 items-center"}>
-                {name}
-            </div>
-            {isPlusIcon && <PlusIcon className="hidden group-hover:block text-200 transition hover-bg-grey-300 border-radius-200" />}
-        </Link>
+        <div className={cn(baseStyle, className)}>
+            <Link ref={drag} to={path} className={"w-full"}>
+                <p className={"p-m"}>
+                    {name}
+                </p>
+            </Link>
+            <TrashIcon className={"transition padding-100 border-radius-200 hover-bg-grey-300"}></TrashIcon>
+        </div>
     ) : (
         <ContextMenu>
             <li style={style} ref={drop} className={cn(baseStyle, className)}>
@@ -111,7 +113,7 @@ export const NavItem: React.FC<NavItemProps> = (
                         Edit folder name
                     </ContextMenuItem>
                 </ContextMenuContent>
-                <Popover>
+                <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
                     <PopoverTrigger>
                         {isPlusIcon && <PlusIcon ref={plusIconRef} onClick={handleOpenForm}
                                                  className="group-hover:block text-200 transition hover-bg-grey-300 border-radius-200"/>}
