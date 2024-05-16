@@ -8,6 +8,7 @@ import {createProject} from "../../../repository/project/createProject.data.ts";
 import {deleteFolderData} from "../../../repository/folder/delete-folder.data.ts";
 import {deleteProjectData} from "../../../repository/project/delete-project.data.ts";
 import {createFolderData} from "../../../repository/folder/createFodler.data.ts";
+import {editFolderData} from "../../../repository/folder/edit-folder.data.ts";
 
 export const useNavitem = (
     {
@@ -32,6 +33,7 @@ export const useNavitem = (
     const projectId = project?.id;
     const projectName = project?.name;
     const [isPopoverOpen, setIsPopoverOpen] = React.useState<boolean>(false);
+    const [isEditFolderName, setIsEditFolderName] = React.useState<boolean>(false);
     let projects: ProjectType[] = [];
     let subfolders: FolderType[] = [];
 
@@ -222,6 +224,23 @@ export const useNavitem = (
         subfolders = []
     }
 
+    const handleEditFolderName = async (e:  React.FormEvent<HTMLFormElement>, folderId: string) => {
+        e.preventDefault();
+        const folder = folders?.find(folder => folder.id === folderId);
+        if (!folder) return console.error("Folder not found");
+        const formTarget = e.target as HTMLFormElement;
+        const data = {
+            id: folderId,
+            name: formTarget.folderTitle.value,
+            parent_folder_id: folder.parent_folder_id
+        }
+        await editFolderData(data);
+        const updatedFolders = await getFolders();
+        if (!setFolders || !updatedFolders) return console.error("Error editing folder");
+        setFolders(updatedFolders);
+        setIsEditFolderName(false);
+    }
+
     return {
         chevronClickHandler,
         drag,
@@ -234,5 +253,8 @@ export const useNavitem = (
         setIsPopoverOpen,
         handleDeleteProject,
         handleCreateFolder,
+        handleEditFolderName,
+        isEditFolderName,
+        setIsEditFolderName
     }
 }

@@ -1,7 +1,7 @@
 import React, {Ref} from 'react';
 import { Link } from 'react-router-dom';
 import { cn } from '../../../services/shadcn/utils.ts';
-import {PlusIcon, ChevronDownIcon, TrashIcon, PenIcon} from 'lucide-react';
+import {PlusIcon, ChevronDownIcon, TrashIcon, PenIcon, CheckIcon} from 'lucide-react';
 import {useNavitem} from "./navItem.viewModel.tsx"
 import {ProjectType} from "../../../types/project/projet.type.ts";
 import {FolderType} from "../../../types/folder/folder.type.ts";
@@ -56,7 +56,8 @@ export const NavItem: React.FC<NavItemProps> = (
     const plusIconRef = React.useRef<SVGSVGElement>(null);
     const createFolderButtonRef = React.useRef<HTMLButtonElement>(null);
     const [isAltertDialogOpen, setIsAltertDialogOpen] = React.useState<boolean>(false);
-    const { chevronClickHandler, drop, style, drag, handleOpenForm, submitForm, handleDeleteFolder, isPopoverOpen, setIsPopoverOpen, handleDeleteProject, handleCreateFolder } = useNavitem({ chevronIconRef, plusIconRef, id, project, folders, setFolders, formRef, navbarRef });
+    const editFolderInputRef = React.useRef<HTMLInputElement>(null);
+    const { chevronClickHandler, drop, style, drag, handleOpenForm, submitForm, handleDeleteFolder, isPopoverOpen, setIsPopoverOpen, handleDeleteProject, handleCreateFolder, handleEditFolderName, isEditFolderName, setIsEditFolderName } = useNavitem({ chevronIconRef, plusIconRef, id, project, folders, setFolders, formRef, navbarRef });
 
     const linkElement = path ? (
         <div className={cn(baseStyle, className)}>
@@ -76,10 +77,25 @@ export const NavItem: React.FC<NavItemProps> = (
             <li style={style} ref={drop} className={cn(baseStyle, className)}>
                 <ContextMenuTrigger onMouseMove={(e) => e.preventDefault()}>
                     <div className={"flex min-w-[200%] gap-200 items-center"}>
-                        <div ref={chevronIconRef} onClick={chevronClickHandler} className={iconStyle}>
-                            <ChevronDownIcon className={"transition -rotate-90"}/>
-                        </div>
-                        {name}
+                        {
+                            !isEditFolderName && (
+                                <div ref={chevronIconRef} onClick={chevronClickHandler} className={iconStyle}>
+                                    <ChevronDownIcon className={"transition -rotate-90"}/>
+                                </div>
+                            )
+                        }
+                        {
+                            isEditFolderName ? (
+                                <form onSubmit={(e) => handleEditFolderName(e, id)} className={"flex gap-300"}>
+                                <Input ref={editFolderInputRef} className={"w-2/3"} name={"folderTitle"} onClick={(e) => e.preventDefault()} type={"text"} placeholder={"Enter the folder name"} required/>
+                                    <MainButton className={"w-fit h-fit padding-100"} type={"submit"}>
+                                        <CheckIcon></CheckIcon>
+                                    </MainButton>
+                                </form>
+                            ) : (
+                                <p className={"p-s"}>{name}</p>
+                            )
+                        }
                     </div>
                 </ContextMenuTrigger>
                 <ContextMenuContent>
@@ -134,14 +150,19 @@ export const NavItem: React.FC<NavItemProps> = (
                             </ContextMenuItem>
                         </ContextMenuSubContent>
                     </ContextMenuSub>
-                    <ContextMenuItem className={"justify-between gap-400"}>
+                    <ContextMenuItem onClick={() => {
+                        setIsEditFolderName(true)
+                        setTimeout(() => {
+                            editFolderInputRef?.current?.focus();
+                        }, 10)
+                    }} className={"justify-between gap-400"}>
                         <PenIcon strokeWidth={1} width={24}></PenIcon>
                         Edit folder name
                     </ContextMenuItem>
                 </ContextMenuContent>
                 <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
                     <PopoverTrigger>
-                        {isPlusIcon && <PlusIcon ref={plusIconRef} onClick={handleOpenForm}
+                        {isPlusIcon && !isEditFolderName && <PlusIcon ref={plusIconRef} onClick={handleOpenForm}
                                                  className="group-hover:block text-200 transition hover-bg-grey-300 border-radius-200"/>}
                     </PopoverTrigger>
                     <PopoverContent className={'p-0'}>
