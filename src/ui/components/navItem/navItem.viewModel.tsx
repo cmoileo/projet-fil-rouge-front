@@ -7,6 +7,7 @@ import {getFolders} from "../../../repository/folder/getAll.data.ts";
 import {createProject} from "../../../repository/project/createProject.data.ts";
 import {deleteFolderData} from "../../../repository/folder/delete-folder.data.ts";
 import {deleteProjectData} from "../../../repository/project/delete-project.data.ts";
+import {createFolderData} from "../../../repository/folder/createFodler.data.ts";
 
 export const useNavitem = (
     {
@@ -130,6 +131,15 @@ export const useNavitem = (
         setFolders(updatedFolders);
     }
 
+    const handleCreateFolder = async (e:React.FormEvent<HTMLFormElement>, folderId: string | null) => {
+        e.preventDefault()
+        const formTarget = e.target as HTMLFormElement;
+        await createFolderData(formTarget.folderTitle.value, folderId);
+        const updatedFolders = await getFolders();
+        if (!setFolders || !updatedFolders) return console.error("Error creating folder");
+        setFolders(updatedFolders);
+    }
+
     const updateFolders = async (setFolders: React.Dispatch<React.SetStateAction<FolderType[]>> | undefined) => {
         const newFolders: FolderType[] | undefined = await getFolders();
         if (!newFolders) return console.error("Error sorting folders");
@@ -180,7 +190,7 @@ export const useNavitem = (
                 subfolders.push(child);
                 storeSubfolders(child);
             })
-        }
+        } else return;
     }
 
     const findSubfolders = (folderId: string): FolderType | undefined | void => {
@@ -193,7 +203,11 @@ export const useNavitem = (
     }
 
     const handleDeleteFolder = async (folderId: string) => {
-        const folder = findSubfolders(folderId);
+        if (!folders) return console.error("Error deleting folder");
+        let folder = findSubfolders(folderId);
+        if (!folder) {
+            folder = folders.find(folder => folder.id === folderId);
+        }
         if (!folder) return console.error("Folder not found");
         storeProjects(folder);
         storeSubfolders(folder);
@@ -218,6 +232,7 @@ export const useNavitem = (
         handleDeleteFolder,
         isPopoverOpen,
         setIsPopoverOpen,
-        handleDeleteProject
+        handleDeleteProject,
+        handleCreateFolder,
     }
 }

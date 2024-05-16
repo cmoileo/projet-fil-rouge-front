@@ -8,7 +8,14 @@ import {FolderType} from "../../../types/folder/folder.type.ts";
 import {MainButton} from "../mainButton.tsx";
 import {Input} from "../input.tsx";
 import {Popover, PopoverContent, PopoverTrigger} from "../Popup.tsx";
-import {ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuTrigger} from "../contextMenu.tsx";
+import {
+    ContextMenu,
+    ContextMenuContent,
+    ContextMenuItem,
+    ContextMenuSub,
+    ContextMenuSubContent, ContextMenuSubTrigger,
+    ContextMenuTrigger
+} from "../contextMenu.tsx";
 import {
     AlertDialog,
     AlertDialogAction, AlertDialogCancel,
@@ -47,9 +54,9 @@ export const NavItem: React.FC<NavItemProps> = (
     const chevronIconRef = React.useRef<HTMLDivElement>(null);
     const formRef = React.useRef<HTMLFormElement>(null);
     const plusIconRef = React.useRef<SVGSVGElement>(null);
+    const createFolderButtonRef = React.useRef<HTMLButtonElement>(null);
     const [isAltertDialogOpen, setIsAltertDialogOpen] = React.useState<boolean>(false);
-    const { chevronClickHandler, drop, style, drag, handleOpenForm, submitForm, handleDeleteFolder, isPopoverOpen, setIsPopoverOpen, handleDeleteProject } = useNavitem({ chevronIconRef, plusIconRef, id, project, folders, setFolders, formRef, navbarRef });
-
+    const { chevronClickHandler, drop, style, drag, handleOpenForm, submitForm, handleDeleteFolder, isPopoverOpen, setIsPopoverOpen, handleDeleteProject, handleCreateFolder } = useNavitem({ chevronIconRef, plusIconRef, id, project, folders, setFolders, formRef, navbarRef });
 
     const linkElement = path ? (
         <div className={cn(baseStyle, className)}>
@@ -58,12 +65,16 @@ export const NavItem: React.FC<NavItemProps> = (
                     {name}
                 </p>
             </Link>
-            <TrashIcon onClick={() => handleDeleteProject(project?.id || null)} className={"transition padding-100 border-radius-200 hover-bg-grey-300"}></TrashIcon>
+            {
+                project && (
+                    <TrashIcon onClick={() => handleDeleteProject(project?.id || null)} className={"transition padding-100 border-radius-200 hover-bg-grey-300"}></TrashIcon>
+                )
+            }
         </div>
     ) : (
         <ContextMenu>
             <li style={style} ref={drop} className={cn(baseStyle, className)}>
-                <ContextMenuTrigger >
+                <ContextMenuTrigger onMouseMove={(e) => e.preventDefault()}>
                     <div className={"flex min-w-[200%] gap-200 items-center"}>
                         <div ref={chevronIconRef} onClick={chevronClickHandler} className={iconStyle}>
                             <ChevronDownIcon className={"transition -rotate-90"}/>
@@ -104,10 +115,25 @@ export const NavItem: React.FC<NavItemProps> = (
                             </AlertDialogFooter>
                         </AlertDialogContent>
                     </AlertDialog>
-                    <ContextMenuItem className={"justify-between gap-400"}>
-                        <PlusIcon strokeWidth={1}></PlusIcon>
-                        Create subfolder
-                    </ContextMenuItem>
+                    <ContextMenuSub>
+                        <ContextMenuSubTrigger>
+                            <PlusIcon strokeWidth={1}></PlusIcon>
+                            Create subfolder
+                        </ContextMenuSubTrigger>
+                        <ContextMenuSubContent asChild>
+                            <ContextMenuItem onKeyDown={(e) => {
+                                if (e.key === "Enter") {
+                                    e.preventDefault();
+                                    createFolderButtonRef.current?.click();
+                                }
+                            }} asChild>
+                                <form onSubmit={(e) => handleCreateFolder(e, id)} className={"flex flex-col gap-300"}>
+                                    <Input name={"folderTitle"} onClick={(e) => e.preventDefault()} type={"text"} placeholder={"Enter the folder name"} required/>
+                                    <MainButton ref={createFolderButtonRef} className={"w-full"} type={"submit"}>Create folder</MainButton>
+                                </form>
+                            </ContextMenuItem>
+                        </ContextMenuSubContent>
+                    </ContextMenuSub>
                     <ContextMenuItem className={"justify-between gap-400"}>
                         <PenIcon strokeWidth={1} width={24}></PenIcon>
                         Edit folder name
