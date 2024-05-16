@@ -8,7 +8,7 @@ import {createProject} from "../../../repository/project/createProject.data.ts";
 import {deleteFolderData} from "../../../repository/folder/delete-folder.data.ts";
 import {deleteProjectData} from "../../../repository/project/delete-project.data.ts";
 import {createFolderData} from "../../../repository/folder/createFodler.data.ts";
-import {editFolderData} from "../../../repository/folder/edit-folder.data.ts";
+import {editFolderData} from "../../../repository/folder/edit-folder.data";
 
 export const useNavitem = (
     {
@@ -64,11 +64,11 @@ export const useNavitem = (
 
     const openChevron = (el: Element, parentUl: HTMLElement) => {
         el.classList.remove("-rotate-90");
-        parentUl.classList.remove("h-[37.5px]");
+        parentUl.classList.remove("h-[33px]");
     }
     const closeChevron = (el: Element, parentUl: HTMLElement) => {
         el.classList.add("-rotate-90");
-        parentUl.classList.add("h-[37.5px]");
+        parentUl.classList.add("h-[33px]");
     }
 
     const ItemType = 'LI';
@@ -144,6 +144,7 @@ export const useNavitem = (
 
     const updateFolders = async (setFolders: React.Dispatch<React.SetStateAction<FolderType[]>> | undefined) => {
         const newFolders: FolderType[] | undefined = await getFolders();
+        console.log(newFolders)
         if (!newFolders) return console.error("Error sorting folders");
         if (setFolders) setFolders(newFolders);
     }
@@ -255,6 +256,7 @@ export const useNavitem = (
         handleCreateFolder,
         handleEditFolderName,
         isEditFolderName,
-        setIsEditFolderName
+        setIsEditFolderName,
+        findSubfolders
     }
 }

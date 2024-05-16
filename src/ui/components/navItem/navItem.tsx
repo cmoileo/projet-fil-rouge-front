@@ -57,7 +57,9 @@ export const NavItem: React.FC<NavItemProps> = (
     const createFolderButtonRef = React.useRef<HTMLButtonElement>(null);
     const [isAltertDialogOpen, setIsAltertDialogOpen] = React.useState<boolean>(false);
     const editFolderInputRef = React.useRef<HTMLInputElement>(null);
-    const { chevronClickHandler, drop, style, drag, handleOpenForm, submitForm, handleDeleteFolder, isPopoverOpen, setIsPopoverOpen, handleDeleteProject, handleCreateFolder, handleEditFolderName, isEditFolderName, setIsEditFolderName } = useNavitem({ chevronIconRef, plusIconRef, id, project, folders, setFolders, formRef, navbarRef });
+    const { chevronClickHandler, drop, style, drag, handleOpenForm, submitForm, handleDeleteFolder, isPopoverOpen, setIsPopoverOpen, handleDeleteProject, handleCreateFolder, handleEditFolderName, isEditFolderName, setIsEditFolderName, findSubfolders } = useNavitem({ chevronIconRef, plusIconRef, id, project, folders, setFolders, formRef, navbarRef });
+    const folder = folders?.find(folder => folder.id === id) || findSubfolders(id) || null;
+    const isChevron = folder && (folder?.children?.length > 0 || folder.projects.length > 0);
 
     const linkElement = path ? (
         <div className={cn(baseStyle, className)}>
@@ -78,7 +80,7 @@ export const NavItem: React.FC<NavItemProps> = (
                 <ContextMenuTrigger onMouseMove={(e) => e.preventDefault()}>
                     <div className={"flex min-w-[200%] gap-200 items-center"}>
                         {
-                            !isEditFolderName && (
+                            !isEditFolderName && isChevron && (
                                 <div ref={chevronIconRef} onClick={chevronClickHandler} className={iconStyle}>
                                     <ChevronDownIcon className={"transition -rotate-90"}/>
                                 </div>

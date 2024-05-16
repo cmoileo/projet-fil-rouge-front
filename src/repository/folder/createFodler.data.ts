@@ -7,7 +7,6 @@ export const createFolderData = async (folderName: string, parentFolderId: strin
             name: folderName,
             parent_folder_id: parentFolderId
         }
-        console.log(data)
         await fetch(ApiUrl.Folder.Create, {
             method: "POST",
             headers: {

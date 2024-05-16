@@ -17,7 +17,6 @@ export const useNavLayout = (
         await createFolderData(formTarget.folderTitle.value, null);
         const updatedFolders = await getFolders();
         if (!setFolders || !updatedFolders) return console.error("Error creating folder");
-        console.log(updatedFolders);
         setFolders(updatedFolders);
     }
     return {
