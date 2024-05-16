@@ -5,6 +5,7 @@ import React, {useEffect} from "react";
 import {changeProjectParentFolderData} from "../../../repository/project/changeProjectParentFolder.data.ts";
 import {getFolders} from "../../../repository/folder/getAll.data.ts";
 import {createProject} from "../../../repository/project/createProject.data.ts";
+import {deleteFolderData} from "../../../repository/folder/delete-folder.data.ts";
 
 export const useNavitem = (
     {
@@ -28,6 +29,8 @@ export const useNavitem = (
     }) => {
     const projectId = project?.id;
     const projectName = project?.name;
+    let projects: ProjectType[] = [];
+    let subfolders: FolderType[] = [];
 
     useEffect(() => {
         const handleClickOutside = (e: any) => {
@@ -149,12 +152,59 @@ export const useNavitem = (
         formRef.current.classList.add("flex");
     }
 
+    const storeProjects = (folder: FolderType) => {
+        if (!folder.projects) return false;
+        folder.projects.map(project => {
+            projects.push(project);
+        })
+        if (folder.children) {
+            folder.children.map(child => {
+                storeProjects(child);
+            })
+        }
+    }
+
+    const storeSubfolders = (folder: FolderType) => {
+        if (folder.children) {
+            folder.children.map(child => {
+                subfolders.push(child);
+                storeSubfolders(child);
+            })
+        }
+    }
+
+    const findSubfolders = (folderId: string): FolderType | undefined | void => {
+        if (!folders) return;
+        storeSubfolders(folders[0])
+        const subfolder = subfolders.find(subfolder => subfolder.id === folderId);
+        if (!subfolder) return console.error("Subfolder not found");
+        subfolders = []
+        return subfolder;
+    }
+
+    const handleDeleteFolder = async (folderId: string) => {
+        const folder = findSubfolders(folderId);
+        if (!folder) return console.error("Folder not found");
+        storeProjects(folder);
+        storeSubfolders(folder);
+        await deleteFolderData(folder.id)
+        for (const subfolder of subfolders) {
+            await deleteFolderData(subfolder.id)
+        }
+        const updatedFolders = await getFolders();
+        if (!setFolders || !updatedFolders) return console.error("Error deleting folder");
+        setFolders(updatedFolders);
+        projects = []
+        subfolders = []
+    }
+
     return {
         chevronClickHandler,
         drag,
         drop,
         style,
         handleOpenForm,
-        submitForm
+        submitForm,
+        handleDeleteFolder
     }
 }

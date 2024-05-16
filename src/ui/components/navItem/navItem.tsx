@@ -48,7 +48,7 @@ export const NavItem: React.FC<NavItemProps> = (
     const formRef = React.useRef<HTMLFormElement>(null);
     const plusIconRef = React.useRef<SVGSVGElement>(null);
     const [isAltertDialogOpen, setIsAltertDialogOpen] = React.useState<boolean>(false);
-    const { chevronClickHandler, drop, style, drag, handleOpenForm, submitForm } = useNavitem({ chevronIconRef, plusIconRef, id, project, folders, setFolders, formRef, navbarRef });
+    const { chevronClickHandler, drop, style, drag, handleOpenForm, submitForm, handleDeleteFolder } = useNavitem({ chevronIconRef, plusIconRef, id, project, folders, setFolders, formRef, navbarRef });
 
 
     const linkElement = path ? (
@@ -95,6 +95,7 @@ export const NavItem: React.FC<NavItemProps> = (
                                 </AlertDialogCancel>
                                 <AlertDialogAction asChild onClick={() => {
                                     setIsAltertDialogOpen(false)
+                                    handleDeleteFolder(id);
                                 }}>
                                     <MainButton className={"danger"} variant="danger">Continue</MainButton>
                                 </AlertDialogAction>
