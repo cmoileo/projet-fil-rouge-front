@@ -12,7 +12,7 @@ export const useRegisterEmployee = () => {
         e.preventDefault();
         if (!params) return console.error('No params')
         const target = e.target as HTMLFormElement;
-        console.log(target.password.value)
+
         const data: RegisterEmployeeDto = {
             email: target.email.value,
             password: target.password.value,

@@ -8,12 +8,13 @@ export const registerEmployeeData = async (data: RegisterEmployeeDto, id: string
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${cookieManager.getCookie("token")}`
             },
             body: JSON.stringify(data)
         });
         const json = await res.json();
         if (json) {
+            const token = json.token;
+            cookieManager.setCookie(token, 'token', 30);
             return json;
         }
         return false;
