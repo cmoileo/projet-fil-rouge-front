@@ -1,6 +1,6 @@
 import {useProjects} from "./projects.viewModel.tsx";
 
-export const ProjectsPage = () => {
+export const ProjectsLayout = () => {
     const {projects} = useProjects();
     return (
         <div>

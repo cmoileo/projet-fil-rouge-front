@@ -1,7 +1,9 @@
+import {ProjectsLayout} from "../layout/projects.layout.tsx";
+
 export const ProjectsPage = () => {
     return (
         <div>
-            <h1>Page</h1>
+            <ProjectsLayout />
         </div>
     );
 }

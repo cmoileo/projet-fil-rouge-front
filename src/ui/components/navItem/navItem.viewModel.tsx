@@ -144,7 +144,6 @@ export const useNavitem = (
 
     const updateFolders = async (setFolders: React.Dispatch<React.SetStateAction<FolderType[]>> | undefined) => {
         const newFolders: FolderType[] | undefined = await getFolders();
-        console.log(newFolders)
         if (!newFolders) return console.error("Error sorting folders");
         if (setFolders) setFolders(newFolders);
     }
@@ -215,6 +214,11 @@ export const useNavitem = (
         storeProjects(folder);
         storeSubfolders(folder);
         await deleteFolderData(folder.id)
+        const fodlerProjects = folder.projects;
+        for (const folderProject of fodlerProjects) {
+            if (!folderProject.id) return;
+            await deleteProjectData(folderProject.id)
+        }
         for (const subfolder of subfolders) {
             await deleteFolderData(subfolder.id)
         }
