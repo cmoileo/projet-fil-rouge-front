@@ -4,6 +4,7 @@ import {ProjectType} from "../../../../../../types/project/projet.type.ts";
 
 export const useProjects = () => {
     const [projects, setProjects] = useState<ProjectType[] | null>(null)
+
     useEffect(() => {
         const fetchProjects = async () => {
             const projects = await getProjectsData()
@@ -16,6 +17,6 @@ export const useProjects = () => {
     }, []);
 
     return {
-        projects
+        projects,
     }
 }
