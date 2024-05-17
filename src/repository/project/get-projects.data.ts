@@ -12,7 +12,6 @@ export const getProjectsData = async (): Promise<ProjectType[] | undefined> => {
             },
         })
         const data = await res.json()
-        console.log(data)
         return data
     } catch (error) {
         console.log(error)
