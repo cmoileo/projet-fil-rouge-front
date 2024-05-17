@@ -9,7 +9,7 @@ export const EmployeeViewLayout = () => {
     return (
         <div className={'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-600'}>
             {
-                employees ? employees.map((employee: EmployeeDto, index: number) => {
+                employees.length > 0 ? employees.map((employee: EmployeeDto, index: number) => {
                     return (
                         <article key={index} className={"flex flex-col gap-400 items-center padding-500 border-radius-300 shadow-[rgba(0,_0,_0,_0.15)_0px_0px_20px_0px]"}>
                             {

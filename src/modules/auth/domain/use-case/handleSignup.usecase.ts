@@ -14,7 +14,7 @@ export const handleSignup = async (data: SignUpDto) => {
         const json = await res.json()
         const role = json.role
         const token = json.token
-        if (!token || !role) {
+        if (!token) {
             throw new Error('Token not found')
         }
         cookieManager.setCookie(token, "token", 30)

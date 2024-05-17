@@ -35,5 +35,11 @@ export const ApiUrl = {
     Account: {
         GetByUserId: BaseUrl + '/account/get-user',
         Update: BaseUrl + '/account/update',
-    }
+    },
+    Task: {
+        Get: BaseUrl + '/tasks/get',
+        Create: BaseUrl + '/tasks/create',
+        Update: BaseUrl + '/tasks/update',
+        Delete: BaseUrl + '/tasks/delete',
+    },
 }

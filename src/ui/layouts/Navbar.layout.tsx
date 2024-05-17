@@ -77,7 +77,7 @@ export const Navbar = () => {
                         <PopoverTrigger>
                             <div
                                 className={"transition padding-200-x padding-300-left hover-bg-grey-200 border-radius-200 cursor-pointer flex justify-between items-center"}>
-                                <p className="p-m">Folders</p>
+                                <p className="p-l">Folders</p>
                                 <PlusIcon className={"transition hover-bg-grey-300 border-radius-200"}></PlusIcon>
                             </div>
                         </PopoverTrigger>

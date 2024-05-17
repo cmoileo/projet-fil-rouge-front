@@ -64,13 +64,35 @@ export const NavItem: React.FC<NavItemProps> = (
     const linkElement = path ? (
         <div className={cn(baseStyle, className)}>
             <Link ref={drag} to={path} className={"w-full"}>
-                <p className={"p-m"}>
+                <p className={"p-s"}>
                     {name}
                 </p>
             </Link>
             {
                 project && (
-                    <TrashIcon onClick={() => handleDeleteProject(project?.id || null)} className={"transition padding-100 border-radius-200 hover-bg-grey-300"}></TrashIcon>
+                    <AlertDialog>
+                        <AlertDialogTrigger>
+                            <TrashIcon className={"transition padding-100 border-radius-200 hover-bg-grey-300"}></TrashIcon>
+                        </AlertDialogTrigger>
+                        <AlertDialogContent>
+                            <AlertDialogHeader>
+                                <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                                <AlertDialogDescription>
+                                    This action will permanently delete the project.
+                                </AlertDialogDescription>
+                            </AlertDialogHeader>
+                            <AlertDialogFooter>
+                                <AlertDialogCancel>
+                                    Cancel
+                                </AlertDialogCancel>
+                                <AlertDialogAction asChild onClick={() => {
+                                    handleDeleteProject(project?.id || null)
+                                }}>
+                                    <MainButton className={"danger"} variant="danger">Continue</MainButton>
+                                </AlertDialogAction>
+                            </AlertDialogFooter>
+                        </AlertDialogContent>
+                    </AlertDialog>
                 )
             }
         </div>
@@ -95,7 +117,7 @@ export const NavItem: React.FC<NavItemProps> = (
                                     </MainButton>
                                 </form>
                             ) : (
-                                <p className={"p-s"}>{name}</p>
+                                <p className={"p-m"}>{name}</p>
                             )
                         }
                     </div>

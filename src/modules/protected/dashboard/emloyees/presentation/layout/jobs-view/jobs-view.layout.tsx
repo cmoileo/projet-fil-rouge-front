@@ -27,9 +27,9 @@ export const JobsViewLayout = () => {
             </Popover>
             <div className={"grid flex-col gap-500 margin-500-top"}>
                 {
-                    jobs && jobs.map((job: JobDto) => (
+                    jobs.length > 0 ? jobs.map((job: JobDto) => (
                         <JobPillViewLayout key={job.id} jobs={jobs} job={job} setJobs={setJobs}/>
-                    ))
+                    )) : null
                 }
             </div>
         </div>
