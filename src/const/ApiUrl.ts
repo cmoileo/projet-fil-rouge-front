@@ -42,4 +42,10 @@ export const ApiUrl = {
         Update: BaseUrl + '/tasks/update',
         Delete: BaseUrl + '/tasks/delete',
     },
+    TaskCategory: {
+        Get: BaseUrl + '/task-categories',
+        Create: BaseUrl + '/task-categories',
+        Update: BaseUrl + '/task-categories',
+        Delete: BaseUrl + '/task-categories',
+    },
 }
