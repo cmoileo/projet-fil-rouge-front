@@ -2,7 +2,7 @@ import {TaskCategoryType} from "../../types/task-categories/task-category.type.t
 import {ApiUrl} from "../../const/ApiUrl.ts";
 import {cookieManager} from "../../services/coockies/CoockieManager.service.ts";
 
-export const updateTaskCateogyData = async (body: TaskCategoryType) => {
+export const updateTaskCategoryData = async (body: TaskCategoryType) => {
     try {
         const res = await fetch(ApiUrl.TaskCategory.Update, {
             method: 'PATCH',
