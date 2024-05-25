@@ -30,7 +30,7 @@ export const TaskCategoryLayout = (
                         taskCategories && taskCategories.map((taskCategory) => (
                             <DropdownMenuItem className={"p-0 gap-200"} key={taskCategory.id}>
                                 <Badge className={"w-full padding-200-y cursor-pointer"} style={{backgroundColor: taskCategory.color}}>{taskCategory.name}</Badge>
-                                <TrashIcon onClick={(e) => {
+                                <TrashIcon className={"cursor-pointer"} onClick={(e) => {
                                     e.preventDefault()
                                     handleDeleteCategory(taskCategory.id)
                                 }}></TrashIcon>

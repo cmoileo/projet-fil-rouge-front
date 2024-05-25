@@ -9,7 +9,6 @@ export const useTaskCategory = () => {
     const [isOpen, setIsOpen] = useState(false);
     const createTaskInputRef: React.MutableRefObject<HTMLInputElement | null> = useRef(null);
     const colorInputRef: React.MutableRefObject<HTMLInputElement | null> = useRef(null);
-
     const handleCreateCategory = async () => {
         if (!createTaskInputRef.current || !colorInputRef.current) return
         const name = createTaskInputRef.current.value
@@ -43,6 +42,6 @@ export const useTaskCategory = () => {
         createTaskInputRef,
         handleCreateCategory,
         colorInputRef,
-        handleDeleteCategory
+        handleDeleteCategory,
     }
 }
