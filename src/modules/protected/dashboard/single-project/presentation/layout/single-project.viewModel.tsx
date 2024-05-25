@@ -18,8 +18,13 @@ export const useSingleProject = () => {
         fetchProject();
     }, []);
 
+    const handleCreateTask = async (e: any) => {
+        e.preventDefault()
+    }
+
     return {
         id,
-        project
+        project,
+        handleCreateTask
     }
 }
