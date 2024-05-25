@@ -1,13 +1,7 @@
 import {ApiUrl} from "../../const/ApiUrl.ts";
 import {cookieManager} from "../../services/coockies/CoockieManager.service.ts";
 
-export const assignCategoryToTaskData = async({
-    task_id,
-    task_category_id
-}: {
-    task_id: string,
-    task_category_id: string
-}) => {
+export const assignCategoryToTaskData = async(task_id: string, task_category_id: string) => {
     try {
         await fetch(ApiUrl.TaskCategory.Assign, {
             method: 'POST',

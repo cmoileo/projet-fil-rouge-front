@@ -20,7 +20,7 @@ export const TaskCategoryLayout = (
         taskId: string | undefined
     }
 ) => {
-    const {taskCategories, isOpen, setIsOpen, createTaskInputRef, colorInputRef, handleCreateCategory, handleDeleteCategory } = useTaskCategory(taskId);
+    const {taskCategories, isOpen, setIsOpen, createTaskInputRef, colorInputRef, handleCreateCategory, handleDeleteCategory, handleAssignTaskCategory } = useTaskCategory(taskId);
     return (
         <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
             <DropdownMenuTrigger asChild>
@@ -33,7 +33,7 @@ export const TaskCategoryLayout = (
                     {
                         taskCategories && taskCategories.map((taskCategory) => (
                             <DropdownMenuItem className={"p-0 gap-200"} key={taskCategory.id}>
-                                <Badge className={"w-full padding-200-y cursor-pointer"} style={{backgroundColor: taskCategory.color}}>{taskCategory.name}</Badge>
+                                <Badge onClick={() => handleAssignTaskCategory(taskCategory.id)} className={"w-full padding-200-y cursor-pointer"} style={{backgroundColor: taskCategory.color}}>{taskCategory.name}</Badge>
                                 <TrashIcon className={"cursor-pointer"} onClick={(e) => {
                                     e.preventDefault()
                                     handleDeleteCategory(taskCategory.id)

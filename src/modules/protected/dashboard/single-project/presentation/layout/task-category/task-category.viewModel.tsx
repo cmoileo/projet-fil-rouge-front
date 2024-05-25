@@ -3,6 +3,7 @@ import {DashboardContext} from "../../../../../../../contexts/dashboard.context.
 import {createTaskCategoryData} from "../../../../../../../repository/task-categoriy/create-task-category.data.ts";
 import {getTaskCategoriesData} from "../../../../../../../repository/task/get-task-categories.data.ts";
 import {deleteTaskCategoryData} from "../../../../../../../repository/task-categoriy/delete-task-category.data.ts";
+import {assignCategoryToTaskData} from "../../../../../../../repository/task-categoriy/assign-category-to-task.data.ts";
 
 export const useTaskCategory = (taskId: string | undefined) => {
     const {taskCategories, setTaskCategories} = useContext(DashboardContext);
@@ -35,6 +36,11 @@ export const useTaskCategory = (taskId: string | undefined) => {
         setTaskCategories(updatedTaskCategory)
     }
 
+    const handleAssignTaskCategory = async(task_category: string | undefined) => {
+        if (!task_category || !taskId) return
+        await assignCategoryToTaskData(taskId, task_category)
+    }
+
     return {
         taskCategories,
         isOpen,
@@ -43,5 +49,6 @@ export const useTaskCategory = (taskId: string | undefined) => {
         handleCreateCategory,
         colorInputRef,
         handleDeleteCategory,
+        handleAssignTaskCategory
     }
 }
