@@ -3,11 +3,13 @@ import {TaskCategoryLayout} from "./task-category/task-category.layout.tsx";
 
 export const SingleProjectLayout = () => {
     const {id, project} = useSingleProject();
-    console.log("id :", id)
-    console.log("project :", project)
     return (
         <div>
-            <TaskCategoryLayout categoryName={"Category"} />
+            {
+                project && project.tasks && project.tasks.map((task) => (
+                    <TaskCategoryLayout categoryId={task?.task_category_id} />
+                ))
+            }
         </div>
     );
 }

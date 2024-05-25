@@ -2,6 +2,7 @@ export type TaskType = {
     id: string;
     name: string;
     description: string;
+    task_category_id?: string;
     starting_date: Date;
     finishing_date: Date;
     progress_percentage: number;

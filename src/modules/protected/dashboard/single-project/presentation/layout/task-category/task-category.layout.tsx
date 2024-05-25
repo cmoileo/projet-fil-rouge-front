@@ -13,16 +13,18 @@ import {TrashIcon} from "lucide-react";
 
 export const TaskCategoryLayout = (
     {
-        categoryName,
+        categoryId,
     }: {
-        categoryName: string
+        categoryId: string | undefined
     }
 ) => {
     const {taskCategories, isOpen, setIsOpen, createTaskInputRef, colorInputRef, handleCreateCategory, handleDeleteCategory } = useTaskCategory();
     return (
         <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
             <DropdownMenuTrigger asChild>
-                <MainButton className={"border-radius-full bg-grey-200 color-grey-1000 hover:bg-gray-400 p-xs"}>{categoryName}</MainButton>
+                <MainButton className={"border-radius-full bg-grey-200 color-grey-1000 hover:bg-gray-400 p-xs"}>
+                    {categoryId && (taskCategories?.find((taskCategory) => categoryId == taskCategory?.id)?.name ?? "Category")}
+                </MainButton>
             </DropdownMenuTrigger>
             <DropdownMenuContent className={"padding-300"}>
                 <div className="margin-300-bottom flex flex-col gap-300">
