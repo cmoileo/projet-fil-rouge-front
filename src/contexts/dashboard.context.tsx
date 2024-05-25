@@ -6,6 +6,8 @@ import {ProjectType} from "../types/project/projet.type.ts";
 import {getProjectsData} from "../repository/project/get-projects.data.ts";
 import {TaskCategoryType} from "../types/task-categories/task-category.type.ts";
 import {getTaskCategoriesData} from "../repository/task/get-task-categories.data.ts";
+import {EmployeeDto} from "../modules/protected/dashboard/emloyees/domain/dto/employee.dto.ts";
+import {getEmployeeData} from "../repository/employee/get-employee.data.ts";
 
 export const DashboardContext =
     createContext<{
@@ -17,6 +19,8 @@ export const DashboardContext =
         setProjects: React.Dispatch<React.SetStateAction<ProjectType[] | null>>;
         taskCategories: TaskCategoryType[] | null;
         setTaskCategories: React.Dispatch<React.SetStateAction<TaskCategoryType[] | null>>;
+        employees: EmployeeDto[] | null
+        setEmployees: React.Dispatch<React.SetStateAction<EmployeeDto[] | null>>;
     }>(
         {
             jobs: [],
@@ -27,6 +31,8 @@ export const DashboardContext =
             setProjects: () => {},
             taskCategories: null,
             setTaskCategories: () => {},
+            employees: null,
+            setEmployees: () => {}
         });
 
 export const DashboardProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -34,6 +40,7 @@ export const DashboardProvider: React.FC<{ children: React.ReactNode }> = ({ chi
     const [account, setAccount] = useState<AccountType | null>(null);
     const [projects, setProjects] = useState<ProjectType[] | null>(null);
     const [taskCategories, setTaskCategories] = useState<TaskCategoryType[] | null>(null);
+    const [employees, setEmployees] = useState<EmployeeDto[] | null>(null);
 
     useEffect(() => {
         const getAccount = async(): Promise<void> => {
@@ -48,6 +55,11 @@ export const DashboardProvider: React.FC<{ children: React.ReactNode }> = ({ chi
                 setProjects(projects)
             }
         }
+        const fetchEmployee = async () => {
+            const employees: EmployeeDto[] | null = await getEmployeeData();
+            if (!employees) return;
+            setEmployees(employees);
+        }
         const fetchTaskCategories = async () => {
             const taskCategories = await getTaskCategoriesData();
             if (taskCategories) {
@@ -55,12 +67,13 @@ export const DashboardProvider: React.FC<{ children: React.ReactNode }> = ({ chi
             }
         }
         fetchProjects();
+        fetchEmployee()
         getAccount();
         fetchTaskCategories()
     }, []);
 
     return (
-        <DashboardContext.Provider value={{ jobs, setJobs, account, setAccount, projects, setProjects, taskCategories, setTaskCategories }}>
+        <DashboardContext.Provider value={{ jobs, setJobs, account, setAccount, projects, setProjects, taskCategories, setTaskCategories, employees, setEmployees }}>
             {children}
         </DashboardContext.Provider>
     );
