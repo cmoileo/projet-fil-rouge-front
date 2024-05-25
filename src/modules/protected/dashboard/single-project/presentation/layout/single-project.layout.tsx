@@ -7,7 +7,7 @@ export const SingleProjectLayout = () => {
         <div>
             {
                 project && project.tasks && project.tasks.map((task) => (
-                    <TaskCategoryLayout categoryId={task?.task_category_id} />
+                    <TaskCategoryLayout taskId={id} categoryId={task?.task_category_id} />
                 ))
             }
         </div>

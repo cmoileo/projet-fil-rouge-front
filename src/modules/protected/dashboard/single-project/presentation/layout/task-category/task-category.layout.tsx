@@ -14,11 +14,13 @@ import {TrashIcon} from "lucide-react";
 export const TaskCategoryLayout = (
     {
         categoryId,
+        taskId,
     }: {
-        categoryId: string | undefined
+        categoryId: string | undefined,
+        taskId: string | undefined
     }
 ) => {
-    const {taskCategories, isOpen, setIsOpen, createTaskInputRef, colorInputRef, handleCreateCategory, handleDeleteCategory } = useTaskCategory();
+    const {taskCategories, isOpen, setIsOpen, createTaskInputRef, colorInputRef, handleCreateCategory, handleDeleteCategory } = useTaskCategory(taskId);
     return (
         <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
             <DropdownMenuTrigger asChild>

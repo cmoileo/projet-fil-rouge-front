@@ -2,9 +2,9 @@ import {useContext, useRef, useState} from "react";
 import {DashboardContext} from "../../../../../../../contexts/dashboard.context.tsx";
 import {createTaskCategoryData} from "../../../../../../../repository/task-categoriy/create-task-category.data.ts";
 import {getTaskCategoriesData} from "../../../../../../../repository/task/get-task-categories.data.ts";
-import {deleteTaskCategoryData} from "../../../../../../../repository/task/delete-task-category.data.ts";
+import {deleteTaskCategoryData} from "../../../../../../../repository/task-categoriy/delete-task-category.data.ts";
 
-export const useTaskCategory = () => {
+export const useTaskCategory = (taskId: string | undefined) => {
     const {taskCategories, setTaskCategories} = useContext(DashboardContext);
     const [isOpen, setIsOpen] = useState(false);
     const createTaskInputRef: React.MutableRefObject<HTMLInputElement | null> = useRef(null);

@@ -47,5 +47,6 @@ export const ApiUrl = {
         Create: BaseUrl + '/task-categories',
         Update: BaseUrl + '/task-categories',
         Delete: BaseUrl + '/task-categories',
+        Assign: BaseUrl + '/task-categories/assign'
     },
 }
