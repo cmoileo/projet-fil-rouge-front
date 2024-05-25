@@ -25,7 +25,7 @@ export const TaskCategoryLayout = (
         <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
             <DropdownMenuTrigger asChild>
                 <MainButton className={"border-radius-full bg-grey-200 color-grey-1000 hover:bg-gray-400 p-xs"}>
-                    {categoryId && (taskCategories?.find((taskCategory) => categoryId == taskCategory?.id)?.name ?? "Category")}
+                    {categoryId && taskCategories?.find((taskCategory) => categoryId == taskCategory?.id)?.name ? taskCategories?.find((taskCategory) => categoryId == taskCategory?.id)?.name : "Category"}
                 </MainButton>
             </DropdownMenuTrigger>
             <DropdownMenuContent className={"padding-300"}>
