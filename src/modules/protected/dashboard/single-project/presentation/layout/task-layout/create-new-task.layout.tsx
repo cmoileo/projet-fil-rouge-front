@@ -12,6 +12,8 @@ import {MainButton} from "../../../../../../../ui/components/mainButton.tsx";
 import {cn} from "../../../../../../../services/shadcn/utils.ts";
 import {format} from "date-fns";
 import {TaskCategoryLayout} from "../task-category/task-category.layout.tsx";
+import {EmployeesLayout} from "../employees/employees.layout.tsx";
+import {EmployeeDto} from "../../../../emloyees/domain/dto/employee.dto.ts";
 
 export const CreateNewTaskLayout = (
     {
@@ -24,6 +26,7 @@ export const CreateNewTaskLayout = (
     const [endDate, setEndDate] = useState<Date>()
     const [isBeginOpen, setIsBeginOpen] = useState(false)
     const [isEndOpen, setIsEndOpen] = useState(false)
+    const [selectedEmplooyees, setSelectedEmployees] = useState<EmployeeDto[]>([])
 
 
     return (
@@ -77,6 +80,8 @@ export const CreateNewTaskLayout = (
                         />
                     </PopoverContent>
                 </Popover>
+
+                <EmployeesLayout selectedEmployees={selectedEmplooyees} setSelectedEmployees={setSelectedEmployees} />
 
                 <TaskCategoryLayout taskId={undefined} categoryId={undefined} />
             </div>
