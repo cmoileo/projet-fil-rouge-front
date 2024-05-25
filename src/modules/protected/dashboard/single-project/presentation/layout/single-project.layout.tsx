@@ -7,7 +7,7 @@ export const SingleProjectLayout = () => {
     console.log("project :", project)
     return (
         <div>
-            <TaskCategoryLayout />
+            <TaskCategoryLayout categoryName={"Category"} />
         </div>
     );
 }

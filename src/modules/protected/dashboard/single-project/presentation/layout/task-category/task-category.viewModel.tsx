@@ -2,6 +2,7 @@ import {useContext, useRef, useState} from "react";
 import {DashboardContext} from "../../../../../../../contexts/dashboard.context.tsx";
 import {createTaskCategoryData} from "../../../../../../../repository/task-categoriy/create-task-category.data.ts";
 import {getTaskCategoriesData} from "../../../../../../../repository/task/get-task-categories.data.ts";
+import {deleteTaskCategoryData} from "../../../../../../../repository/task/delete-task-category.data.ts";
 
 export const useTaskCategory = () => {
     const {taskCategories, setTaskCategories} = useContext(DashboardContext);
@@ -23,6 +24,12 @@ export const useTaskCategory = () => {
         updateTaskCategory()
     }
 
+    const handleDeleteCategory = async (id: string | undefined) => {
+        if (!id) return
+        await deleteTaskCategoryData(id)
+        updateTaskCategory()
+    }
+
     const updateTaskCategory = async () => {
         const updatedTaskCategory = await getTaskCategoriesData()
         if (!updatedTaskCategory) return
@@ -35,6 +42,7 @@ export const useTaskCategory = () => {
         setIsOpen,
         createTaskInputRef,
         handleCreateCategory,
-        colorInputRef
+        colorInputRef,
+        handleDeleteCategory
     }
 }

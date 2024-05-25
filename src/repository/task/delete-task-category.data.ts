@@ -3,7 +3,7 @@ import {cookieManager} from "../../services/coockies/CoockieManager.service.ts";
 
 export const deleteTaskCategoryData = async (task_id: string) => {
     try {
-        const res = await fetch(ApiUrl.TaskCategory.Delete + task_id, {
+        const res = await fetch(ApiUrl.TaskCategory.Delete + "/" + task_id, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
