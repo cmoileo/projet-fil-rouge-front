@@ -1,15 +1,16 @@
 export type TaskType = {
-    id: string;
+    id?: string;
     name: string;
-    description: string;
+    description?: string;
     task_category_id?: string;
-    starting_date: Date;
-    finishing_date: Date;
-    progress_percentage: number;
-    is_priority: 'low' | 'medium' | 'hard';
-    project_id: string;
-    kanban_state_id: number;
-    agencyId: string;
-    userId: string;
-    task_state_id: string;
+    starting_date?: Date;
+    finishing_date?: Date;
+    progress_percentage?: number;
+    is_priority?: 'low' | 'medium' | 'hard';
+    project_id?: string;
+    kanban_state_id?: number;
+    agencyId?: string;
+    userId?: string;
+    task_state_id?: string;
+    assigned_users_id?: string[];
 };

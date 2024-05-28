@@ -7,33 +7,38 @@ import {
 } from "../../../../../../../ui/components/Popup"
 import { Calendar as CalendarIcon } from "lucide-react"
 import { Calendar } from "../../../../../../../ui/components/calendar.tsx"
-import {useState} from "react";
+import {useRef, useState} from "react";
 import {MainButton} from "../../../../../../../ui/components/mainButton.tsx";
 import {cn} from "../../../../../../../services/shadcn/utils.ts";
 import {format} from "date-fns";
 import {TaskCategoryLayout} from "../task-category/task-category.layout.tsx";
 import {EmployeesLayout} from "../employees/employees.layout.tsx";
 import {EmployeeDto} from "../../../../emloyees/domain/dto/employee.dto.ts";
+import {useCreateNewTask} from "./creat-new-task.viewModel.tsx";
+import {ProjectType} from "../../../../../../../types/project/projet.type.ts";
 
 export const CreateNewTaskLayout = (
     {
-        handleCreateTask,
+        setProject,
+        projectId
     }: {
-        handleCreateTask: (e: any) => Promise<void>
+        setProject: React.Dispatch<React.SetStateAction<ProjectType>>,
+        projectId: string | undefined
     }
-    ) => {
+) => {
     const [beginDate, setBeginDateDate] = useState<Date>()
     const [endDate, setEndDate] = useState<Date>()
     const [isBeginOpen, setIsBeginOpen] = useState(false)
     const [isEndOpen, setIsEndOpen] = useState(false)
-    const [selectedEmplooyees, setSelectedEmployees] = useState<EmployeeDto[]>([])
+    const [selectedEmployees, setSelectedEmployees] = useState<EmployeeDto[]>([])
     const [categoryId, setCategoryId] = useState<string | undefined>(undefined)
-
+    const taskNameRef = useRef<HTMLInputElement>(null)
+    const {handleCreateTask} = useCreateNewTask({beginDate, endDate, selectedEmployees, categoryId, taskNameRef, setProject, projectId})
 
     return (
         <form className={'w-full flex flex-col gap-500'} onSubmit={handleCreateTask}>
             <div className={"flex gap-400"}>
-                <Input type={"text"} placeholder={"Task name"}></Input>
+                <Input ref={taskNameRef} required type={"text"} placeholder={"Task name"}></Input>
                 <Popover open={isBeginOpen} onOpenChange={setIsBeginOpen}>
                     <PopoverTrigger asChild>
                         <MainButton
@@ -82,7 +87,7 @@ export const CreateNewTaskLayout = (
                     </PopoverContent>
                 </Popover>
 
-                <EmployeesLayout selectedEmployees={selectedEmplooyees} setSelectedEmployees={setSelectedEmployees} />
+                <EmployeesLayout selectedEmployees={selectedEmployees} setSelectedEmployees={setSelectedEmployees} />
 
                 <TaskCategoryLayout setCategoryId={setCategoryId} taskId={undefined} categoryId={categoryId} />
             </div>

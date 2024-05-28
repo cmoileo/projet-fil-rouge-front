@@ -3,7 +3,8 @@ import {TaskLayout} from "./task-layout/task.layout.tsx";
 import {CreateNewTaskLayout} from "./task-layout/create-new-task.layout.tsx";
 
 export const SingleProjectLayout = () => {
-    const {project, handleCreateTask} = useSingleProject();
+    const {project, setProject} = useSingleProject();
+    console.log(project)
     return (
         <div className={"flex flex-col gap-400"}>
             {
@@ -11,7 +12,7 @@ export const SingleProjectLayout = () => {
                     <TaskLayout task={task} />
                 ))
             }
-            <CreateNewTaskLayout handleCreateTask={handleCreateTask} />
+            <CreateNewTaskLayout setProject={setProject} projectId={project?.id} />
         </div>
     );
 }

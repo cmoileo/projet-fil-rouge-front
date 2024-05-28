@@ -10,7 +10,7 @@ export const TaskLayout = (
 ) => {
     return (
         <div>
-            <TaskCategoryLayout taskId={task.id} categoryId={task?.task_category_id}/>
+            <TaskCategoryLayout setCategoryId={undefined} taskId={task.id} categoryId={task?.task_category_id}/>
         </div>
     );
 }

@@ -19,7 +19,7 @@ export const TaskCategoryLayout = (
     }: {
         categoryId: string | undefined,
         taskId: string | undefined,
-        setCategoryId: React.Dispatch<string>
+        setCategoryId: React.Dispatch<string> | undefined
     }
 ) => {
     const {taskCategories, isOpen, setIsOpen, createTaskInputRef, colorInputRef, handleCreateCategory, handleDeleteCategory, handleAssignTaskCategory } = useTaskCategory({
