@@ -37,19 +37,20 @@ export const useTaskCategory = (
         updateTaskCategory()
     }
 
-    const updateTaskCategory = async () => {
-        const updatedTaskCategory = await getTaskCategoriesData()
-        if (!updatedTaskCategory) return
-        setTaskCategories(updatedTaskCategory)
-    }
-
     const handleAssignTaskCategory = async(task_category: string | undefined) => {
         if (!task_category) return
         if (taskId) {
             await assignCategoryToTaskData(taskId, task_category)
+            setCategoryId(task_category)
         } else {
             setCategoryId(task_category)
         }
+    }
+
+    const updateTaskCategory = async () => {
+        const updatedTaskCategory = await getTaskCategoriesData()
+        if (!updatedTaskCategory) return
+        setTaskCategories(updatedTaskCategory)
     }
 
     return {
