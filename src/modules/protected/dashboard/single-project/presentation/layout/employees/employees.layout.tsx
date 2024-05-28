@@ -14,6 +14,7 @@ export const EmployeesLayout = (
     }
 ) => {
     const {employees} = useContext(DashboardContext)
+    console.log(selectedEmployees)
 
     const handleSelectEmployee = (employee: EmployeeDto) => {
         const isSelected = selectedEmployees.some(selectedEmployee => selectedEmployee.id === employee.id);

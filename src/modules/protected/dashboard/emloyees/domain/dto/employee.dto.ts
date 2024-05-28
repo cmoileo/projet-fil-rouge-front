@@ -9,4 +9,5 @@ export type EmployeeDto = {
     profile_picture_url?: string | null;
     role: RolesEnum;
     job: JobDto | null;
+    employe?: EmployeeDto;
 }

@@ -1,3 +1,5 @@
+import {EmployeeDto} from "../../modules/protected/dashboard/emloyees/domain/dto/employee.dto.ts";
+
 export type TaskType = {
     id?: string;
     name: string;
@@ -13,4 +15,5 @@ export type TaskType = {
     userId?: string;
     task_state_id?: string;
     assigned_users_id?: string[];
+    task_users?: EmployeeDto[];
 };
