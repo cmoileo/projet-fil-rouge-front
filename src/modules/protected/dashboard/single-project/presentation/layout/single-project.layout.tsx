@@ -9,7 +9,7 @@ export const SingleProjectLayout = () => {
         <div className={"flex flex-col gap-400"}>
             {
                 project && project.tasks && project.tasks.map((task) => (
-                    <TaskLayout task={task} />
+                    <TaskLayout key={task.id} task={task} />
                 ))
             }
             <CreateNewTaskLayout setProject={setProject} projectId={project?.id} />

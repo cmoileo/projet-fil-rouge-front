@@ -30,13 +30,13 @@ export const CreateNewTaskLayout = (
     const [endDate, setEndDate] = useState<Date>()
     const [isBeginOpen, setIsBeginOpen] = useState(false)
     const [isEndOpen, setIsEndOpen] = useState(false)
-    const [selectedEmployees, setSelectedEmployees] = useState<EmployeeDto[]>([])
+    const [selectedEmployees, setSelectedEmployees] = useState<EmployeeDto[] | []>([])
     const [categoryId, setCategoryId] = useState<string | undefined>(undefined)
     const taskNameRef = useRef<HTMLInputElement>(null)
-    const {handleCreateTask} = useCreateNewTask({beginDate, endDate, selectedEmployees, categoryId, taskNameRef, setProject, projectId})
+    const {handleCreateTask, formRef} = useCreateNewTask({beginDate, endDate, selectedEmployees, categoryId, taskNameRef, setProject, projectId, setCategoryId, setSelectedEmployees})
 
     return (
-        <form className={'w-full flex flex-col gap-500'} onSubmit={handleCreateTask}>
+        <form ref={formRef} className={'w-full flex flex-col gap-500'} onSubmit={handleCreateTask}>
             <div className={"flex gap-400"}>
                 <Input ref={taskNameRef} required type={"text"} placeholder={"Task name"}></Input>
                 <Popover open={isBeginOpen} onOpenChange={setIsBeginOpen}>
