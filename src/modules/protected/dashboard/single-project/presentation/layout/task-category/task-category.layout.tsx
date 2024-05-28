@@ -15,16 +15,21 @@ export const TaskCategoryLayout = (
     {
         categoryId,
         taskId,
+        setCategoryId,
     }: {
         categoryId: string | undefined,
-        taskId: string | undefined
+        taskId: string | undefined,
+        setCategoryId: React.Dispatch<string>
     }
 ) => {
-    const {taskCategories, isOpen, setIsOpen, createTaskInputRef, colorInputRef, handleCreateCategory, handleDeleteCategory, handleAssignTaskCategory } = useTaskCategory(taskId);
+    const {taskCategories, isOpen, setIsOpen, createTaskInputRef, colorInputRef, handleCreateCategory, handleDeleteCategory, handleAssignTaskCategory } = useTaskCategory({
+        taskId,
+        setCategoryId
+    });
     return (
         <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
             <DropdownMenuTrigger asChild>
-                <MainButton className={"border-radius-full bg-grey-200 color-grey-1000 hover:bg-gray-400 p-xs"}>
+                <MainButton style={{backgroundColor: categoryId && taskCategories?.find((taskCategory) => categoryId == taskCategory?.id)?.name ? taskCategories?.find((taskCategory) => categoryId == taskCategory?.id)?.color : ""}} className={"border-radius-full white bg-grey-200 color-grey-1000 hover:bg-gray-400 p-xs"}>
                     {categoryId && taskCategories?.find((taskCategory) => categoryId == taskCategory?.id)?.name ? taskCategories?.find((taskCategory) => categoryId == taskCategory?.id)?.name : "Category"}
                 </MainButton>
             </DropdownMenuTrigger>

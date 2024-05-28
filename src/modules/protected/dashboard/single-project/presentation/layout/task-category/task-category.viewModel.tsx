@@ -5,7 +5,14 @@ import {getTaskCategoriesData} from "../../../../../../../repository/task/get-ta
 import {deleteTaskCategoryData} from "../../../../../../../repository/task-categoriy/delete-task-category.data.ts";
 import {assignCategoryToTaskData} from "../../../../../../../repository/task-categoriy/assign-category-to-task.data.ts";
 
-export const useTaskCategory = (taskId: string | undefined) => {
+export const useTaskCategory = (
+    {
+        taskId,
+        setCategoryId
+    }: {
+        taskId: string | undefined,
+        setCategoryId: any
+    }) => {
     const {taskCategories, setTaskCategories} = useContext(DashboardContext);
     const [isOpen, setIsOpen] = useState(false);
     const createTaskInputRef: React.MutableRefObject<HTMLInputElement | null> = useRef(null);
@@ -37,8 +44,12 @@ export const useTaskCategory = (taskId: string | undefined) => {
     }
 
     const handleAssignTaskCategory = async(task_category: string | undefined) => {
-        if (!task_category || !taskId) return
-        await assignCategoryToTaskData(taskId, task_category)
+        if (!task_category) return
+        if (taskId) {
+            await assignCategoryToTaskData(taskId, task_category)
+        } else {
+            setCategoryId(task_category)
+        }
     }
 
     return {

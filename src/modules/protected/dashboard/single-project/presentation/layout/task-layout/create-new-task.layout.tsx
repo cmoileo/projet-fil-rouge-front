@@ -27,6 +27,7 @@ export const CreateNewTaskLayout = (
     const [isBeginOpen, setIsBeginOpen] = useState(false)
     const [isEndOpen, setIsEndOpen] = useState(false)
     const [selectedEmplooyees, setSelectedEmployees] = useState<EmployeeDto[]>([])
+    const [categoryId, setCategoryId] = useState<string | undefined>(undefined)
 
 
     return (
@@ -83,7 +84,7 @@ export const CreateNewTaskLayout = (
 
                 <EmployeesLayout selectedEmployees={selectedEmplooyees} setSelectedEmployees={setSelectedEmployees} />
 
-                <TaskCategoryLayout taskId={undefined} categoryId={undefined} />
+                <TaskCategoryLayout setCategoryId={setCategoryId} taskId={undefined} categoryId={categoryId} />
             </div>
             <SecondaryButton className={"w-full"}>Add new Task</SecondaryButton>
         </form>
