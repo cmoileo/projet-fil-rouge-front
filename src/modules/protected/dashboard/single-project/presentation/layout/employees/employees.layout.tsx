@@ -1,4 +1,4 @@
-import {useContext, useEffect} from "react";
+import {useContext} from "react";
 import {DashboardContext} from "../../../../../../../contexts/dashboard.context.tsx";
 import {Popover, PopoverContent, PopoverTrigger} from "../../../../../../../ui/components/Popup.tsx";
 import {MainButton} from "../../../../../../../ui/components/mainButton.tsx";
@@ -27,10 +27,6 @@ export const EmployeesLayout = (
         }
     };
 
-    useEffect(() => {
-        console.log(selectedEmployees);
-    }, [selectedEmployees]);
-
     return (
         <Popover>
             <PopoverTrigger asChild>
@@ -42,7 +38,7 @@ export const EmployeesLayout = (
                 <div className="flex flex-col gap-400">
                     {
                         employees && employees.map((employee) => (
-                            <div onClick={() => handleSelectEmployee(employee)} className={"flex hover-bg-grey-100 transition padding-300 border-radius-200 cursor-pointer items-center gap-300"} key={employee.id}>
+                            <div style={{backgroundColor: selectedEmployees.find((selectedEmployee) => selectedEmployee.id == employee.id) ? "lightgrey" : ""}} onClick={() => handleSelectEmployee(employee)} className={"flex hover-bg-grey-100 transition padding-300 border-radius-200 cursor-pointer items-center gap-300"} key={employee.id}>
                                 {
                                     employee.profile_picture_url ? (
                                         <img className={"w-12 h-12 border-radius-full object-cover"} src={employee.profile_picture_url} alt=""/>
