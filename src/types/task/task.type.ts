@@ -2,7 +2,7 @@ import {EmployeeDto} from "../../modules/protected/dashboard/emloyees/domain/dto
 
 export type TaskType = {
     id?: string;
-    name: string;
+    name?: string;
     description?: string;
     task_category_id?: string;
     starting_date?: Date;
