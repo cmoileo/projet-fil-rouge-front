@@ -91,7 +91,7 @@ export const CreateNewTaskLayout = (
 
                 <TaskCategoryLayout setCategoryId={setCategoryId} taskId={undefined} categoryId={categoryId} />
             </div>
-            <SecondaryButton className={"w-full"}>Add new Task</SecondaryButton>
+            <SecondaryButton type={"submit"} className={"w-full"}>Add new Task</SecondaryButton>
         </form>
     )
 }

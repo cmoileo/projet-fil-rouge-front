@@ -4,6 +4,7 @@ import {useEffect, useState} from "react";
 import {Input} from "../../../../../../../ui/components/input.tsx";
 import {EmployeesLayout} from "../employees/employees.layout.tsx";
 import {EmployeeDto} from "../../../../emloyees/domain/dto/employee.dto.ts";
+import {TaskPercentageLayout} from "./task-percentage.layout.tsx";
 
 export const TaskLayout = (
     {
@@ -23,8 +24,9 @@ export const TaskLayout = (
     }, []);
     return (
         <form id={task.id} className={"flex items-center justify-between"}>
-            <Input defaultValue={task.name} className={"bg-transparent p-m"} />
+            <Input defaultValue={task.name} className={"bg-transparent p-m w-fit"} />
             <EmployeesLayout selectedEmployees={selectedEmployees} setSelectedEmployees={setSelectedEmployees} />
+            <TaskPercentageLayout />
             <TaskCategoryLayout setCategoryId={setCategoryId} taskId={task.id} categoryId={categoryId}/>
         </form>
     );

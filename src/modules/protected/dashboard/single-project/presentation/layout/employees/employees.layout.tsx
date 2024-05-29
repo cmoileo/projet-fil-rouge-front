@@ -3,6 +3,8 @@ import {DashboardContext} from "../../../../../../../contexts/dashboard.context.
 import {Popover, PopoverContent, PopoverTrigger} from "../../../../../../../ui/components/Popup.tsx";
 import {MainButton} from "../../../../../../../ui/components/mainButton.tsx";
 import {EmployeeDto} from "../../../../emloyees/domain/dto/employee.dto.ts";
+import {Link} from "react-router-dom";
+import {PlusIcon} from "lucide-react";
 
 export const EmployeesLayout = (
     {
@@ -31,9 +33,37 @@ export const EmployeesLayout = (
     return (
         <Popover>
             <PopoverTrigger asChild>
-                <MainButton>
-                    Select Employees
-                </MainButton>
+                <div className={"flex gap-400 items-center"}>
+                    <div className={"flex gap-200 items-center"}>
+                        {
+                            selectedEmployees.length > 0 && selectedEmployees.map((selectedEmployee) => (
+                                <Link to={`/employees/${selectedEmployee.id}`} key={selectedEmployee.id}>
+                                    {
+                                        selectedEmployee.profile_picture_url ? (
+                                            <img
+                                                key={selectedEmployee.id}
+                                                className="w-12 h-12 border-radius-full object-cover"
+                                                src={selectedEmployee.profile_picture_url}
+                                                alt=""
+                                            />
+                                        ) : (
+                                            <div
+                                                key={selectedEmployee.id}
+                                                className="w-12 h-12 border-radius-full bg-grey-400"
+                                            ></div>
+                                        )
+                                    }
+                                </Link>
+                                )
+                            )
+                        }
+                    </div>
+                    <MainButton type={"button"}>
+                        {
+                            selectedEmployees.length > 0 ? <PlusIcon></PlusIcon> : "Select Employees"
+                        }
+                    </MainButton>
+                </div>
             </PopoverTrigger>
             <PopoverContent>
                 <div className="flex flex-col gap-400">
