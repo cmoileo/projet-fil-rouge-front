@@ -31,7 +31,7 @@ export const TaskLayout = (
     const [isBeginOpen, setIsBeginOpen] = useState(false);
     const [isEndOpen, setIsEndOpen] = useState(false);
     const [isDeleteOpen, setIsDeleteOpen] = useState(false);
-
+    let typingTimer: any;
     const handleAssignEmployeeToApi = async (updatedEmployees: EmployeeDto[]) => {
         if (!task.id) return;
         const data: TaskType = {
@@ -63,6 +63,18 @@ export const TaskLayout = (
         fetchProject();
     }
 
+    const handleChangeTaskName = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        clearTimeout(typingTimer);
+        typingTimer = setTimeout(async () => {
+            if (!task.id) return;
+            const data: TaskType = {
+                name: e.target.value
+            };
+            await updateTaskData(data, task.id);
+            fetchProject();
+        }, 3000);
+    };
+
     useEffect(() => {
         setCategoryId(task?.task_category_id);
         if (!task?.task_users) return;
@@ -72,7 +84,7 @@ export const TaskLayout = (
 
     return (
         <form id={task.id} className={"flex items-center justify-between"}>
-            <Input defaultValue={task.name} className={"bg-transparent p-m w-fit"} />
+            <Input defaultValue={task.name} onChange={handleChangeTaskName} className={"bg-transparent p-m w-fit"} />
             <EmployeesLayout handleAssignEmployeeToApi={handleAssignEmployeeToApi} selectedEmployees={selectedEmployees} setSelectedEmployees={setSelectedEmployees} />
             <Popover open={isBeginOpen} onOpenChange={setIsBeginOpen}>
                 <PopoverTrigger asChild>
