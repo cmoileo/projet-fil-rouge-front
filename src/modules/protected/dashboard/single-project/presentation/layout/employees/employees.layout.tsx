@@ -9,15 +9,20 @@ import {PlusIcon} from "lucide-react";
 export const EmployeesLayout = (
     {
         selectedEmployees,
-        setSelectedEmployees
+        setSelectedEmployees,
+        handleAssignEmployeeToApi
     }: {
         selectedEmployees: EmployeeDto[],
-        setSelectedEmployees: React.Dispatch<EmployeeDto[]>
+        setSelectedEmployees: React.Dispatch<EmployeeDto[]>,
+        handleAssignEmployeeToApi?: () => void
     }
 ) => {
     const {employees} = useContext(DashboardContext)
     const handleSelectEmployee = (employee: EmployeeDto) => {
         const isSelected = selectedEmployees.some(selectedEmployee => selectedEmployee.id === employee.id);
+        if (handleAssignEmployeeToApi) {
+            handleAssignEmployeeToApi()
+        }
         if (isSelected) {
             setSelectedEmployees(selectedEmployees.filter(selectedEmployee => selectedEmployee.id !== employee.id));
         } else if (selectedEmployees.length == 0) {
