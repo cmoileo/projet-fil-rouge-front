@@ -3,9 +3,11 @@ import {useTaskPercentage} from "./task-percentage.viewModel.tsx";
 
 export const TaskPercentageLayout = (
     {
-        taskId
+        taskId,
+        defaultValue
     } : {
-        taskId: string | undefined
+        taskId: string | undefined,
+        defaultValue: number
     }
 ) => {
     const {handleChangePercentage} = useTaskPercentage();
@@ -15,7 +17,7 @@ export const TaskPercentageLayout = (
             <Slider
                 max={100}
                 step={1}
-                defaultValue={[0]}
+                defaultValue={[defaultValue]}
                 className={"min-w-52"}
                 onValueCommit={(value) => handleChangePercentage(value, taskId)}
             />
