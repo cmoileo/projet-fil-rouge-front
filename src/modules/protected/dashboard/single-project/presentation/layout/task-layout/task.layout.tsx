@@ -17,9 +17,11 @@ import {deleteTaskData} from "../../../../../../../repository/task/delete-task.d
 
 export const TaskLayout = (
     {
-        task
+        task,
+        fetchProject
     }: {
-        task: TaskType
+        task: TaskType,
+        fetchProject: () => void
     }
 ) => {
     const [categoryId, setCategoryId] = useState<string | undefined>(task?.task_category_id);
@@ -58,6 +60,7 @@ export const TaskLayout = (
         if (!task.id) return;
         setIsDeleteOpen(false)
         await deleteTaskData(task.id);
+        fetchProject();
     }
 
     useEffect(() => {

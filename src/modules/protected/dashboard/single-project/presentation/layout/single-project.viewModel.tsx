@@ -7,6 +7,13 @@ export const useSingleProject = () => {
     const id = useParams().id;
     const [project, setProject] = useState<ProjectType | null>(null);
 
+    const fetchProject = async () => {
+        if (!id) return;
+        const project = await getProjectByIdData(id);
+        if(!project) return;
+        setProject(project);
+    }
+
     useEffect(() => {
         const fetchProject = async () => {
             if (!id) return;
@@ -21,6 +28,7 @@ export const useSingleProject = () => {
 
     return {
         project,
-        setProject
+        setProject,
+        fetchProject
     }
 }
