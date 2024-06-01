@@ -48,14 +48,14 @@ export const EmployeesLayout = (
                                         selectedEmployee.profile_picture_url ? (
                                             <img
                                                 key={selectedEmployee.id}
-                                                className="w-12 h-12 border-radius-full object-cover"
+                                                className="w-8 h-8 border-radius-full object-cover"
                                                 src={selectedEmployee.profile_picture_url}
                                                 alt=""
                                             />
                                         ) : (
                                             <div
                                                 key={selectedEmployee.id}
-                                                className="w-12 h-12 border-radius-full bg-grey-400"
+                                                className="w-8 h-8 border-radius-full bg-grey-400"
                                             ></div>
                                         )
                                     }

@@ -9,9 +9,11 @@ import { updateTaskData } from "../../../../../../../repository/task/updateTask.
 import { Popover, PopoverContent, PopoverTrigger } from "../../../../../../../ui/components/Popup";
 import { MainButton } from "../../../../../../../ui/components/mainButton";
 import { cn } from "../../../../../../../services/shadcn/utils";
-import { Calendar as CalendarIcon } from "lucide-react";
+import {Calendar as CalendarIcon, TrashIcon} from "lucide-react";
 import { format } from "date-fns";
 import { Calendar } from "../../../../../../../ui/components/calendar";
+import {AlertDialog, AlertDialogContent, AlertDialogTrigger} from "../../../../../../../ui/components/altertDialog.tsx";
+import {deleteTaskData} from "../../../../../../../repository/task/delete-task.data.ts";
 
 export const TaskLayout = (
     {
@@ -26,6 +28,7 @@ export const TaskLayout = (
     const [endDate, setEndDate] = useState<Date>(task?.finishing_date ? new Date(task.finishing_date) : new Date());
     const [isBeginOpen, setIsBeginOpen] = useState(false);
     const [isEndOpen, setIsEndOpen] = useState(false);
+    const [isDeleteOpen, setIsDeleteOpen] = useState(false);
 
     const handleAssignEmployeeToApi = async (updatedEmployees: EmployeeDto[]) => {
         if (!task.id) return;
@@ -35,20 +38,34 @@ export const TaskLayout = (
         await updateTaskData(data, task.id);
     };
 
+    const handleEditStartingDate = async (value: Date) => {
+        if (!task.id) return;
+        const data: TaskType = {
+            starting_date: value,
+        }
+        await updateTaskData(data, task.id);
+    }
+
+    const handleEditEndDate = async (value: Date) => {
+        if (!task.id) return;
+        const data: TaskType = {
+            finishing_date: value,
+        }
+        await updateTaskData(data, task.id);
+    }
+
+    const handleDeleteTask = async () => {
+        if (!task.id) return;
+        setIsDeleteOpen(false)
+        await deleteTaskData(task.id);
+    }
+
     useEffect(() => {
         setCategoryId(task?.task_category_id);
         if (!task?.task_users) return;
         const users = task?.task_users.map((taskUser) => taskUser.employe);
         setSelectedEmployees(users as EmployeeDto[]);
     }, [task]);
-
-    const handleBeginDateSelect = (date: Date | undefined) => {
-        if (date) setBeginDate(date);
-    };
-
-    const handleEndDateSelect = (date: Date | undefined) => {
-        if (date) setEndDate(date);
-    };
 
     return (
         <form id={task.id} className={"flex items-center justify-between"}>
@@ -72,7 +89,12 @@ export const TaskLayout = (
                         className={"w-fit"}
                         mode="single"
                         selected={beginDate}
-                        onSelect={handleBeginDateSelect}
+                        onSelect={(value) => {
+                            if (value) {
+                                setBeginDate(value);
+                                handleEditStartingDate(value);
+                            }
+                        }}
                         initialFocus
                         onDayClick={() => setIsBeginOpen(false)}
                     />
@@ -96,7 +118,12 @@ export const TaskLayout = (
                     <Calendar
                         mode="single"
                         selected={endDate}
-                        onSelect={handleEndDateSelect}
+                        onSelect={(value) => {
+                            if (value) {
+                                setEndDate(value);
+                                handleEditEndDate(value);
+                            }
+                        }}
                         initialFocus
                         onDayClick={() => setIsEndOpen(false)}
                     />
@@ -104,6 +131,18 @@ export const TaskLayout = (
             </Popover>
             <TaskPercentageLayout defaultValue={task.progress_percentage || 0} taskId={task.id} />
             <TaskCategoryLayout setCategoryId={setCategoryId} taskId={task.id} categoryId={categoryId} />
+            <AlertDialog open={isDeleteOpen} onOpenChange={setIsDeleteOpen}>
+                <AlertDialogTrigger>
+                    <TrashIcon className={"w-4 h-4 cursor-pointer"} />
+                </AlertDialogTrigger>
+                <AlertDialogContent>
+                    <p className={"p-m"}>Are you sure you want to delete this task?</p>
+                    <div className="flex gap-4 justify-center">
+                        <MainButton onClick={() => setIsDeleteOpen(false)} variant="outline">Cancel</MainButton>
+                        <MainButton variant={"danger"} onClick={handleDeleteTask}>Delete</MainButton>
+                    </div>
+                </AlertDialogContent>
+            </AlertDialog>
         </form>
     );
 };

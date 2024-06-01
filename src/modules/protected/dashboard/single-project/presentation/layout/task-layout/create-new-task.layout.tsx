@@ -5,7 +5,7 @@ import {
     PopoverContent,
     PopoverTrigger,
 } from "../../../../../../../ui/components/Popup"
-import { Calendar as CalendarIcon } from "lucide-react"
+import {Calendar as CalendarIcon} from "lucide-react"
 import { Calendar } from "../../../../../../../ui/components/calendar.tsx"
 import {useRef, useState} from "react";
 import {MainButton} from "../../../../../../../ui/components/mainButton.tsx";
@@ -38,7 +38,7 @@ export const CreateNewTaskLayout = (
     return (
         <form ref={formRef} className={'w-full flex flex-col gap-500'} onSubmit={handleCreateTask}>
             <div className={"flex gap-400"}>
-                <Input ref={taskNameRef} required type={"text"} placeholder={"Task name"}></Input>
+                <Input ref={taskNameRef} className={"w-fit"} required type={"text"} placeholder={"Task name"}></Input>
                 <Popover open={isBeginOpen} onOpenChange={setIsBeginOpen}>
                     <PopoverTrigger asChild>
                         <MainButton
