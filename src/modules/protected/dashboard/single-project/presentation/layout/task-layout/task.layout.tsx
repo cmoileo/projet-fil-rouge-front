@@ -17,12 +17,12 @@ export const TaskLayout = (
     const [categoryId, setCategoryId] = useState<string | undefined>(task?.task_category_id);
     const [selectedEmployees, setSelectedEmployees] = useState<EmployeeDto[] | []>([])
 
-    const handleAssignEmployeeToApi = async () => {
+    const handleAssignEmployeeToApi = async (updatedEmployees: EmployeeDto[]) => {
+        if (!task.id) return;
         const data: TaskType = {
-            id: task.id,
-            assigned_users_id: selectedEmployees.map((employee) => employee.id)
+            assigned_users_id: updatedEmployees.map((employee) => employee.id)
         }
-        await updateTaskData(data)
+        await updateTaskData(data, task.id)
     }
 
     useEffect(() => {
@@ -35,7 +35,7 @@ export const TaskLayout = (
         <form id={task.id} className={"flex items-center justify-between"}>
             <Input defaultValue={task.name} className={"bg-transparent p-m w-fit"} />
             <EmployeesLayout handleAssignEmployeeToApi={handleAssignEmployeeToApi} selectedEmployees={selectedEmployees} setSelectedEmployees={setSelectedEmployees} />
-            <TaskPercentageLayout />
+            <TaskPercentageLayout taskId={task.id} />
             <TaskCategoryLayout setCategoryId={setCategoryId} taskId={task.id} categoryId={categoryId}/>
         </form>
     );

@@ -14,22 +14,25 @@ export const EmployeesLayout = (
     }: {
         selectedEmployees: EmployeeDto[],
         setSelectedEmployees: React.Dispatch<EmployeeDto[]>,
-        handleAssignEmployeeToApi?: () => void
+        handleAssignEmployeeToApi?: (updatedEmployees: EmployeeDto[]) => void
     }
 ) => {
     const {employees} = useContext(DashboardContext)
     const handleSelectEmployee = (employee: EmployeeDto) => {
         const isSelected = selectedEmployees.some(selectedEmployee => selectedEmployee.id === employee.id);
-        if (handleAssignEmployeeToApi) {
-            handleAssignEmployeeToApi()
-        }
+        let updatedEmployees: EmployeeDto[] = [];
         if (isSelected) {
             setSelectedEmployees(selectedEmployees.filter(selectedEmployee => selectedEmployee.id !== employee.id));
+            updatedEmployees = selectedEmployees.filter(selectedEmployee => selectedEmployee.id !== employee.id);
         } else if (selectedEmployees.length == 0) {
             setSelectedEmployees([employee])
+            updatedEmployees = [employee]
         } else {
-            const updatedEmployees: EmployeeDto[] = [...selectedEmployees, employee]
+            updatedEmployees = [...selectedEmployees, employee]
             setSelectedEmployees(updatedEmployees);
+        }
+        if (handleAssignEmployeeToApi) {
+            handleAssignEmployeeToApi(updatedEmployees)
         }
     };
 

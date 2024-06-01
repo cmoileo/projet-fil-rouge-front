@@ -1,7 +1,13 @@
 import {Slider} from "../../../../../../../ui/components/range.tsx";
 import {useTaskPercentage} from "./task-percentage.viewModel.tsx";
 
-export const TaskPercentageLayout = () => {
+export const TaskPercentageLayout = (
+    {
+        taskId
+    } : {
+        taskId: string | undefined
+    }
+) => {
     const {handleChangePercentage} = useTaskPercentage();
 
     return (
@@ -11,7 +17,7 @@ export const TaskPercentageLayout = () => {
                 step={1}
                 defaultValue={[0]}
                 className={"min-w-52"}
-                onValueCommit={handleChangePercentage}
+                onValueCommit={(value) => handleChangePercentage(value, taskId)}
             />
         </div>
     )
