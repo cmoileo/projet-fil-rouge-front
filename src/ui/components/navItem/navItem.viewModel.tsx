@@ -1,7 +1,7 @@
 import {useDrag, useDrop} from "react-dnd";
 import {ProjectType} from "../../../types/project/projet.type.ts";
 import {FolderType} from "../../../types/folder/folder.type.ts";
-import React, {useEffect} from "react";
+import React, {useContext, useEffect} from "react";
 import {changeProjectParentFolderData} from "../../../repository/project/changeProjectParentFolder.data.ts";
 import {getFolders} from "../../../repository/folder/getAll.data.ts";
 import {createProject} from "../../../repository/project/createProject.data.ts";
@@ -9,6 +9,8 @@ import {deleteFolderData} from "../../../repository/folder/delete-folder.data.ts
 import {deleteProjectData} from "../../../repository/project/delete-project.data.ts";
 import {createFolderData} from "../../../repository/folder/createFodler.data.ts";
 import {editFolderData} from "../../../repository/folder/edit-folder.data";
+import {DashboardContext} from "../../../contexts/dashboard.context.tsx";
+import {getProjectsData} from "../../../repository/project/get-projects.data.ts";
 
 export const useNavitem = (
     {
@@ -34,6 +36,7 @@ export const useNavitem = (
     const projectName = project?.name;
     const [isPopoverOpen, setIsPopoverOpen] = React.useState<boolean>(false);
     const [isEditFolderName, setIsEditFolderName] = React.useState<boolean>(false);
+    const {setProjects} = useContext(DashboardContext);
     let projects: ProjectType[] = [];
     let subfolders: FolderType[] = [];
 
@@ -114,8 +117,9 @@ export const useNavitem = (
         const createdProject = await createProject(data);
         formRef.current.reset();
         if (!createdProject) return console.error("Error creating project");
-        updateFolders(setFolders);
+        await updateFolders(setFolders);
         setIsPopoverOpen(false)
+        await updateProjects();
     }
 
     const handleDrop = async (folderId: string) => {
@@ -128,23 +132,19 @@ export const useNavitem = (
     const handleDeleteProject = async (projectId: string | null) => {
         if (!projectId) return console.error("Project not found");
         await deleteProjectData(projectId)
-        const updatedFolders = await getFolders();
-        if (!setFolders || !updatedFolders) return console.error("Error deleting project");
-        setFolders(updatedFolders);
+        await getUpdatedFolders();
+        await updateProjects();
     }
 
     const handleCreateFolder = async (e:React.FormEvent<HTMLFormElement>, folderId: string | null) => {
         e.preventDefault()
         const formTarget = e.target as HTMLFormElement;
         await createFolderData(formTarget.folderTitle.value, folderId);
-        const updatedFolders = await getFolders();
-        if (!setFolders || !updatedFolders) return console.error("Error creating folder");
-        setFolders(updatedFolders);
+        await getUpdatedFolders();
     }
 
     const updateFolders = async (setFolders: React.Dispatch<React.SetStateAction<FolderType[]>> | undefined) => {
         const newFolders: FolderType[] | undefined = await getFolders();
-        console.log(newFolders)
         if (!newFolders) return console.error("Error sorting folders");
         if (setFolders) setFolders(newFolders);
     }
@@ -215,12 +215,16 @@ export const useNavitem = (
         storeProjects(folder);
         storeSubfolders(folder);
         await deleteFolderData(folder.id)
+        const fodlerProjects = folder.projects;
+        for (const folderProject of fodlerProjects) {
+            if (!folderProject.id) return;
+            await deleteProjectData(folderProject.id)
+        }
         for (const subfolder of subfolders) {
             await deleteFolderData(subfolder.id)
         }
-        const updatedFolders = await getFolders();
-        if (!setFolders || !updatedFolders) return console.error("Error deleting folder");
-        setFolders(updatedFolders);
+        await getUpdatedFolders();
+        await updateProjects();
         projects = []
         subfolders = []
     }
@@ -236,10 +240,20 @@ export const useNavitem = (
             parent_folder_id: folder.parent_folder_id
         }
         await editFolderData(data);
-        const updatedFolders = await getFolders();
-        if (!setFolders || !updatedFolders) return console.error("Error editing folder");
-        setFolders(updatedFolders);
+        getUpdatedFolders();
         setIsEditFolderName(false);
+    }
+
+    const getUpdatedFolders = async() => {
+        const updatedFolders = await getFolders();
+        if (!setFolders || !updatedFolders) return console.error("Error creating folder");
+        setFolders(updatedFolders);
+    }
+
+    const updateProjects = async () => {
+        const updatedProjects = await getProjectsData();
+        if (!setProjects || !updatedProjects) return console.error("Error updating projects");
+        setProjects(updatedProjects);
     }
 
     return {
