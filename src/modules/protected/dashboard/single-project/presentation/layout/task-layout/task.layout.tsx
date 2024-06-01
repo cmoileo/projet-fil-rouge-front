@@ -14,6 +14,7 @@ import { format } from "date-fns";
 import { Calendar } from "../../../../../../../ui/components/calendar";
 import {AlertDialog, AlertDialogContent, AlertDialogTrigger} from "../../../../../../../ui/components/altertDialog.tsx";
 import {deleteTaskData} from "../../../../../../../repository/task/delete-task.data.ts";
+import {TaskDetailsLayout} from "./task-details.layout.tsx";
 
 export const TaskLayout = (
     {
@@ -83,81 +84,83 @@ export const TaskLayout = (
     }, [task]);
 
     return (
-        <form id={task.id} className={"flex items-center justify-between"}>
-            <Input defaultValue={task.name} onChange={handleChangeTaskName} className={"bg-transparent p-m w-fit"} />
-            <EmployeesLayout handleAssignEmployeeToApi={handleAssignEmployeeToApi} selectedEmployees={selectedEmployees} setSelectedEmployees={setSelectedEmployees} />
-            <Popover open={isBeginOpen} onOpenChange={setIsBeginOpen}>
-                <PopoverTrigger asChild>
-                    <MainButton
-                        variant={"outline"}
-                        className={cn(
-                            "w-[280px] w-fit justify-start text-left font-normal p-xs",
-                            !beginDate && "text-muted-foreground"
-                        )}
-                    >
-                        <CalendarIcon className="mr-2 h-4 w-4"/>
-                        {beginDate ? format(beginDate, "PPP") : <span>Pick a beginning date</span>}
-                    </MainButton>
-                </PopoverTrigger>
-                <PopoverContent className="w-fit p-0">
-                    <Calendar
-                        className={"w-fit"}
-                        mode="single"
-                        selected={beginDate}
-                        onSelect={(value) => {
-                            if (value) {
-                                setBeginDate(value);
-                                handleEditStartingDate(value);
-                            }
-                        }}
-                        initialFocus
-                        onDayClick={() => setIsBeginOpen(false)}
-                    />
-                </PopoverContent>
-            </Popover>
+        <>
+            <form id={task.id} className={"flex items-center justify-between"}>
+                <Input defaultValue={task.name} onChange={handleChangeTaskName} className={"bg-transparent p-m w-fit"}/>
+                <EmployeesLayout handleAssignEmployeeToApi={handleAssignEmployeeToApi}
+                                 selectedEmployees={selectedEmployees} setSelectedEmployees={setSelectedEmployees}/>
+                <Popover open={isBeginOpen} onOpenChange={setIsBeginOpen}>
+                    <PopoverTrigger asChild>
+                        <MainButton
+                            variant={"outline"}
+                            className={cn(
+                                "w-[280px] w-fit justify-start text-left font-normal p-xs",
+                                !beginDate && "text-muted-foreground"
+                            )}
+                        >
+                            <CalendarIcon className="mr-2 h-4 w-4"/>
+                            {beginDate ? format(beginDate, "PPP") : <span>Pick a beginning date</span>}
+                        </MainButton>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-fit p-0">
+                        <Calendar
+                            className={"w-fit"}
+                            mode="single"
+                            selected={beginDate}
+                            onSelect={(value) => {
+                                if (value) {
+                                    setBeginDate(value);
+                                    handleEditStartingDate(value);
+                                }
+                            }}
+                            initialFocus
+                            onDayClick={() => setIsBeginOpen(false)}/>
+                    </PopoverContent>
+                </Popover>
 
-            <Popover open={isEndOpen} onOpenChange={setIsEndOpen}>
-                <PopoverTrigger asChild>
-                    <MainButton
-                        variant={"outline"}
-                        className={cn(
-                            "w-[280px] w-fit justify-start text-left font-normal p-xs",
-                            !endDate && "text-muted-foreground"
-                        )}
-                    >
-                        <CalendarIcon className="mr-2 h-4 w-4"/>
-                        {endDate ? format(endDate, "PPP") : <span>Pick an ending date</span>}
-                    </MainButton>
-                </PopoverTrigger>
-                <PopoverContent className="w-auto p-0">
-                    <Calendar
-                        mode="single"
-                        selected={endDate}
-                        onSelect={(value) => {
-                            if (value) {
-                                setEndDate(value);
-                                handleEditEndDate(value);
-                            }
-                        }}
-                        initialFocus
-                        onDayClick={() => setIsEndOpen(false)}
-                    />
-                </PopoverContent>
-            </Popover>
-            <TaskPercentageLayout defaultValue={task.progress_percentage || 0} taskId={task.id} />
-            <TaskCategoryLayout setCategoryId={setCategoryId} taskId={task.id} categoryId={categoryId} />
-            <AlertDialog open={isDeleteOpen} onOpenChange={setIsDeleteOpen}>
-                <AlertDialogTrigger>
-                    <TrashIcon className={"w-4 h-4 cursor-pointer"} />
-                </AlertDialogTrigger>
-                <AlertDialogContent>
-                    <p className={"p-m"}>Are you sure you want to delete this task?</p>
-                    <div className="flex gap-4 justify-center">
-                        <MainButton onClick={() => setIsDeleteOpen(false)} variant="outline">Cancel</MainButton>
-                        <MainButton variant={"danger"} onClick={handleDeleteTask}>Delete</MainButton>
-                    </div>
-                </AlertDialogContent>
-            </AlertDialog>
-        </form>
+                <Popover open={isEndOpen} onOpenChange={setIsEndOpen}>
+                    <PopoverTrigger asChild>
+                        <MainButton
+                            variant={"outline"}
+                            className={cn(
+                                "w-[280px] w-fit justify-start text-left font-normal p-xs",
+                                !endDate && "text-muted-foreground"
+                            )}
+                        >
+                            <CalendarIcon className="mr-2 h-4 w-4"/>
+                            {endDate ? format(endDate, "PPP") : <span>Pick an ending date</span>}
+                        </MainButton>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-auto p-0">
+                        <Calendar
+                            mode="single"
+                            selected={endDate}
+                            onSelect={(value) => {
+                                if (value) {
+                                    setEndDate(value);
+                                    handleEditEndDate(value);
+                                }
+                            }}
+                            initialFocus
+                            onDayClick={() => setIsEndOpen(false)}/>
+                    </PopoverContent>
+                </Popover>
+                <TaskPercentageLayout defaultValue={task.progress_percentage || 0} taskId={task.id}/>
+                <TaskCategoryLayout setCategoryId={setCategoryId} taskId={task.id} categoryId={categoryId}/>
+                <AlertDialog open={isDeleteOpen} onOpenChange={setIsDeleteOpen}>
+                    <AlertDialogTrigger>
+                        <TrashIcon className={"w-4 h-4 cursor-pointer"}/>
+                    </AlertDialogTrigger>
+                    <AlertDialogContent>
+                        <p className={"p-m"}>Are you sure you want to delete this task?</p>
+                        <div className="flex gap-4 justify-center">
+                            <MainButton onClick={() => setIsDeleteOpen(false)} variant="outline">Cancel</MainButton>
+                            <MainButton variant={"danger"} onClick={handleDeleteTask}>Delete</MainButton>
+                        </div>
+                    </AlertDialogContent>
+                </AlertDialog>
+            </form>
+            <TaskDetailsLayout task={task} fetchProject={fetchProject}/>
+        </>
     );
 };
