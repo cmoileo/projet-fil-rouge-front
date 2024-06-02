@@ -1,6 +1,6 @@
 import {TaskType} from "../../../../../../../types/task/task.type.ts";
 import {Drawer, DrawerContent, DrawerHeader, DrawerTrigger} from "../../../../../../../ui/components/drawer.tsx";
-import {HamburgerMenuIcon} from "@radix-ui/react-icons";
+import {ChatBubbleIcon} from "@radix-ui/react-icons";
 import { MainButton } from "../../../../../../../ui/components/mainButton.tsx";
 import {postCommentData} from "../../../../../../../repository/comments/post-comment.data.ts";
 import {cookieManager} from "../../../../../../../services/coockies/CoockieManager.service.ts";
@@ -30,17 +30,15 @@ export const TaskDetailsLayout = (
         <div className={"flex flex-col gap-400"}>
             <Drawer>
                 <DrawerTrigger asChild>
-                    <HamburgerMenuIcon className={"w-6 h-6 cursor-pointer"} />
+                    <ChatBubbleIcon className={"w-6 h-6 cursor-pointer"} />
                 </DrawerTrigger>
-                <DrawerContent className={"w-[100vw] pl-12 pr-12 h-[75vh]"}>
+                <DrawerContent className={"w-[100vw] pl-12 pr-12 h-[80vh]"}>
                     <DrawerHeader>
                      <h2 className={"h2"}>{task.name}</h2>
                     </DrawerHeader>
                     <hr className={'w-full'}></hr>
-                    <div>
-                    </div>
-                    <div className={"flex flex-col justify-between h-full py-8"}>
-                        <div className="flex flex-col gap-400">
+                    <div className={"flex flex-col justify-between h-full overflow-hidden py-8"}>
+                        <div className="flex flex-col gap-400 h-full overflow-y-auto">
                             {task.comments && task.comments.map((comment) => (
                                 comment.author.id === cookieManager.getCookie('userId') ? (
                                     <div className={"flex flex-col gap-500 items-end"}>
