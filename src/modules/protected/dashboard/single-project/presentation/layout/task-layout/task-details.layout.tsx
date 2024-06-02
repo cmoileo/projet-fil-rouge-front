@@ -3,6 +3,7 @@ import {Drawer, DrawerContent, DrawerHeader, DrawerTrigger} from "../../../../..
 import {HamburgerMenuIcon} from "@radix-ui/react-icons";
 import { MainButton } from "../../../../../../../ui/components/mainButton.tsx";
 import {postCommentData} from "../../../../../../../repository/comments/post-comment.data.ts";
+import {cookieManager} from "../../../../../../../services/coockies/CoockieManager.service.ts";
 
 export const TaskDetailsLayout = (
     {
@@ -38,22 +39,61 @@ export const TaskDetailsLayout = (
                     <hr className={'w-full'}></hr>
                     <div>
                     </div>
-                    <div className="flex flex-colgap-200">
-                        {
-                            task.comments && task.comments.map((comment) => {
-                                return (
-                                    <div key={comment.id} className={"flex flex-col gap-200"}>
-                                        <p>{comment.content}</p>
-                                        <p>{comment.createdAt}</p>
+                    <div className={"flex flex-col justify-between h-full py-8"}>
+                        <div className="flex flex-col gap-400">
+                            {task.comments && task.comments.map((comment) => (
+                                comment.author.id === cookieManager.getCookie('userId') ? (
+                                    <div className={"flex flex-col gap-500 items-end"}>
+                                        <div key={comment.id} className="flex w-full gap-600">
+                                            <p className={"p-s w-full bg-green-100 border-radius-400 padding-300"}>{comment.content}</p>
+                                            {
+                                                comment.author.profile_picture_url ? (
+                                                    <img src={comment.author.profile_picture_url}
+                                                         className={"w-10 h-10 rounded-full"}/>
+                                                ) : (
+                                                    <div className={"w-10 h-10 rounded-full bg-gray-200"}></div>
+                                                )
+                                            }
+                                        </div>
+                                        <p className={"p-xs w-fit"}>{new Date("2024-06-01T12:52:27.442Z").toLocaleString("fr-FR", {
+                                            day: "2-digit",
+                                            month: "2-digit",
+                                            hour: "2-digit",
+                                            minute: "2-digit",
+                                            hour12: false
+                                        }).replace(',', '')}</p>
+                                    </div>
+                                ) : (
+                                    <div className={"flex flex-col gap-500"}>
+                                        <div key={comment.id} className="flex w-full gap-600">
+                                            {
+                                                comment.author.profile_picture_url ? (
+                                                    <img src={comment.author.profile_picture_url}
+                                                         className={"w-10 h-10 rounded-full"}/>
+                                                ) : (
+                                                    <div className={"w-10 h-10 rounded-full bg-gray-200"}></div>
+                                                )
+                                            }
+                                            <p className={"p-s w-full bg-green-100 border-radius-400 padding-300"}>{comment.content}</p>
+                                        </div>
+                                        <p className={"p-xs w-fit"}>{new Date("2024-06-01T12:52:27.442Z").toLocaleString("fr-FR", {
+                                            day: "2-digit",
+                                            month: "2-digit",
+                                            hour: "2-digit",
+                                            minute: "2-digit",
+                                            hour12: false
+                                        }).replace(',', '')}</p>
                                     </div>
                                 )
-                            })
-                        }
+                            ))}
+                        </div>
+                        <form className={"margin-300-top" +
+                            ""} onSubmit={handlePostComment}>
+                        <textarea placeholder={"Post a comment"}
+                                  className={"w-full blue-900 p-s padding-200 bg-blue-100 border-radius-200 h-[100px]"}></textarea>
+                            <MainButton className={"w-fit mt-6"}>Post</MainButton>
+                        </form>
                     </div>
-                    <form onSubmit={handlePostComment}>
-                        <textarea placeholder={"Post a comment"} className={"w-full blue-900 p-s padding-200 bg-blue-100 border-radius-200 h-[100px]"}></textarea>
-                        <MainButton className={"w-fit mt-6"}>Post</MainButton>
-                    </form>
                 </DrawerContent>
             </Drawer>
         </div>

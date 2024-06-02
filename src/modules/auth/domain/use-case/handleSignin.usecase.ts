@@ -15,11 +15,14 @@ export const handleSignin = async (data: SignInDto) => {
         console.log(json)
         const token = json.token
         const userRole = json.role
+        const userId = json.userId
+        console.log(json)
         if (!token) {
             throw new Error('Token not found')
         }
         cookieManager.setCookie(token, "token", 30)
         cookieManager.setCookie(userRole, "role", 30)
+        cookieManager.setCookie(userId, "userId", 30)
         return true
     } catch (err) {
         console.error(err)
