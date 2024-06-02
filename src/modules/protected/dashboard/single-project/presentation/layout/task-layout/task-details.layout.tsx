@@ -14,8 +14,6 @@ export const TaskDetailsLayout = (
         fetchProject: () => void
     }
 ) => {
-    console.log(task)
-
     const handlePostComment = async (e: React.FormEvent<HTMLFormElement>) => {
         if (!task.id) return
         e.preventDefault();
@@ -41,7 +39,7 @@ export const TaskDetailsLayout = (
                         <div className="flex flex-col gap-400 h-full overflow-y-auto">
                             {task.comments && task.comments.map((comment) => (
                                 comment.author.id === cookieManager.getCookie('userId') ? (
-                                    <div className={"flex flex-col gap-500 items-end"}>
+                                    <div key={comment.id} className={"flex flex-col gap-500 items-end"}>
                                         <div key={comment.id} className="flex w-full gap-600">
                                             <p className={"p-s w-full bg-green-100 border-radius-400 padding-300"}>{comment.content}</p>
                                             {
