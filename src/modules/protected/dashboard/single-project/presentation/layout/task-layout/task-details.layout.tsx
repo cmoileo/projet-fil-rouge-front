@@ -47,7 +47,7 @@ export const TaskDetailsLayout = (
                                             {
                                                 comment.author.profile_picture_url ? (
                                                     <img src={comment.author.profile_picture_url}
-                                                         className={"w-10 h-10 rounded-full"}/>
+                                                         className={"w-10 h-10 object-cover rounded-full"}/>
                                                 ) : (
                                                     <div className={"w-10 h-10 rounded-full bg-gray-200"}></div>
                                                 )
@@ -67,7 +67,7 @@ export const TaskDetailsLayout = (
                                             {
                                                 comment.author.profile_picture_url ? (
                                                     <img src={comment.author.profile_picture_url}
-                                                         className={"w-10 h-10 rounded-full"}/>
+                                                         className={"w-10 h-10 object-cover rounded-full"}/>
                                                 ) : (
                                                     <div className={"w-10 h-10 rounded-full bg-gray-200"}></div>
                                                 )

@@ -147,19 +147,19 @@ export const TaskLayout = (
                 </Popover>
                 <TaskPercentageLayout defaultValue={task.progress_percentage || 0} taskId={task.id}/>
                 <TaskCategoryLayout setCategoryId={setCategoryId} taskId={task.id} categoryId={categoryId}/>
+                <TaskDetailsLayout task={task} fetchProject={fetchProject}/>
                 <AlertDialog open={isDeleteOpen} onOpenChange={setIsDeleteOpen}>
                     <AlertDialogTrigger>
-                        <TrashIcon className={"w-4 h-4 cursor-pointer"}/>
+                        <TrashIcon className={"w-6 h-6 cursor-pointer"}/>
                     </AlertDialogTrigger>
                     <AlertDialogContent>
                         <p className={"p-m"}>Are you sure you want to delete this task?</p>
-                        <div className="flex gap-4 justify-center">
+                        <div className="flex gap-4 justify-end">
                             <MainButton onClick={() => setIsDeleteOpen(false)} variant="outline">Cancel</MainButton>
                             <MainButton variant={"danger"} onClick={handleDeleteTask}>Delete</MainButton>
                         </div>
                     </AlertDialogContent>
                 </AlertDialog>
-                <TaskDetailsLayout task={task} fetchProject={fetchProject}/>
             </form>
         </>
     );

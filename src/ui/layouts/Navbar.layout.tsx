@@ -39,7 +39,6 @@ export const Navbar = () => {
     const navItems1: NavItemType[] = [
         {name: "Home", path: "/dashboard/", className: "", isPlusIcon: false},
         {name: "Employees", path: "/dashboard/employees/", className: "", isPlusIcon: false},
-        {name: "Projects", path: "/dashboard/projects/", className: "", isPlusIcon: false},
     ]
 
     const renderFolderItems = (folder: FolderType): JSX.Element => {
