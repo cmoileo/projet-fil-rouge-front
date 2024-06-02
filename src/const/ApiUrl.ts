@@ -49,4 +49,10 @@ export const ApiUrl = {
         Delete: BaseUrl + '/task-categories',
         Assign: BaseUrl + '/task-categories/assign'
     },
+    Comments: {
+        Get: BaseUrl + '/comments/get',
+        Create: BaseUrl + '/tasks/add-comment',
+        Update: BaseUrl + '/comments/update',
+        Delete: BaseUrl + '/comments/delete',
+    }
 }

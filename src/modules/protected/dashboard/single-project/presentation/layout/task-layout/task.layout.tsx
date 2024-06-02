@@ -159,8 +159,8 @@ export const TaskLayout = (
                         </div>
                     </AlertDialogContent>
                 </AlertDialog>
+                <TaskDetailsLayout task={task} fetchProject={fetchProject}/>
             </form>
-            <TaskDetailsLayout task={task} fetchProject={fetchProject}/>
         </>
     );
 };
