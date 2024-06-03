@@ -41,6 +41,7 @@ export const ApiUrl = {
         Create: BaseUrl + '/tasks/create',
         Update: BaseUrl + '/tasks/update',
         Delete: BaseUrl + '/tasks/delete',
+        GetMostUrgent: BaseUrl + '/tasks/get-most-urgent',
     },
     TaskCategory: {
         Get: BaseUrl + '/task-categories',
