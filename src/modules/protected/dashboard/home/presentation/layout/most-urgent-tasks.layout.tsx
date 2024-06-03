@@ -1,11 +1,23 @@
 import {useMostUrgentTasksViewModel} from "./most-urgent-tasks.viewModel.tsx";
+import {TaskType} from "../../../../../../types/task/task.type.ts";
+import {TaskLayout} from "../../../single-project/presentation/layout/task-layout/task.layout.tsx";
+import {useSingleProject} from "../../../single-project/presentation/layout/single-project.viewModel.tsx";
 
 export const MostUrgentTasksLayout = () => {
     const {mostUrgentTasks} = useMostUrgentTasksViewModel();
-    console.log(mostUrgentTasks)
+    const {fetchProject} = useSingleProject()
     return (
         <div>
-            <h1>Most Urgent Tasks</h1>
+            <h2 className={"h3"}>Most urgent tasks</h2>
+            <div className={"flex flex-col gap-600 margin-500-top"}>
+                {
+                    mostUrgentTasks?.map((task: TaskType) => (
+                        <div key={task.id}>
+                            <TaskLayout isLink={true} task={task} fetchProject={fetchProject}/>
+                        </div>
+                    ))
+                }
+            </div>
         </div>
     );
 }

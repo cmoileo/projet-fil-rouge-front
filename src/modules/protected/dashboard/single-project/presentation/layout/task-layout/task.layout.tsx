@@ -9,20 +9,23 @@ import { updateTaskData } from "../../../../../../../repository/task/updateTask.
 import { Popover, PopoverContent, PopoverTrigger } from "../../../../../../../ui/components/Popup";
 import { MainButton } from "../../../../../../../ui/components/mainButton";
 import { cn } from "../../../../../../../services/shadcn/utils";
-import {Calendar as CalendarIcon, TrashIcon} from "lucide-react";
+import {Calendar as CalendarIcon, LinkIcon, TrashIcon} from "lucide-react";
 import { format } from "date-fns";
 import { Calendar } from "../../../../../../../ui/components/calendar";
 import {AlertDialog, AlertDialogContent, AlertDialogTrigger} from "../../../../../../../ui/components/altertDialog.tsx";
 import {deleteTaskData} from "../../../../../../../repository/task/delete-task.data.ts";
 import {TaskDetailsLayout} from "./task-details.layout.tsx";
+import {Link} from "react-router-dom";
 
 export const TaskLayout = (
     {
         task,
-        fetchProject
+        fetchProject,
+        isLink
     }: {
         task: TaskType,
-        fetchProject: () => void
+        fetchProject: () => void,
+        isLink?: boolean
     }
 ) => {
     const [categoryId, setCategoryId] = useState<string | undefined>(task?.task_category_id);
@@ -99,7 +102,7 @@ export const TaskLayout = (
                             )}
                         >
                             <CalendarIcon className="mr-2 h-4 w-4"/>
-                            {beginDate ? format(beginDate, "PPP") : <span>Pick a beginning date</span>}
+                            {beginDate ? format(beginDate, "P") : <span>Pick a beginning date</span>}
                         </MainButton>
                     </PopoverTrigger>
                     <PopoverContent className="w-fit p-0">
@@ -128,7 +131,7 @@ export const TaskLayout = (
                             )}
                         >
                             <CalendarIcon className="mr-2 h-4 w-4"/>
-                            {endDate ? format(endDate, "PPP") : <span>Pick an ending date</span>}
+                            {endDate ? format(endDate, "P") : <span>Pick an ending date</span>}
                         </MainButton>
                     </PopoverTrigger>
                     <PopoverContent className="w-auto p-0">
@@ -160,6 +163,9 @@ export const TaskLayout = (
                         </div>
                     </AlertDialogContent>
                 </AlertDialog>
+                {
+                    isLink && <Link to={`/dashboard/project/${task.project_id}`}><LinkIcon className={"w-6 h-6 cursor-pointer"}/></Link>
+                }
             </form>
         </>
     );
