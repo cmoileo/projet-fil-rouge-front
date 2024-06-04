@@ -9,7 +9,7 @@ export const DashboardPage = () => {
         <DashboardProvider>
             <div className={"flex gap-1000"}>
                 <Navbar/>
-                <main className={"margin-600-top w-full margin-1000-right margin-600-bottom"}>
+                <main className={"margin-600-top w-full margin-500-right margin-600-bottom"}>
                     <Outlet/>
                 </main>
             </div>
