@@ -28,9 +28,9 @@ export const TaskDetailsLayout = (
         <div className={"flex flex-col gap-400"}>
             <Drawer>
                 <DrawerTrigger asChild>
-                    <ChatBubbleIcon className={"w-6 h-6 cursor-pointer"} />
+                    <ChatBubbleIcon color={'lightgrey'} className={"w-6 h-6 cursor-pointer"} />
                 </DrawerTrigger>
-                <DrawerContent className={"w-[100vw] pl-12 pr-12 h-[80vh]"}>
+                <DrawerContent className={"w-[100vw] pl-12 pr-12 h-[80vh] bg-grey-800 border-grey-600"}>
                     <DrawerHeader>
                      <h2 className={"h2 grey-100"}>{task.name}</h2>
                     </DrawerHeader>
@@ -51,7 +51,7 @@ export const TaskDetailsLayout = (
                                                 )
                                             }
                                         </div>
-                                        <p className={"p-xs w-fit"}>{new Date("2024-06-01T12:52:27.442Z").toLocaleString("fr-FR", {
+                                        <p className={"p-xs grey-300 w-fit"}>{new Date("2024-06-01T12:52:27.442Z").toLocaleString("fr-FR", {
                                             day: "2-digit",
                                             month: "2-digit",
                                             hour: "2-digit",
@@ -72,7 +72,7 @@ export const TaskDetailsLayout = (
                                             }
                                             <p className={"p-s w-full bg-green-300 border-radius-400 padding-300"}>{comment.content}</p>
                                         </div>
-                                        <p className={"p-xs w-fit"}>{new Date("2024-06-01T12:52:27.442Z").toLocaleString("fr-FR", {
+                                        <p className={"p-xs grey-300 w-fit"}>{new Date("2024-06-01T12:52:27.442Z").toLocaleString("fr-FR", {
                                             day: "2-digit",
                                             month: "2-digit",
                                             hour: "2-digit",
@@ -86,7 +86,7 @@ export const TaskDetailsLayout = (
                         <form className={"margin-300-top" +
                             ""} onSubmit={handlePostComment}>
                         <textarea placeholder={"Post a comment"}
-                                  className={"w-full blue-900 p-s padding-200 bg-blue-100 border-radius-200 h-[100px]"}></textarea>
+                                  className={"w-full grey-200-900 p-s padding-200 bg-grey-700 border-radius-200 h-[100px] grey-200 focus:outline-none"}></textarea>
                             <MainButton className={"w-fit mt-6"}>Post</MainButton>
                         </form>
                     </div>

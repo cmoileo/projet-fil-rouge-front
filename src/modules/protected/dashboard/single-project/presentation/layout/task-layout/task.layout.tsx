@@ -162,7 +162,7 @@ export const TaskLayout = (
                 {
                     !isLink && <AlertDialog open={isDeleteOpen} onOpenChange={setIsDeleteOpen}>
                         <AlertDialogTrigger>
-                            <TrashIcon className={"w-6 h-6 cursor-pointer"}/>
+                            <TrashIcon color={'lightgrey'} className={"w-6 h-6 cursor-pointer"}/>
                         </AlertDialogTrigger>
                         <AlertDialogContent>
                             <p className={"p-m grey-200"}>Are you sure you want to delete this task?</p>
@@ -174,7 +174,7 @@ export const TaskLayout = (
                     </AlertDialog>
                 }
                 {
-                    isLink && <Link to={`/dashboard/project/${task.project_id}`}><LinkIcon className={"w-6 h-6 cursor-pointer"}/></Link>
+                    isLink && <Link to={`/dashboard/project/${task.project_id}`}><LinkIcon color={"lightgrey"} className={"w-6 h-6 cursor-pointer"}/></Link>
                 }
             </form>
         </>
