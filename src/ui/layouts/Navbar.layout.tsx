@@ -76,12 +76,12 @@ export const Navbar = () => {
                     <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
                         <PopoverTrigger>
                             <div
-                                className={"transition padding-200-x padding-300-left hover-bg-grey-800 border-radius-200 cursor-pointer flex justify-between items-center"}>
+                                className={"transition padding-200-x padding-300-left hover-bg-grey-700 border-radius-200 cursor-pointer flex justify-between items-center"}>
                                 <div className={"flex gap-300 items-center"}>
                                     <FolderIcon color={"lightgrey"} />
                                     <p className="p-l grey-200">Folders</p>
                                 </div>
-                                <PlusIcon color={"lightgrey"} className={"transition hover-bg-grey-800 border-radius-200"}></PlusIcon>
+                                <PlusIcon color={"lightgrey"} className={"transition hover-bg-grey-700 border-radius-200"}></PlusIcon>
                             </div>
                         </PopoverTrigger>
                         <PopoverContent align={"end"}>

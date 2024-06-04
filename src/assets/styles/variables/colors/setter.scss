@@ -18,7 +18,7 @@
     background-color: $color-value;
   }
   .border-#{$color-name} {
-    border: $color-value 10px solid;
+    border: $color-value 1px solid;
   }
   .color-#{$color-name} {
     color: $color-value;

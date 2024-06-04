@@ -51,8 +51,8 @@ export const NavItem: React.FC<NavItemProps> = (
         navbarRef,
         icon
     }) => {
-    const baseStyle = "select-none grow transition blue-1000 border-radius-100 padding-200-x cursor-pointer padding-100-y flex justify-between hover-bg-grey-800 items-center group";
-    const iconStyle = "text-200 transition hover-bg-grey-800 border-radius-200";
+    const baseStyle = "select-none grow transition blue-1000 border-radius-100 padding-200-x cursor-pointer padding-100-y flex justify-between hover-bg-grey-700 items-center group";
+    const iconStyle = "text-200 transition hover-bg-grey-700 border-radius-200";
     const chevronIconRef = React.useRef<HTMLDivElement>(null);
     const formRef = React.useRef<HTMLFormElement>(null);
     const plusIconRef = React.useRef<SVGSVGElement>(null);
@@ -75,7 +75,7 @@ export const NavItem: React.FC<NavItemProps> = (
                 project && (
                     <AlertDialog>
                         <AlertDialogTrigger>
-                            <TrashIcon color={"lightgrey"} className={"transition padding-100 border-radius-200 hover-bg-grey-800"}></TrashIcon>
+                            <TrashIcon color={"lightgrey"} className={"transition padding-100 border-radius-200 hover-bg-grey-700"}></TrashIcon>
                         </AlertDialogTrigger>
                         <AlertDialogContent>
                             <AlertDialogHeader>
@@ -125,7 +125,7 @@ export const NavItem: React.FC<NavItemProps> = (
                         }
                     </div>
                 </ContextMenuTrigger>
-                <ContextMenuContent className={"bg-grey-900"}>
+                <ContextMenuContent className={"bg-grey-900 border-grey-500"}>
                     <AlertDialog open={isAltertDialogOpen}>
                         <AlertDialogTrigger className={"w-full"}>
                             <ContextMenuItem onClick={(e) => {
@@ -159,7 +159,7 @@ export const NavItem: React.FC<NavItemProps> = (
                         </AlertDialogContent>
                     </AlertDialog>
                     <ContextMenuSub>
-                        <ContextMenuSubTrigger>
+                        <ContextMenuSubTrigger className={"bg-grey-700"}>
                             <PlusIcon color={"lightgrey"} strokeWidth={1}></PlusIcon>
                             <p className={"grey-200"}>Create subfolder</p>
                         </ContextMenuSubTrigger>
@@ -170,7 +170,7 @@ export const NavItem: React.FC<NavItemProps> = (
                                     createFolderButtonRef.current?.click();
                                 }
                             }} asChild>
-                                <form onSubmit={(e) => handleCreateFolder(e, id)} className={"flex flex-col gap-300"}>
+                                <form onSubmit={(e) => handleCreateFolder(e, id)} className={"flex flex-col bg-grey-900 gap-300"}>
                                     <Input name={"folderTitle"} onClick={(e) => e.preventDefault()} type={"text"} placeholder={"Enter the folder name"} required/>
                                     <MainButton ref={createFolderButtonRef} className={"w-full"} type={"submit"}>Create folder</MainButton>
                                 </form>
