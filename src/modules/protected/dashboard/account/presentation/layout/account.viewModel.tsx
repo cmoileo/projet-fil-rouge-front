@@ -30,7 +30,6 @@ export const useAccountLayout = () => {
                 if (!e.target) return;
                 if (typeof e.target.result !== "string") return;
                 setIsAvatar(e.target.result);
-                console.log(isAvatar)
             };
 
             reader.readAsDataURL(e.target.files[0]);

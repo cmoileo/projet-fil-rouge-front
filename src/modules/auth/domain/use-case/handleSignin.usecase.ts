@@ -12,11 +12,9 @@ export const handleSignin = async (data: SignInDto) => {
             body: JSON.stringify(data),
         })
         const json = await res.json()
-        console.log(json)
         const token = json.token
         const userRole = json.role
         const userId = json.userId
-        console.log(json)
         if (!token) {
             throw new Error('Token not found')
         }
