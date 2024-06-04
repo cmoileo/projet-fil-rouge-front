@@ -192,11 +192,11 @@ export const NavItem: React.FC<NavItemProps> = (
                         {isPlusIcon && !isEditFolderName && <PlusIcon color={"lightgrey"} ref={plusIconRef} onClick={handleOpenForm}
                                                  className="group-hover:block text-200 transition hover-bg-grey-800 border-radius-200"/>}
                     </PopoverTrigger>
-                    <PopoverContent className={'p-0'}>
+                    <PopoverContent className={'p-0 bg-grey-600 border-none'}>
                         <form onSubmit={submitForm} id={id} ref={formRef}
-                              className={"z-10 shadow-[rgba(0,_0,_0,_0.25)_0px_0px_50px_0px] flex flex-col gap-700 padding-500 border-radius-300 bg-white"}
+                              className={"z-10 shadow-[rgba(0,_0,_0,_0.25)_0px_0px_50px_0px] flex flex-col gap-700 padding-500 border-radius-300 border-grey-700"}
                               action="submit">
-                            <Input name={"projectTitle"} type={"text"} placeholder={"Enter the project name"}
+                            <Input name={"projectTitle"} type={"text"} className={'grey-200'} placeholder={"Enter the project name"}
                                    required/>
                             <MainButton className={"w-full"} type={"submit"}>Create project</MainButton>
                         </form>

@@ -84,9 +84,9 @@ export const Navbar = () => {
                                 <PlusIcon color={"lightgrey"} className={"transition hover-bg-grey-700 border-radius-200"}></PlusIcon>
                             </div>
                         </PopoverTrigger>
-                        <PopoverContent align={"end"}>
+                        <PopoverContent className={"active bg-grey-600 border-bg-500"} align={"end"}>
                             <form onSubmit={handleCreateFolder} className={"flex flex-col gap-300"}>
-                                <Input name={"folderTitle"} type={"text"} placeholder={"Folder name"} />
+                                <Input name={"folderTitle"} type={"text"} className={"grey-200"} placeholder={"Folder name"} />
                                 <MainButton type={"submit"}>Create folder</MainButton>
                             </form>
                         </PopoverContent>
