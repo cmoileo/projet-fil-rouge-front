@@ -38,13 +38,13 @@ export const CreateNewTaskLayout = (
     return (
         <form ref={formRef} className={'absolute bottom-8 flex flex-col gap-500'} onSubmit={handleCreateTask}>
             <div className={"flex gap-400"}>
-                <Input ref={taskNameRef} className={"w-fit"} required type={"text"} placeholder={"Task name"}></Input>
+                <Input ref={taskNameRef} className={"w-fit grey-200"} required type={"text"} placeholder={"Task name"}></Input>
                 <Popover open={isBeginOpen} onOpenChange={setIsBeginOpen}>
                     <PopoverTrigger asChild>
                         <MainButton
                             variant={"outline"}
                             className={cn(
-                                "w-[280px] justify-start text-left font-normal p-xs",
+                                "w-[280px] justify-start text-left font-normal p-xs bg-grey-700 border-grey-600 grey-200",
                                 !beginDate && "text-muted-foreground"
                             )}
                         >
@@ -68,7 +68,7 @@ export const CreateNewTaskLayout = (
                         <MainButton
                             variant={"outline"}
                             className={cn(
-                                "w-[280px] justify-start text-left font-normal p-xs",
+                                "w-[280px] justify-start text-left font-normal p-xs bg-grey-700 border-grey-600 grey-200",
                                 !endDate && "text-muted-foreground"
                             )}
                         >
@@ -91,7 +91,7 @@ export const CreateNewTaskLayout = (
 
                 <TaskCategoryLayout setCategoryId={setCategoryId} taskId={undefined} categoryId={categoryId} />
             </div>
-            <SecondaryButton type={"submit"} className={"w-full"}>Add new Task</SecondaryButton>
+            <SecondaryButton type={"submit"} className={"w-full bg-grey-700 grey-100"}>Add new Task</SecondaryButton>
         </form>
     )
 }

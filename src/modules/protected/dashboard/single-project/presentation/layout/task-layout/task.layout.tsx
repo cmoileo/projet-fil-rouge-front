@@ -89,7 +89,7 @@ export const TaskLayout = (
     return (
         <>
             <form id={task.id} className={"flex items-center justify-between"}>
-                <Input defaultValue={task.name} onChange={handleChangeTaskName} className={"bg-transparent p-m w-fit grey-200"}/>
+                <Input defaultValue={task.name} onChange={handleChangeTaskName} className={"bg-grey-600 p-m w-fit grey-100"}/>
                 <EmployeesLayout isLink={isLink} handleAssignEmployeeToApi={handleAssignEmployeeToApi}
                                  selectedEmployees={selectedEmployees} setSelectedEmployees={setSelectedEmployees}/>
                 {
@@ -102,7 +102,7 @@ export const TaskLayout = (
                                 <MainButton
                                     variant={"outline"}
                                     className={cn(
-                                        "w-[280px] w-fit justify-start text-left font-normal p-xs",
+                                        "w-[280px] w-fit justify-start text-left font-normal bg-grey-600 border-grey-700 p-xs",
                                         !beginDate && "text-muted-foreground"
                                     )}
                                 >
@@ -129,7 +129,7 @@ export const TaskLayout = (
                                 <MainButton
                                     variant={"outline"}
                                     className={cn(
-                                        "w-[280px] w-fit justify-start text-left font-normal p-xs",
+                                        "w-[280px] w-fit justify-start text-left font-normal bg-grey-600 border-grey-700 p-xs",
                                         !endDate && "text-muted-foreground"
                                     )}
                                 >

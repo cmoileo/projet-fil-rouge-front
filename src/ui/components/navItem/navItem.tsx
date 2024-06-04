@@ -77,15 +77,15 @@ export const NavItem: React.FC<NavItemProps> = (
                         <AlertDialogTrigger>
                             <TrashIcon color={"lightgrey"} className={"transition padding-100 border-radius-200 hover-bg-grey-700"}></TrashIcon>
                         </AlertDialogTrigger>
-                        <AlertDialogContent>
+                        <AlertDialogContent className={"bg-grey-800 border-grey-700"}>
                             <AlertDialogHeader>
-                                <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-                                <AlertDialogDescription>
+                                <AlertDialogTitle className={"grey-200"}>Are you absolutely sure?</AlertDialogTitle>
+                                <AlertDialogDescription className={"grey-300"}>
                                     This action will permanently delete the project.
                                 </AlertDialogDescription>
                             </AlertDialogHeader>
                             <AlertDialogFooter>
-                                <AlertDialogCancel>
+                                <AlertDialogCancel className={"grey-400"}>
                                     Cancel
                                 </AlertDialogCancel>
                                 <AlertDialogAction asChild onClick={() => {

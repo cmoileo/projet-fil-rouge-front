@@ -33,13 +33,13 @@ export const TaskCategoryLayout = (
                     {categoryId && taskCategories?.find((taskCategory) => categoryId == taskCategory?.id)?.name ? taskCategories?.find((taskCategory) => categoryId == taskCategory?.id)?.name : "Category"}
                 </MainButton>
             </DropdownMenuTrigger>
-            <DropdownMenuContent className={"padding-300"}>
+            <DropdownMenuContent className={"padding-300 bg-grey-800 border-grey-700"}>
                 <div className="margin-300-bottom flex flex-col gap-300">
                     {
                         taskCategories && taskCategories.map((taskCategory) => (
                             <DropdownMenuItem className={"p-0 gap-200"} key={taskCategory.id}>
                                 <Badge onClick={() => handleAssignTaskCategory(taskCategory.id)} className={"w-full padding-200-y cursor-pointer"} style={{backgroundColor: taskCategory.color}}>{taskCategory.name}</Badge>
-                                <TrashIcon className={"cursor-pointer"} onClick={(e) => {
+                                <TrashIcon color={"lightgrey"} className={"cursor-pointer"} onClick={(e) => {
                                     e.preventDefault()
                                     handleDeleteCategory(taskCategory.id)
                                 }}></TrashIcon>
@@ -49,7 +49,7 @@ export const TaskCategoryLayout = (
                 </div>
                     <Input ref={createTaskInputRef} type={"text"} placeholder={"Write new category"} />
                     <Input ref={colorInputRef} className={"w-full margin-200-top"} type={"color"} />
-                    <SecondaryButton className={"p-xs w-full margin-200-top"} onClick={handleCreateCategory}>Create Task Category</SecondaryButton>
+                    <SecondaryButton className={"p-xs w-full margin-200-top bg-grey-100 grey-900"} onClick={handleCreateCategory}>Create Task Category</SecondaryButton>
             </DropdownMenuContent>
         </DropdownMenu>
     );

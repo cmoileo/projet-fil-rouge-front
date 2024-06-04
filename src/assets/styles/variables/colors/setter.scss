@@ -17,6 +17,9 @@
   .active-bg-#{$color-name}:active {
     background-color: $color-value;
   }
+  .placeholder-#{$color-name}::placeholder {
+    color: $color-value;
+  }
   .border-#{$color-name} {
     border: $color-value 1px solid;
   }

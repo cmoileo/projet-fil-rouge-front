@@ -18,7 +18,7 @@ export const TaskPercentageLayout = (
                 max={100}
                 step={1}
                 defaultValue={[defaultValue]}
-                className={"min-w-52 bg-purple-400 border-radius-full"}
+                className={"min-w-52 bg-purple-700 border-radius-full"}
                 onValueCommit={(value) => handleChangePercentage(value, taskId)}
             />
         </div>
