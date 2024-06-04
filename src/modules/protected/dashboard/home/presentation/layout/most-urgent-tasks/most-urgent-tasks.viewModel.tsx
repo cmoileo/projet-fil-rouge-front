@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {getMostUrgentTasks} from "../../../../../../repository/task/get-most-urgent-tasks.data.ts";
+import {getMostUrgentTasks} from "../../../../../../../repository/task/get-most-urgent-tasks.data.ts";
 
 export const useMostUrgentTasksViewModel = () => {
     const [mostUrgentTasks, setMostUrgentTasks] = useState([]);
