@@ -20,6 +20,18 @@
   .border-#{$color-name} {
     border: $color-value 1px solid;
   }
+    .border-top-#{$color-name} {
+        border-top: $color-value 1px solid;
+    }
+    .border-right-#{$color-name} {
+        border-right: $color-value 1px solid;
+    }
+    .border-bottom-#{$color-name} {
+        border-bottom: $color-value 1px solid;
+    }
+    .border-left-#{$color-name} {
+        border-left: $color-value 1px solid;
+    }
   .color-#{$color-name} {
     color: $color-value;
   }

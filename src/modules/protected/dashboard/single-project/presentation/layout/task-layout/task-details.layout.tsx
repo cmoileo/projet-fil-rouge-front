@@ -32,7 +32,7 @@ export const TaskDetailsLayout = (
                 </DrawerTrigger>
                 <DrawerContent className={"w-[100vw] pl-12 pr-12 h-[80vh]"}>
                     <DrawerHeader>
-                     <h2 className={"h2"}>{task.name}</h2>
+                     <h2 className={"h2 grey-100"}>{task.name}</h2>
                     </DrawerHeader>
                     <hr className={'w-full'}></hr>
                     <div className={"flex flex-col justify-between h-full overflow-hidden py-8"}>

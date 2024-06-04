@@ -6,3 +6,7 @@
 @import "./variables/spacings/figma";
 @import "./variables/spacings/setter";
 @import "./global.css";
+
+#root {
+  @extend .bg-grey-900;
+}

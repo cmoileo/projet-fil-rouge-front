@@ -136,15 +136,15 @@ export const NavItem: React.FC<NavItemProps> = (
                                 <p className={"grey-200"}>Delete folder</p>
                             </ContextMenuItem>
                         </AlertDialogTrigger>
-                        <AlertDialogContent className={"bg-grey900"}>
+                        <AlertDialogContent className={"bg-grey-900 border-grey-500"}>
                             <AlertDialogHeader>
-                                <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-                                <AlertDialogDescription>
+                                <AlertDialogTitle className={"grey-200"}>Are you absolutely sure?</AlertDialogTitle>
+                                <AlertDialogDescription className={"grey-300"}>
                                     This action will permanently delete the folder and all projects in it.
                                 </AlertDialogDescription>
                             </AlertDialogHeader>
                             <AlertDialogFooter>
-                                <AlertDialogCancel onClick={() => {
+                                <AlertDialogCancel className={"grey-400"} onClick={() => {
                                     setIsAltertDialogOpen(false)
                                 }}>
                                     Cancel

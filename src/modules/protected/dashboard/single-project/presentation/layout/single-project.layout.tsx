@@ -7,7 +7,7 @@ export const SingleProjectLayout = () => {
     return (
         <div className={"h-full overflow-y-hidden"}>
             <div>
-                <h2 className={"h3"}>{project?.name}</h2>
+                <h2 className={"h3 grey-200"}>{project?.name}</h2>
                 <hr className={"margin-300-top"}/>
             </div>
             <div className={"flex flex-col h-[60vh] justify-between margin-500-top"}>
