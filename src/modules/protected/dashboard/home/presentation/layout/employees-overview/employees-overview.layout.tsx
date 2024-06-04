@@ -11,7 +11,7 @@ export const EmployeesOverviewLayout = () => {
             <h2 className={"h4"}>Employees overview</h2>
             <div className={"grid grid-cols-3 gap-10 margin-500-top justify-items-center"}>
                 {
-                    employees?.map((employee) => (
+                    employees && employees?.map((employee) => (
                         <div className={"flex flex-col items-center gap-400 h-full"} key={employee.id}>
                             <div className={"flex flex-col justify-between items-center h-full w-full"}>
                                 {
