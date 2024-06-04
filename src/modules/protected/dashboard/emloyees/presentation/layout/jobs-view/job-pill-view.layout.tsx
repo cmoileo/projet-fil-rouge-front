@@ -35,12 +35,12 @@ export const JobPillViewLayout = (
               </div>
               {
                   isEdit ? (
-                      <CheckIcon onClick={handleValidateEdit} className={"cursor-pointer max-w-10"}></CheckIcon>
+                      <CheckIcon color={'lightgrey'} onClick={handleValidateEdit} className={"cursor-pointer max-w-10"}></CheckIcon>
                   ) : (
-                      <PenIcon onClick={handleEdit} className={"cursor-pointer max-w-10"}></PenIcon>
+                      <PenIcon color={'lightgrey'} onClick={handleEdit} className={"cursor-pointer max-w-10"}></PenIcon>
                   )
               }
-              <TrashIcon onClick={() => handleDelete(job.id)} className={"cursor-pointer"}></TrashIcon>
+              <TrashIcon color={'lightgrey'} onClick={() => handleDelete(job.id)} className={"cursor-pointer"}></TrashIcon>
           </div>
       </form>
   );

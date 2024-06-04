@@ -12,16 +12,16 @@ export const AccountLayout = () => {
                 <form onSubmit={handleSaveChanges} className={"margin-800-top"}>
                     <div className="flex gap-500">
                         <div className="w-full flex items-center gap-400">
-                            <label className={"p-s"}>Firstname</label>
+                            <label className={"p-s grey-300"}>Firstname</label>
                             <Input name={"firstname"} type={"text"} className={"h-fit"} defaultValue={account.firstname} />
                         </div>
                         <div className="w-full flex items-center gap-400">
-                            <label className={"p-s"}>Lastname</label>
+                            <label className={"p-s grey-300"}>Lastname</label>
                             <Input name={"lastname"} type={"text"} className={"h-fit"} defaultValue={account.lastname} />
                         </div>
                     </div>
                     <div className="flex items-center gap-400 margin-600-top">
-                        <label className={"p-s"}>Email</label>
+                        <label className={"p-s grey-300"}>Email</label>
                         <Input name={"email"} type={"email"} defaultValue={account.email} />
                     </div>
                     <div className="flex items-center gap-500 margin-600-top">
@@ -38,7 +38,7 @@ export const AccountLayout = () => {
                             </div>
                             <Input ref={imageInputRef} onChange={handleAvatarChange} accept={"image/png, image/jpg, image/jpeg"} name={"avatar"} type={"file"} className={"cursor-pointer absolute opacity-0 top-0 w-full h-full"} />
                         </div>
-                        <label className="p-s">Profile picture</label>
+                        <label className="p-s grey-300">Profile picture</label>
                     </div>
                     <MainButton className={"margin-800-top"}>Save changes</MainButton>
                 </form>

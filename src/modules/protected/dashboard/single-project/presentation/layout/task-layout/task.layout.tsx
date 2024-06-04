@@ -89,12 +89,12 @@ export const TaskLayout = (
     return (
         <>
             <form id={task.id} className={"flex items-center justify-between"}>
-                <Input defaultValue={task.name} onChange={handleChangeTaskName} className={"bg-transparent p-m w-fit"}/>
+                <Input defaultValue={task.name} onChange={handleChangeTaskName} className={"bg-grey-600 p-m w-fit grey-100"}/>
                 <EmployeesLayout isLink={isLink} handleAssignEmployeeToApi={handleAssignEmployeeToApi}
                                  selectedEmployees={selectedEmployees} setSelectedEmployees={setSelectedEmployees}/>
                 {
                     isLink ? (
-                        <p className={"p-s"}>{format(endDate, "P")}</p>
+                        <p className={"p-s grey-300"}>{format(endDate, "P")}</p>
                     ) : (
                         <>
                             <Popover open={isBeginOpen} onOpenChange={setIsBeginOpen}>
@@ -102,7 +102,7 @@ export const TaskLayout = (
                                 <MainButton
                                     variant={"outline"}
                                     className={cn(
-                                        "w-[280px] w-fit justify-start text-left font-normal p-xs",
+                                        "w-[280px] w-fit justify-start text-left font-normal bg-grey-600 border-grey-700 p-xs",
                                         !beginDate && "text-muted-foreground"
                                     )}
                                 >
@@ -129,7 +129,7 @@ export const TaskLayout = (
                                 <MainButton
                                     variant={"outline"}
                                     className={cn(
-                                        "w-[280px] w-fit justify-start text-left font-normal p-xs",
+                                        "w-[280px] w-fit justify-start text-left font-normal bg-grey-600 border-grey-700 p-xs",
                                         !endDate && "text-muted-foreground"
                                     )}
                                 >
@@ -162,10 +162,10 @@ export const TaskLayout = (
                 {
                     !isLink && <AlertDialog open={isDeleteOpen} onOpenChange={setIsDeleteOpen}>
                         <AlertDialogTrigger>
-                            <TrashIcon className={"w-6 h-6 cursor-pointer"}/>
+                            <TrashIcon color={'lightgrey'} className={"w-6 h-6 cursor-pointer"}/>
                         </AlertDialogTrigger>
                         <AlertDialogContent>
-                            <p className={"p-m"}>Are you sure you want to delete this task?</p>
+                            <p className={"p-m grey-200"}>Are you sure you want to delete this task?</p>
                             <div className="flex gap-4 justify-end">
                                 <MainButton onClick={() => setIsDeleteOpen(false)} variant="outline">Cancel</MainButton>
                                 <MainButton variant={"danger"} onClick={handleDeleteTask}>Delete</MainButton>
@@ -174,7 +174,7 @@ export const TaskLayout = (
                     </AlertDialog>
                 }
                 {
-                    isLink && <Link to={`/dashboard/project/${task.project_id}`}><LinkIcon className={"w-6 h-6 cursor-pointer"}/></Link>
+                    isLink && <Link to={`/dashboard/project/${task.project_id}`}><LinkIcon color={"lightgrey"} className={"w-6 h-6 cursor-pointer"}/></Link>
                 }
             </form>
         </>

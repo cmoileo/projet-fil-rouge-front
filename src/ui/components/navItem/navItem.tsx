@@ -1,7 +1,7 @@
-import React, {Ref} from 'react';
+import React, {ReactElement, Ref} from 'react';
 import { Link } from 'react-router-dom';
 import { cn } from '../../../services/shadcn/utils.ts';
-import {PlusIcon, ChevronDownIcon, TrashIcon, PenIcon, CheckIcon} from 'lucide-react';
+import {PlusIcon, ChevronDownIcon, TrashIcon, PenIcon, CheckIcon, LucideProps} from 'lucide-react';
 import {useNavitem} from "./navItem.viewModel.tsx"
 import {ProjectType} from "../../../types/project/projet.type.ts";
 import {FolderType} from "../../../types/folder/folder.type.ts";
@@ -34,7 +34,8 @@ interface NavItemProps {
     project?: ProjectType,
     folders?: FolderType[]
     setFolders?: React.Dispatch<React.SetStateAction<FolderType[]>>,
-    navbarRef?: React.RefObject<HTMLDivElement> | undefined
+    navbarRef?: React.RefObject<HTMLDivElement> | undefined,
+    icon?: ReactElement<LucideProps>;
 }
 
 export const NavItem: React.FC<NavItemProps> = (
@@ -47,10 +48,11 @@ export const NavItem: React.FC<NavItemProps> = (
         project,
         folders,
         setFolders,
-        navbarRef
+        navbarRef,
+        icon
     }) => {
-    const baseStyle = "select-none grow transition blue-1000 border-radius-100 padding-200-x cursor-pointer padding-100-y flex justify-between hover-bg-grey-200 items-center group";
-    const iconStyle = "text-200 transition hover-bg-grey-300 border-radius-200";
+    const baseStyle = "select-none grow transition blue-1000 border-radius-100 padding-200-x cursor-pointer padding-100-y flex justify-between hover-bg-grey-700 items-center group";
+    const iconStyle = "text-200 transition hover-bg-grey-700 border-radius-200";
     const chevronIconRef = React.useRef<HTMLDivElement>(null);
     const formRef = React.useRef<HTMLFormElement>(null);
     const plusIconRef = React.useRef<SVGSVGElement>(null);
@@ -63,8 +65,9 @@ export const NavItem: React.FC<NavItemProps> = (
 
     const linkElement = path ? (
         <div className={cn(baseStyle, className)}>
-            <Link ref={drag} to={path} className={"w-full"}>
-                <p className={"p-s"}>
+            <Link ref={drag} to={path} className={"w-full flex gap-300 items-start"}>
+                {icon}
+                <p className={"p-s grey-300"}>
                     {name}
                 </p>
             </Link>
@@ -72,17 +75,17 @@ export const NavItem: React.FC<NavItemProps> = (
                 project && (
                     <AlertDialog>
                         <AlertDialogTrigger>
-                            <TrashIcon className={"transition padding-100 border-radius-200 hover-bg-grey-300"}></TrashIcon>
+                            <TrashIcon color={"lightgrey"} className={"transition padding-100 border-radius-200 hover-bg-grey-700"}></TrashIcon>
                         </AlertDialogTrigger>
-                        <AlertDialogContent>
+                        <AlertDialogContent className={"bg-grey-800 border-grey-700"}>
                             <AlertDialogHeader>
-                                <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-                                <AlertDialogDescription>
+                                <AlertDialogTitle className={"grey-200"}>Are you absolutely sure?</AlertDialogTitle>
+                                <AlertDialogDescription className={"grey-300"}>
                                     This action will permanently delete the project.
                                 </AlertDialogDescription>
                             </AlertDialogHeader>
                             <AlertDialogFooter>
-                                <AlertDialogCancel>
+                                <AlertDialogCancel className={"grey-400"}>
                                     Cancel
                                 </AlertDialogCancel>
                                 <AlertDialogAction asChild onClick={() => {
@@ -104,7 +107,7 @@ export const NavItem: React.FC<NavItemProps> = (
                         {
                             !isEditFolderName && isChevron && (
                                 <div ref={chevronIconRef} onClick={chevronClickHandler} className={iconStyle}>
-                                    <ChevronDownIcon className={"transition -rotate-90"}/>
+                                    <ChevronDownIcon color={"lightgrey"} className={"transition -rotate-90"}/>
                                 </div>
                             )
                         }
@@ -113,35 +116,35 @@ export const NavItem: React.FC<NavItemProps> = (
                                 <form onSubmit={(e) => handleEditFolderName(e, id)} className={"flex gap-300"}>
                                 <Input ref={editFolderInputRef} className={"w-2/3"} name={"folderTitle"} onClick={(e) => e.preventDefault()} type={"text"} placeholder={"Enter the folder name"} required/>
                                     <MainButton className={"w-fit h-fit padding-100"} type={"submit"}>
-                                        <CheckIcon></CheckIcon>
+                                        <CheckIcon color={"lightgrey"}></CheckIcon>
                                     </MainButton>
                                 </form>
                             ) : (
-                                <p className={"p-m"}>{name}</p>
+                                <p className={"p-m grey-300"}>{name}</p>
                             )
                         }
                     </div>
                 </ContextMenuTrigger>
-                <ContextMenuContent>
+                <ContextMenuContent className={"bg-grey-900 border-grey-500"}>
                     <AlertDialog open={isAltertDialogOpen}>
                         <AlertDialogTrigger className={"w-full"}>
                             <ContextMenuItem onClick={(e) => {
                                 e.preventDefault();
                                 setIsAltertDialogOpen(true);
                             }}  className={"justify-between w-full gap-400"}>
-                                <TrashIcon strokeWidth={1}></TrashIcon>
-                                Delete folder
+                                <TrashIcon color={"lightgrey"} strokeWidth={1}></TrashIcon>
+                                <p className={"grey-200"}>Delete folder</p>
                             </ContextMenuItem>
                         </AlertDialogTrigger>
-                        <AlertDialogContent>
+                        <AlertDialogContent className={"bg-grey-900 border-grey-500"}>
                             <AlertDialogHeader>
-                                <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-                                <AlertDialogDescription>
+                                <AlertDialogTitle className={"grey-200"}>Are you absolutely sure?</AlertDialogTitle>
+                                <AlertDialogDescription className={"grey-300"}>
                                     This action will permanently delete the folder and all projects in it.
                                 </AlertDialogDescription>
                             </AlertDialogHeader>
                             <AlertDialogFooter>
-                                <AlertDialogCancel onClick={() => {
+                                <AlertDialogCancel className={"grey-400"} onClick={() => {
                                     setIsAltertDialogOpen(false)
                                 }}>
                                     Cancel
@@ -156,9 +159,9 @@ export const NavItem: React.FC<NavItemProps> = (
                         </AlertDialogContent>
                     </AlertDialog>
                     <ContextMenuSub>
-                        <ContextMenuSubTrigger>
-                            <PlusIcon strokeWidth={1}></PlusIcon>
-                            Create subfolder
+                        <ContextMenuSubTrigger className={"bg-grey-700"}>
+                            <PlusIcon color={"lightgrey"} strokeWidth={1}></PlusIcon>
+                            <p className={"grey-200"}>Create subfolder</p>
                         </ContextMenuSubTrigger>
                         <ContextMenuSubContent asChild>
                             <ContextMenuItem onKeyDown={(e) => {
@@ -167,7 +170,7 @@ export const NavItem: React.FC<NavItemProps> = (
                                     createFolderButtonRef.current?.click();
                                 }
                             }} asChild>
-                                <form onSubmit={(e) => handleCreateFolder(e, id)} className={"flex flex-col gap-300"}>
+                                <form onSubmit={(e) => handleCreateFolder(e, id)} className={"flex flex-col bg-grey-900 gap-300"}>
                                     <Input name={"folderTitle"} onClick={(e) => e.preventDefault()} type={"text"} placeholder={"Enter the folder name"} required/>
                                     <MainButton ref={createFolderButtonRef} className={"w-full"} type={"submit"}>Create folder</MainButton>
                                 </form>
@@ -180,20 +183,20 @@ export const NavItem: React.FC<NavItemProps> = (
                             editFolderInputRef?.current?.focus();
                         }, 10)
                     }} className={"justify-between gap-400"}>
-                        <PenIcon strokeWidth={1} width={24}></PenIcon>
-                        Edit folder name
+                        <PenIcon color={"lightgrey"} strokeWidth={1} width={24}></PenIcon>
+                        <p className={'grey-200'}>Edit folder name</p>
                     </ContextMenuItem>
                 </ContextMenuContent>
                 <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
                     <PopoverTrigger>
-                        {isPlusIcon && !isEditFolderName && <PlusIcon ref={plusIconRef} onClick={handleOpenForm}
-                                                 className="group-hover:block text-200 transition hover-bg-grey-300 border-radius-200"/>}
+                        {isPlusIcon && !isEditFolderName && <PlusIcon color={"lightgrey"} ref={plusIconRef} onClick={handleOpenForm}
+                                                 className="group-hover:block text-200 transition hover-bg-grey-800 border-radius-200"/>}
                     </PopoverTrigger>
-                    <PopoverContent className={'p-0'}>
+                    <PopoverContent className={'p-0 bg-grey-600 border-none'}>
                         <form onSubmit={submitForm} id={id} ref={formRef}
-                              className={"z-10 shadow-[rgba(0,_0,_0,_0.25)_0px_0px_50px_0px] flex flex-col gap-700 padding-500 border-radius-300 bg-white"}
+                              className={"z-10 shadow-[rgba(0,_0,_0,_0.25)_0px_0px_50px_0px] flex flex-col gap-700 padding-500 border-radius-300 border-grey-700"}
                               action="submit">
-                            <Input name={"projectTitle"} type={"text"} placeholder={"Enter the project name"}
+                            <Input name={"projectTitle"} type={"text"} className={'grey-200'} placeholder={"Enter the project name"}
                                    required/>
                             <MainButton className={"w-full"} type={"submit"}>Create project</MainButton>
                         </form>
