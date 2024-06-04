@@ -6,10 +6,12 @@ export const SingleProjectLayout = () => {
     const {project, setProject, fetchProject} = useSingleProject();
     return (
         <div className={"h-full overflow-y-hidden"}>
-            <h2 className={"h3"}>{project?.name}</h2>
-            <hr className={"margin-300-top"}/>
-            <div className={"flex flex-col h-[85%] justify-between margin-500-top"}>
-                <div className={"flex flex-col gap-800 overflow-y-auto"}>
+            <div>
+                <h2 className={"h3"}>{project?.name}</h2>
+                <hr className={"margin-300-top"}/>
+            </div>
+            <div className={"flex flex-col h-[60vh] justify-between margin-500-top"}>
+            <div className={"flex flex-col gap-800 h-full overflow-y-auto"}>
                     {
                         project && project.tasks && project.tasks.map((task) => (
                             <TaskLayout fetchProject={fetchProject} key={task.id} task={task}/>
