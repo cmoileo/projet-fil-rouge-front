@@ -1,5 +1,6 @@
 import {cookieManager} from "../../services/coockies/CoockieManager.service.ts";
 import {ApiUrl} from "../../const/ApiUrl.ts";
+import {toast} from "react-toastify";
 
 export const createFolderData = async (folderName: string, parentFolderId: string | null): Promise<void> => {
     try {
@@ -15,7 +16,9 @@ export const createFolderData = async (folderName: string, parentFolderId: strin
             },
             body: JSON.stringify(data)
         });
+        toast("✅ Folder created successfully")
     } catch (error) {
+        toast("❌ An error occurred while creating the folder")
         console.log(error)
     }
 }

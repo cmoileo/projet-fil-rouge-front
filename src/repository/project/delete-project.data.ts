@@ -1,5 +1,6 @@
 import {ApiUrl} from "../../const/ApiUrl.ts";
 import {cookieManager} from "../../services/coockies/CoockieManager.service.ts";
+import {toast} from "react-toastify";
 
 export const deleteProjectData = async (projectId: string): Promise<void> => {
     try {
@@ -10,6 +11,7 @@ export const deleteProjectData = async (projectId: string): Promise<void> => {
                 "Authorization": "Bearer " + cookieManager.getCookie("token")
             },
         });
+        toast("✅ Project deleted successfully")
     } catch (error) {
         console.log(error)
     }

@@ -4,8 +4,8 @@ import {EmployeesOverviewLayout} from "./layout/employees-overview/employees-ove
 export const HomePage = () => {
     return (
         <div className={'flex justify-between'}>
-            <MostUrgentTasksLayout />
-            <EmployeesOverviewLayout />
+            <MostUrgentTasksLayout/>
+            <EmployeesOverviewLayout/>
         </div>
-    );
+    )
 }
