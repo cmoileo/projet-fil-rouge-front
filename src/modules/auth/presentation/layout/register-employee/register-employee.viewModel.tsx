@@ -22,10 +22,11 @@ export const useRegisterEmployee = () => {
             avatar: target.avatar.files[0] ? await toBase64(target.avatar.files[0]) as string : null,
         }
 
-        const registeredEmployee: {token: string; role: string} | boolean = await registerEmployeeData(data, params)
+        const registeredEmployee: {token: string; role: string; userId: string} | boolean = await registerEmployeeData(data, params)
         if (registeredEmployee) {
             cookieManager.setCookie(registeredEmployee.token, "token", 30)
             cookieManager.setCookie(registeredEmployee.role, "role", 30)
+            cookieManager.setCookie(registeredEmployee.userId, "userId", 30)
             navigate('/dashboard')
         }
     }

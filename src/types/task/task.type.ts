@@ -16,4 +16,5 @@ export type TaskType = {
     task_state_id?: string;
     assigned_users_id?: string[];
     task_users?: EmployeeDto[];
+    comments?: any[];
 };

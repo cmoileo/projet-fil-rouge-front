@@ -41,6 +41,7 @@ export const ApiUrl = {
         Create: BaseUrl + '/tasks/create',
         Update: BaseUrl + '/tasks/update',
         Delete: BaseUrl + '/tasks/delete',
+        GetMostUrgent: BaseUrl + '/tasks/get-most-urgent',
     },
     TaskCategory: {
         Get: BaseUrl + '/task-categories',
@@ -49,4 +50,10 @@ export const ApiUrl = {
         Delete: BaseUrl + '/task-categories',
         Assign: BaseUrl + '/task-categories/assign'
     },
+    Comments: {
+        Get: BaseUrl + '/comments/get',
+        Create: BaseUrl + '/tasks/add-comment',
+        Update: BaseUrl + '/comments/update',
+        Delete: BaseUrl + '/comments/delete',
+    }
 }

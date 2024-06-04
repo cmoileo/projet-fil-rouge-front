@@ -10,11 +10,13 @@ export const EmployeesLayout = (
     {
         selectedEmployees,
         setSelectedEmployees,
-        handleAssignEmployeeToApi
+        handleAssignEmployeeToApi,
+        isLink
     }: {
         selectedEmployees: EmployeeDto[],
         setSelectedEmployees: React.Dispatch<EmployeeDto[]>,
-        handleAssignEmployeeToApi?: (updatedEmployees: EmployeeDto[]) => void
+        handleAssignEmployeeToApi?: (updatedEmployees: EmployeeDto[]) => void,
+        isLink?: boolean
     }
 ) => {
     const {employees} = useContext(DashboardContext)
@@ -64,11 +66,13 @@ export const EmployeesLayout = (
                             )
                         }
                     </div>
-                    <MainButton type={"button"}>
-                        {
-                            selectedEmployees.length > 0 ? <PlusIcon></PlusIcon> : "Select Employees"
-                        }
-                    </MainButton>
+                    {
+                        !isLink && <MainButton type={"button"}>
+                            {
+                                selectedEmployees.length > 0 ? <PlusIcon></PlusIcon> : "Select Employees"
+                            }
+                        </MainButton>
+                    }
                 </div>
             </PopoverTrigger>
             <PopoverContent>

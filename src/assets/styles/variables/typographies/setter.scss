@@ -25,7 +25,7 @@
 .p-m {
     @include text-style-paragraphs-paragraph-m();
 }
-.p-s {
+.p-s, textarea::placeholder {
     @include text-style-paragraphs-paragraph-s();
 }
 .p-xs {

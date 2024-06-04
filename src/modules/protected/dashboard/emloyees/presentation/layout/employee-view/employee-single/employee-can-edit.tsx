@@ -18,7 +18,6 @@ export const EmployeeCanEdit = ({employee}: { employee: EmployeeDto }) => {
     return (
         <div className={"flex flex-col gap-400"}>
             <Select onValueChange={(value: RolesEnum) => {
-                console.log(value, employee.id)
                 editEmployeeRole(
                     value,
                     employee.id

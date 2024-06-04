@@ -23,7 +23,7 @@ export const useSingleProject = () => {
         }
 
         fetchProject();
-    }, []);
+    }, [id]);
 
 
     return {

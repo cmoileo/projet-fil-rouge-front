@@ -2,7 +2,7 @@ import {ApiUrl} from "../../const/ApiUrl.ts";
 import {cookieManager} from "../../services/coockies/CoockieManager.service.ts";
 import {RegisterEmployeeDto} from "../../modules/auth/domain/dto/RegisterEmployee.dto.ts";
 
-export const registerEmployeeData = async (data: RegisterEmployeeDto, id: string): Promise<{token: string; role: string} | false> => {
+export const registerEmployeeData = async (data: RegisterEmployeeDto, id: string): Promise<{token: string; role: string; userId: string} | false> => {
     try {
         const res = await fetch(`${ApiUrl.Auth.RegisterEmployee}/${id}`, {
             method: 'POST',
