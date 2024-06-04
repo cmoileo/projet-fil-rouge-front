@@ -22,7 +22,7 @@ export const EmployeesOverviewLayout = () => {
                                         <div className={"w-28 h-28 bg-gray-500 rounded-full"}/>
                                     )
                                 }
-                                <p className={"p-m text-center"}>{employee.firstname}</p>
+                                <p className={"p-m grey-300 text-center"}>{employee.firstname}</p>
                             </div>
                                 <div className={"w-full h-2 border-radius-full bg-grey-200 relative"}>
                                     <div style={{width: getEmployeeOccupationPtUseCase(employee) + "%"}} className={"h-full absolute left-0 bg-green-300 rounded-full"}>

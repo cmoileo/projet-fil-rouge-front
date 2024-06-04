@@ -7,7 +7,7 @@ export const EmployeeCantEdit = ({employee}: { employee: EmployeeDto }) => {
     const jobColor = jobs.find(job => job.name === employee.job?.name)?.color || "white";
     return (
         <div className={"flex flex-col gap-300 w-full"}>
-            <p className={"p-m text-center"}>{employee.role}</p>
+            <p className={"p-m grey-200 text-center"}>{employee.role}</p>
             <p style={{backgroundColor: jobColor}} className="p-s text-center border-radius-1000 w-full white">
                 {employee.job?.name}
             </p>
