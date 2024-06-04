@@ -1,5 +1,6 @@
 import {ApiUrl} from "../../const/ApiUrl.ts";
 import {cookieManager} from "../../services/coockies/CoockieManager.service.ts";
+import {toast} from "react-toastify";
 
 export const editJobData = async (id: string, name: string, color: string) => {
     try {
@@ -15,7 +16,9 @@ export const editJobData = async (id: string, name: string, color: string) => {
                 color: color
             })
         });
+        toast('✅ Job updated successfully')
     } catch (error) {
+        toast('❌ An error occurred while updating the job')
         console.error(error);
     }
 }

@@ -1,5 +1,6 @@
 import {ApiUrl} from "../../const/ApiUrl.ts";
 import {cookieManager} from "../../services/coockies/CoockieManager.service.ts";
+import {toast} from "react-toastify";
 
 export const deleteJobData = async (id: string): Promise<void> => {
     try {
@@ -10,7 +11,9 @@ export const deleteJobData = async (id: string): Promise<void> => {
                 'Authorization': `Bearer ${cookieManager.getCookie("token")}`
             }
         })
+        toast('✅ Job deleted successfully')
     } catch (error) {
+        toast('❌ An error occurred while deleting the job')
         console.log(error)
     }
 }

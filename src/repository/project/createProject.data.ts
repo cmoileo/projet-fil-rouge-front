@@ -1,6 +1,7 @@
 import {ProjectType} from "../../types/project/projet.type.ts";
 import {ApiUrl} from "../../const/ApiUrl.ts";
 import {cookieManager} from "../../services/coockies/CoockieManager.service.ts";
+import {toast} from "react-toastify";
 
 export const createProject = async (data: ProjectType) => {
     try {
@@ -13,6 +14,7 @@ export const createProject = async (data: ProjectType) => {
             body: JSON.stringify(data)
         });
         const json = await res.json();
+        toast("✅ Project created successfully")
         return json;
     } catch (error) {
         console.error("Error creating project:", error);

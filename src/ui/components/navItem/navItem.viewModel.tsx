@@ -198,9 +198,9 @@ export const useNavitem = (
 
     const findSubfolders = (folderId: string): FolderType | undefined | void => {
         if (!folders) return;
-        storeSubfolders(folders[0])
+        folders.map((folder) => storeSubfolders(folder))
         const subfolder = subfolders.find(subfolder => subfolder.id === folderId);
-        if (!subfolder) return console.error("Subfolder not found");
+        if (!subfolder) return
         subfolders = []
         return subfolder;
     }

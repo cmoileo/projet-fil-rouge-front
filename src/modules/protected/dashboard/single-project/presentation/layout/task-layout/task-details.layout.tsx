@@ -70,7 +70,7 @@ export const TaskDetailsLayout = (
                                                     <div className={"w-10 h-10 rounded-full bg-gray-200"}></div>
                                                 )
                                             }
-                                            <p className={"p-s w-full bg-green-100 border-radius-400 padding-300"}>{comment.content}</p>
+                                            <p className={"p-s w-full bg-green-300 border-radius-400 padding-300"}>{comment.content}</p>
                                         </div>
                                         <p className={"p-xs w-fit"}>{new Date("2024-06-01T12:52:27.442Z").toLocaleString("fr-FR", {
                                             day: "2-digit",

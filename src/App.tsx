@@ -10,6 +10,8 @@ import {AccountPage} from "./modules/protected/dashboard/account/presentation/pa
 import {ProjectsPage} from "./modules/protected/dashboard/projects/presentation/page/Page.tsx";
 import {SingleProjectPage} from "./modules/protected/dashboard/single-project/presentation/page/Page.tsx";
 import {HomePage} from "./modules/protected/dashboard/home/presentation/Page.tsx";
+import {Bounce, ToastContainer} from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
     const router = createBrowserRouter([
@@ -64,6 +66,20 @@ function App() {
     return (
         <>
             <RouterProvider router={router} />
+            <ToastContainer
+                position="bottom-left"
+                autoClose={3000}
+                hideProgressBar={true}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+                transition={Bounce}
+                progressStyle={{backgroundColor: 'green'}}
+            />
         </>
     );
 }
