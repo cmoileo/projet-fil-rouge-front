@@ -1,9 +1,11 @@
-import {useContext} from "react";
+import {useContext, useEffect} from "react";
 import {DashboardContext} from "../../../../../../../contexts/dashboard.context.tsx";
 import {getEmployeeOccupationPtUseCase} from "../../../domain/use-case/get-employee-occupation-pt.useCase.ts";
 export const EmployeesOverviewLayout = () => {
-    const { employees } = useContext(DashboardContext);
-    console.log(employees)
+    const { employees, fetchEmployee } = useContext(DashboardContext);
+    useEffect(() => {
+        fetchEmployee();
+    }, []);
     return (
         <div className={"w-[43%] sticky top-4 h-fit"}>
             <h2 className={"h4"}>Employees overview</h2>

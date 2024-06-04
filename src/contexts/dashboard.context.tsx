@@ -21,6 +21,7 @@ export const DashboardContext =
         setTaskCategories: React.Dispatch<React.SetStateAction<TaskCategoryType[] | null>>;
         employees: EmployeeDto[] | null
         setEmployees: React.Dispatch<React.SetStateAction<EmployeeDto[] | null>>;
+        fetchEmployee: () => Promise<void>
     }>(
         {
             jobs: [],
@@ -32,7 +33,8 @@ export const DashboardContext =
             taskCategories: null,
             setTaskCategories: () => {},
             employees: null,
-            setEmployees: () => {}
+            setEmployees: () => {},
+            fetchEmployee: async () => {}
         });
 
 export const DashboardProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -41,6 +43,12 @@ export const DashboardProvider: React.FC<{ children: React.ReactNode }> = ({ chi
     const [projects, setProjects] = useState<ProjectType[] | null>(null);
     const [taskCategories, setTaskCategories] = useState<TaskCategoryType[] | null>(null);
     const [employees, setEmployees] = useState<EmployeeDto[] | null>(null);
+
+    const fetchEmployee = async () => {
+        const employees: EmployeeDto[] | null = await getEmployeeData();
+        if (!employees) return;
+        setEmployees(employees);
+    }
 
     useEffect(() => {
         const getAccount = async(): Promise<void> => {
@@ -73,7 +81,7 @@ export const DashboardProvider: React.FC<{ children: React.ReactNode }> = ({ chi
     }, []);
 
     return (
-        <DashboardContext.Provider value={{ jobs, setJobs, account, setAccount, projects, setProjects, taskCategories, setTaskCategories, employees, setEmployees }}>
+        <DashboardContext.Provider value={{ fetchEmployee, jobs, setJobs, account, setAccount, projects, setProjects, taskCategories, setTaskCategories, employees, setEmployees }}>
             {children}
         </DashboardContext.Provider>
     );
