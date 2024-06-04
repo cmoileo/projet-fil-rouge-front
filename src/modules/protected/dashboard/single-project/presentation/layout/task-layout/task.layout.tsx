@@ -92,62 +92,68 @@ export const TaskLayout = (
                 <Input defaultValue={task.name} onChange={handleChangeTaskName} className={"bg-transparent p-m w-fit"}/>
                 <EmployeesLayout isLink={isLink} handleAssignEmployeeToApi={handleAssignEmployeeToApi}
                                  selectedEmployees={selectedEmployees} setSelectedEmployees={setSelectedEmployees}/>
-                <Popover open={isBeginOpen} onOpenChange={setIsBeginOpen}>
-                    <PopoverTrigger asChild>
-                        <MainButton
-                            variant={"outline"}
-                            className={cn(
-                                "w-[280px] w-fit justify-start text-left font-normal p-xs",
-                                !beginDate && "text-muted-foreground"
-                            )}
-                        >
-                            <CalendarIcon className="mr-2 h-4 w-4"/>
-                            {beginDate ? format(beginDate, "P") : <span>Pick a beginning date</span>}
-                        </MainButton>
-                    </PopoverTrigger>
-                    <PopoverContent className="w-fit p-0">
-                        <Calendar
-                            className={"w-fit"}
-                            mode="single"
-                            selected={beginDate}
-                            onSelect={(value) => {
-                                if (value) {
-                                    setBeginDate(value);
-                                    handleEditStartingDate(value);
-                                }
-                            }}
-                            initialFocus
-                            onDayClick={() => setIsBeginOpen(false)}/>
-                    </PopoverContent>
-                </Popover>
-
-                <Popover open={isEndOpen} onOpenChange={setIsEndOpen}>
-                    <PopoverTrigger asChild>
-                        <MainButton
-                            variant={"outline"}
-                            className={cn(
-                                "w-[280px] w-fit justify-start text-left font-normal p-xs",
-                                !endDate && "text-muted-foreground"
-                            )}
-                        >
-                            <CalendarIcon className="mr-2 h-4 w-4"/>
-                            {endDate ? format(endDate, "P") : <span>Pick an ending date</span>}
-                        </MainButton>
-                    </PopoverTrigger>
-                    <PopoverContent className="w-auto p-0">
-                        <Calendar
-                            mode="single"
-                            selected={endDate}
-                            onSelect={(value) => {
-                                if (value) {
-                                    setEndDate(value);
-                                    handleEditEndDate(value);
-                                }
-                            }}
-                            initialFocus
-                            onDayClick={() => setIsEndOpen(false)}/>
-                    </PopoverContent>
-                </Popover>
+                {
+                    isLink ? (
+                        <p className={"p-s"}>{format(endDate, "P")}</p>
+                    ) : (
+                        <>
+                            <Popover open={isBeginOpen} onOpenChange={setIsBeginOpen}>
+                            <PopoverTrigger asChild>
+                                <MainButton
+                                    variant={"outline"}
+                                    className={cn(
+                                        "w-[280px] w-fit justify-start text-left font-normal p-xs",
+                                        !beginDate && "text-muted-foreground"
+                                    )}
+                                >
+                                    <CalendarIcon className="mr-2 h-4 w-4"/>
+                                    {beginDate ? format(beginDate, "P") : <span>Pick a beginning date</span>}
+                                </MainButton>
+                            </PopoverTrigger>
+                            <PopoverContent className="w-fit p-0">
+                                <Calendar
+                                    className={"w-fit"}
+                                    mode="single"
+                                    selected={beginDate}
+                                    onSelect={(value) => {
+                                        if (value) {
+                                            setBeginDate(value);
+                                            handleEditStartingDate(value);
+                                        }
+                                    }}
+                                    initialFocus
+                                    onDayClick={() => setIsBeginOpen(false)}/>
+                            </PopoverContent>
+                        </Popover><Popover open={isEndOpen} onOpenChange={setIsEndOpen}>
+                            <PopoverTrigger asChild>
+                                <MainButton
+                                    variant={"outline"}
+                                    className={cn(
+                                        "w-[280px] w-fit justify-start text-left font-normal p-xs",
+                                        !endDate && "text-muted-foreground"
+                                    )}
+                                >
+                                    <CalendarIcon className="mr-2 h-4 w-4"/>
+                                    {endDate ? format(endDate, "P") : <span>Pick an ending date</span>}
+                                </MainButton>
+                            </PopoverTrigger>
+                            <PopoverContent className="w-auto p-0">
+                                <Calendar
+                                    mode="single"
+                                    selected={endDate}
+                                    onSelect={(value) => {
+                                        if (value) {
+                                            setEndDate(value);
+                                            handleEditEndDate(value);
+                                        }
+                                    }}
+                                    initialFocus
+                                    onDayClick={() => setIsEndOpen(false)}/>
+                            </PopoverContent>
+                        </Popover>
+                        </>
+                    )
+                }
                 {
                     !isLink && <TaskPercentageLayout defaultValue={task.progress_percentage || 0} taskId={task.id}/>
                 }
