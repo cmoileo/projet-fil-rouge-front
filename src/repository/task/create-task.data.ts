@@ -1,6 +1,7 @@
 import {TaskType} from "../../types/task/task.type.ts";
 import {ApiUrl} from "../../const/ApiUrl.ts";
 import {cookieManager} from "../../services/coockies/CoockieManager.service.ts";
+import {toast} from "react-toastify";
 
 export const createTaskData = async (data: TaskType) => {
     try {
@@ -12,7 +13,9 @@ export const createTaskData = async (data: TaskType) => {
             },
             body: JSON.stringify(data),
         })
+        toast('✅ Task created successfully')
     } catch (error) {
+        toast('❌ An error occurred while creating the task')
         console.log(error);
     }
 }
