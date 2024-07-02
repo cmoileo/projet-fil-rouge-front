@@ -8,7 +8,6 @@ export type SignUpDto = {
     city: string;
     zip_code: number;
     country: string;
-    plan: 'freemium' | 'pro' | 'business';
     firstname: string;
     lastname: string;
 }

@@ -18,7 +18,6 @@ export const useSignUpViewModel = () => {
             city: form.city.value,
             zip_code: Number(form.zip_code.value),
             country: form.country.value,
-            plan: form.plan.value,
             firstname: form.firstname.value,
             lastname: form.lastname.value,
         }

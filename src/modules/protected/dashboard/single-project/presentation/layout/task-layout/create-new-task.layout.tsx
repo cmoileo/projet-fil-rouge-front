@@ -36,8 +36,8 @@ export const CreateNewTaskLayout = (
     const {handleCreateTask, formRef} = useCreateNewTask({beginDate, endDate, selectedEmployees, categoryId, taskNameRef, setProject, projectId, setCategoryId, setSelectedEmployees})
 
     return (
-        <form ref={formRef} className={'absolute bottom-8 flex flex-col gap-500'} onSubmit={handleCreateTask}>
-            <div className={"flex gap-400"}>
+        <form ref={formRef} className={'absolute bottom-8 flex w-[75%] flex-col gap-500'} onSubmit={handleCreateTask}>
+            <div className={"flex gap-400 justify-between"}>
                 <Input ref={taskNameRef} className={"w-fit grey-200"} required type={"text"} placeholder={"Task name"}></Input>
                 <Popover open={isBeginOpen} onOpenChange={setIsBeginOpen}>
                     <PopoverTrigger asChild>
