@@ -5,7 +5,8 @@ import {toast} from "react-toastify";
 
 export const updateTaskData = async (task: TaskType, id: string) => {
     try {
-        const res = await fetch(ApiUrl.Task.Update + "/" + id, {
+        console.log(task)
+        await fetch(ApiUrl.Task.Update + "/" + id, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
@@ -14,7 +15,6 @@ export const updateTaskData = async (task: TaskType, id: string) => {
             body: JSON.stringify(task),
         })
         toast('✅ Task updated successfully')
-        return await res.json();
     } catch (error) {
         toast('❌ An error occurred while updating the task')
         console.error(error)

@@ -29,7 +29,7 @@ export const TaskCategoryLayout = (
     return (
         <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
             <DropdownMenuTrigger asChild>
-                <MainButton style={{backgroundColor: categoryId && taskCategories?.find((taskCategory) => categoryId == taskCategory?.id)?.name ? taskCategories?.find((taskCategory) => categoryId == taskCategory?.id)?.color : ""}} className={"border-radius-full white bg-grey-200 color-grey-1000 hover:bg-gray-400 p-xs"}>
+                <MainButton style={{backgroundColor: categoryId && taskCategories?.find((taskCategory) => categoryId == taskCategory?.id)?.name ? taskCategories?.find((taskCategory) => categoryId == taskCategory?.id)?.color : ""}} className={"border-radius-full white bg-grey-200 color-grey-1000 hover:bg-gray-800 p-xs"}>
                     {categoryId && taskCategories?.find((taskCategory) => categoryId == taskCategory?.id)?.name ? taskCategories?.find((taskCategory) => categoryId == taskCategory?.id)?.name : "Category"}
                 </MainButton>
             </DropdownMenuTrigger>
@@ -37,7 +37,7 @@ export const TaskCategoryLayout = (
                 <div className="margin-300-bottom flex flex-col gap-300">
                     {
                         taskCategories && taskCategories.map((taskCategory) => (
-                            <DropdownMenuItem className={"p-0 gap-200"} key={taskCategory.id}>
+                            <DropdownMenuItem className={"p-0 hover:bg-grey-800 gap-200"} key={taskCategory.id}>
                                 <Badge onClick={() => handleAssignTaskCategory(taskCategory.id)} className={"w-full padding-200-y cursor-pointer"} style={{backgroundColor: taskCategory.color}}>{taskCategory.name}</Badge>
                                 <TrashIcon color={"lightgrey"} className={"cursor-pointer"} onClick={(e) => {
                                     e.preventDefault()

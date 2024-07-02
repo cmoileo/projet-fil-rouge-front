@@ -12,7 +12,9 @@ export const updateTaskCategoryData = async (body: TaskCategoryType) => {
             },
             body: JSON.stringify(body),
         });
-        return await res.json();
+        const data = await res.json();
+        console.log(data)
+        return data;
     } catch (error) {
         console.error(error)
     }
