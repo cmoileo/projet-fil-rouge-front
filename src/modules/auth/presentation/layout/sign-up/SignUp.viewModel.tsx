@@ -1,34 +1,139 @@
-import {FormEvent} from "react";
-import {SignUpDto} from "../../../domain/dto/Signup.dto.ts";
+import {FormEvent, useEffect, useRef, useState} from "react";
 import {useNavigate} from "react-router-dom";
+import {SignUpDto} from "../../../domain/dto/Signup.dto.ts";
 import {handleSignup} from "../../../domain/use-case/handleSignup.usecase.ts";
 
 export const useSignUpViewModel = () => {
     const navigate = useNavigate()
-    const handleSubmitForm = async (e: FormEvent) => {
-        e.preventDefault()
-        const form = e.target as HTMLFormElement
-        const data: SignUpDto = {
-            email: form.email.value,
-            name: form.agencyName.value,
-            password: form.password.value,
-            passwordConfirm: form.passwordConfirm.value,
-            house_number: Number(form.house_number.value),
-            street: form.street.value,
-            city: form.city.value,
-            zip_code: Number(form.zip_code.value),
-            country: form.country.value,
-            firstname: form.firstname.value,
-            lastname: form.lastname.value,
+    const [step, setStep] = useState(0)
+    const [errorMessage, setErrorMessage] = useState('')
+
+    const [email, setEmail] = useState('');
+    const [firstname, setFirstname] = useState('');
+    const [lastname, setLastname] = useState('');
+    const [password, setPassword] = useState('')
+    const [passwordConfirm, setPasswordConfirm] = useState('')
+    const [houseNumber, setHouseNumber] = useState('');
+    const [street, setStreet] = useState('');
+    const [city, setCity] = useState('');
+    const [zipCode, setZipCode] = useState('');
+    const [country, setCountry] = useState('');
+    const [agencyName, setAgencyName] = useState('');
+
+    const emailRef = useRef<HTMLInputElement>(null);
+    const firstnameRef = useRef<HTMLInputElement>(null);
+    const lastnameRef = useRef<HTMLInputElement>(null);
+    const passwordRef = useRef<HTMLInputElement>(null);
+    const passwordConfirmRef = useRef<HTMLInputElement>(null);
+
+    const handleGoesForward = () => {
+        if (password !== passwordConfirm) {
+            setErrorMessage('Passwords must match !');
+            return;
         }
-        const submitedForm = await handleSignup(data)
-        if (!submitedForm) {
-            return console.error('Form not submited')
+        if (
+            !email ||
+            !firstname ||
+            !lastname ||
+            !password ||
+            !passwordConfirm
+        ) {
+            setErrorMessage('Please fill all fields !');
+            return;
         }
-        navigate('/dashboard')
+        setErrorMessage('');
+        setStep(step + 1);
+    };
+
+    useEffect(() => {
+        handleFillPassword();
+    }, [password, passwordConfirm]);
+    const handleFillPassword = () => {
+        if (!password.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W).*$/)) {
+            setErrorMessage('Password must contain at least one uppercase letter, one lowercase letter, one number and one special character.')
+            return;
+        } else if ((!password || !passwordConfirm) || password !== passwordConfirm) {
+            setErrorMessage('Passwords must match !')
+            return;
+        } else {
+            setErrorMessage('')
+        }
     }
 
+    const handleKeyDown = (e: React.KeyboardEvent) => {
+        if (step == 1) return;
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            handleGoesForward();
+        }
+    };
+
+    const handleSubmitForm = async (e: FormEvent) => {
+        e.preventDefault();
+        console.log('submitting form');
+        if (
+            !houseNumber ||
+            !street ||
+            !city ||
+            !zipCode ||
+            !country ||
+            !agencyName
+        ) {
+            return setErrorMessage('Please fill all fields !');
+        }
+        const data: SignUpDto = {
+            email,
+            name: agencyName,
+            password,
+            passwordConfirm,
+            house_number: Number(houseNumber),
+            street,
+            city,
+            zip_code: Number(zipCode),
+            country,
+            firstname,
+            lastname,
+        };
+        const submitedForm = await handleSignup(data);
+        if (!submitedForm) {
+            return console.error('Form not submitted');
+        }
+        navigate('/dashboard');
+    };
+
     return {
-        handleSubmitForm
-    }
-}
+        handleSubmitForm,
+        step,
+        setStep,
+        handleGoesForward,
+        emailRef,
+        firstnameRef,
+        lastnameRef,
+        passwordRef,
+        passwordConfirmRef,
+        errorMessage,
+        setEmail,
+        setFirstname,
+        setLastname,
+        setPassword,
+        setPasswordConfirm,
+        setHouseNumber,
+        setStreet,
+        setCity,
+        setZipCode,
+        setCountry,
+        setAgencyName,
+        email,
+        firstname,
+        lastname,
+        password,
+        passwordConfirm,
+        houseNumber,
+        street,
+        city,
+        zipCode,
+        country,
+        agencyName,
+        handleKeyDown
+    };
+};
