@@ -88,7 +88,7 @@ export const TaskLayout = (
 
     return (
         <>
-            <form id={task.id} className={"flex items-center justify-between"}>
+            <form id={task.id} className={"flex items-center justify-between max-lg:gap-2"}>
                 <Input defaultValue={task.name} onChange={handleChangeTaskName} className={"bg-grey-600 p-m w-fit grey-100"}/>
                 <EmployeesLayout isLink={isLink} handleAssignEmployeeToApi={handleAssignEmployeeToApi}
                                  selectedEmployees={selectedEmployees} setSelectedEmployees={setSelectedEmployees}/>

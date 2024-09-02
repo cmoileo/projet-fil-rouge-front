@@ -7,7 +7,7 @@ export const EmployeesOverviewLayout = () => {
         fetchEmployee();
     }, []);
     return (
-        <div className={"w-[43%] sticky top-4 h-fit"}>
+        <div className={"lg:w-[43%] sticky top-4 h-fit"}>
             <h2 className={"h4 grey-200"}>Employees overview</h2>
             <div className={"grid grid-cols-3 gap-10 margin-500-top justify-items-center"}>
                 {

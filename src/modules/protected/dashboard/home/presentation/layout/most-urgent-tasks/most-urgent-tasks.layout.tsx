@@ -7,9 +7,9 @@ export const MostUrgentTasksLayout = () => {
     const {mostUrgentTasks} = useMostUrgentTasksViewModel();
     const {fetchProject} = useSingleProject()
     return (
-        <div className={"w-[52%] pr-[3%] border-r-2 border-right-grey-700 overflow-x-auto"}>
+        <div className={"lg:w-[52%] pr-[3%] lg:border-r-2 lg:border-right-grey-700 overflow-x-auto"}>
             <h2 className={"h4 grey-200"}>Most urgent tasks</h2>
-            <div className={"flex flex-col gap-600 margin-500-top"}>
+            <div className={"flex max-lg:overflow-x-auto flex-col gap-600 margin-500-top"}>
                 {
                     mostUrgentTasks?.map((task: TaskType) => (
                         <div key={task.id}>
