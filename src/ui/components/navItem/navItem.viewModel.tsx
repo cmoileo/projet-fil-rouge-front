@@ -67,11 +67,11 @@ export const useNavitem = (
 
     const openChevron = (el: Element, parentUl: HTMLElement) => {
         el.classList.remove("-rotate-90");
-        parentUl.classList.remove("h-[33px]");
+        parentUl.classList.remove("h-[40px]");
     }
     const closeChevron = (el: Element, parentUl: HTMLElement) => {
         el.classList.add("-rotate-90");
-        parentUl.classList.add("h-[33px]");
+        parentUl.classList.add("h-[40px]");
     }
 
     const ItemType = 'LI';

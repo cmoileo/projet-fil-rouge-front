@@ -1,4 +1,4 @@
-import {FormEvent, useEffect, useRef, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {SignUpDto} from "../../../domain/dto/Signup.dto.ts";
 import {handleSignup} from "../../../domain/use-case/handleSignup.usecase.ts";
@@ -19,14 +19,18 @@ export const useSignUpViewModel = () => {
     const [zipCode, setZipCode] = useState('');
     const [country, setCountry] = useState('');
     const [agencyName, setAgencyName] = useState('');
+    const [isAvatar, setIsAvatar] = useState<string | undefined>()
 
     const emailRef = useRef<HTMLInputElement>(null);
     const firstnameRef = useRef<HTMLInputElement>(null);
     const lastnameRef = useRef<HTMLInputElement>(null);
     const passwordRef = useRef<HTMLInputElement>(null);
     const passwordConfirmRef = useRef<HTMLInputElement>(null);
+    const imageInputRef = React.useRef<HTMLInputElement>(null);
+
 
     const handleGoesForward = () => {
+        console.log(imageInputRef)
         if (password !== passwordConfirm) {
             setErrorMessage('Passwords must match !');
             return;
@@ -68,7 +72,7 @@ export const useSignUpViewModel = () => {
         }
     };
 
-    const handleSubmitForm = async (e: FormEvent) => {
+    const handleSubmitForm = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         console.log('submitting form');
         if (
@@ -93,7 +97,9 @@ export const useSignUpViewModel = () => {
             country,
             firstname,
             lastname,
+            avatar: isAvatar ? isAvatar as string : null,
         };
+        console.log(isAvatar);
         const submitedForm = await handleSignup(data);
         if (!submitedForm) {
             return console.error('Form not submitted');
@@ -134,6 +140,9 @@ export const useSignUpViewModel = () => {
         zipCode,
         country,
         agencyName,
-        handleKeyDown
+        handleKeyDown,
+        imageInputRef,
+        isAvatar,
+        setIsAvatar
     };
 };

@@ -10,4 +10,5 @@ export type SignUpDto = {
     country: string;
     firstname: string;
     lastname: string;
+    avatar: string | null;
 }

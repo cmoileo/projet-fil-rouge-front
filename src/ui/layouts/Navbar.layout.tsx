@@ -44,7 +44,7 @@ export const Navbar = () => {
 
     const renderFolderItems = (folder: FolderType): JSX.Element => {
         return (
-            <ul className={"flex flex-col gap-100 select-none h-[33px] overflow-hidden"}>
+            <ul className={"flex lg:flex-col gap-100 select-none h-[40px] lg:overflow-hidden"}>
                 <NavItem folders={folders} setFolders={setFolders} navbarRef={navbarRef} id={folder.id} key={folder.id} name={folder.name} className={`padding-400-left p-m`} isPlusIcon={true}/>
                 {folder.projects && folder.projects.map(project => (
                     <NavItem folders={folders} setFolders={setFolders} project={project} id={folder.id} key={project.id} name={project.name} path={`/dashboard/project/${project.id}`}
@@ -61,9 +61,9 @@ export const Navbar = () => {
 
 
     return (
-        <nav ref={navbarRef} className={"sticky overflow-y-hidden top-0 bg-grey-800 h-screen min-w-fit padding-1000-bottom padding-200 flex flex-col justify-between overflow-x-hidden scrollbar-hide"}>
-            <div className="flex flex-col gap-1000">
-                <ul className={"flex flex-col w-60 gap-300 margin-600-top overflow-x-hidden scrollbar-hide"}>
+        <nav ref={navbarRef} className={"lg:sticky lg:overflow-y-hidden max-lg:overflow-x-auto max-lg:min-w-full max-lg:flex-row top-0 bg-grey-800 lg:h-screen min-w-fit lg:padding-1000-bottom padding-200 flex flex-col justify-between lg:overflow-x-hidden scrollbar-hide"}>
+            <div className="flex max-lg:flex-row max-lg:h-fit flex-col lg:gap-16">
+                <ul className={"flex max-lg:h-fit flex-col max-lg:flex-row w-60 gap-300 lg:mt-8 max-lg:mt-4 max-lg:ml-2 lg:overflow-x-hidden scrollbar-hide"}>
                     {
                         navItems1.map((item, index) => (
                             <NavItem icon={item.icon} id={`nav-item-${index}`} key={index} name={item.name} path={item.path}
@@ -72,11 +72,11 @@ export const Navbar = () => {
                 </ul>
                 <div>
                 </div>
-                <ul className={"flex max-h-[70vh] overflow-y-auto padding-1000-bottom scrollbar-hide flex-col w-60 gap-300"}>
+                <ul className={"flex max-lg:mt-3 lg:max-h-[70vh] max-lg:flex-row max-lg:h-fit lg:overflow-y-auto lg:padding-1000-bottom scrollbar-hide flex-col lg:w-60 max-lg:w-fit gap-300"}>
                     <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
                         <PopoverTrigger>
                             <div
-                                className={"transition padding-200-x padding-300-left hover-bg-grey-700 border-radius-200 cursor-pointer flex justify-between items-center"}>
+                                className={"transition padding-200-x padding-300-left max-lg:mt-2 hover-bg-grey-700 border-radius-200 cursor-pointer flex justify-between items-center"}>
                                 <div className={"flex gap-300 items-center"}>
                                     <FolderIcon color={"lightgrey"} />
                                     <p className="p-l grey-200">Folders</p>
@@ -98,10 +98,10 @@ export const Navbar = () => {
                     ))}
                 </ul>
             </div>
-            <Link className={"absolute transition hover-bg-grey-700 w-full bg-grey-800 padding-200-top bottom-0 left-0"} to={"/dashboard/account"}>
+            <Link className={"lg:absolute max-lg:mt-2 max-lg:h-fit transition hover-bg-grey-700 w-full bg-grey-800 padding-200-top bottom-0 left-0"} to={"/dashboard/account"}>
                 <div className="flex items-center gap-400 padding-300-bottom padding-300-left">
                          <CircleUserRound color={"lightgrey"} className={"cursor-pointer w-8 h-8"} />
-                         <p className="p-xs grey-300">{account?.email}</p>
+                         <p className="p-xs grey-300">{account?.firstname} {account?.lastname}</p>
                 </div>
             </Link>
         </nav>

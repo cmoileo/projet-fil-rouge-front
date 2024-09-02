@@ -51,7 +51,7 @@ export const NavItem: React.FC<NavItemProps> = (
         navbarRef,
         icon
     }) => {
-    const baseStyle = "select-none grow transition blue-1000 border-radius-100 padding-200-x cursor-pointer padding-100-y flex justify-between hover-bg-grey-700 items-center group";
+    const baseStyle = "select-none grow transition max-lg:h-fit blue-1000 max-lg:mt-2 border-radius-100 padding-200-x cursor-pointer padding-100-y flex justify-between hover-bg-grey-700 items-center group";
     const iconStyle = "text-200 transition hover-bg-grey-700 border-radius-200";
     const chevronIconRef = React.useRef<HTMLDivElement>(null);
     const formRef = React.useRef<HTMLFormElement>(null);
@@ -65,7 +65,7 @@ export const NavItem: React.FC<NavItemProps> = (
 
     const linkElement = path ? (
         <div className={cn(baseStyle, className)}>
-            <Link ref={drag} to={path} className={"w-full flex gap-300 items-start"}>
+            <Link ref={drag} to={path} className={"w-full flex gap-300 items-center"}>
                 {icon}
                 <p className={"p-s grey-300"}>
                     {name}
@@ -107,7 +107,7 @@ export const NavItem: React.FC<NavItemProps> = (
                         {
                             !isEditFolderName && isChevron && (
                                 <div ref={chevronIconRef} onClick={chevronClickHandler} className={iconStyle}>
-                                    <ChevronDownIcon color={"lightgrey"} className={"transition -rotate-90"}/>
+                                    <ChevronDownIcon color={"lightgrey"} className={"transition max-lg:hidden -rotate-90"}/>
                                 </div>
                             )
                         }
