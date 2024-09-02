@@ -13,7 +13,7 @@ export const TaskPercentageLayout = (
     const {handleChangePercentage} = useTaskPercentage();
 
     return (
-        <div>
+        <div className={"max-lg:w-full"}>
             <Slider
                 max={100}
                 step={1}

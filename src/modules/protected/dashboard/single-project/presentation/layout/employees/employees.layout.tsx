@@ -41,7 +41,7 @@ export const EmployeesLayout = (
     return (
         <Popover>
             <PopoverTrigger asChild>
-                <div className={"flex gap-400 items-center"}>
+                <div className={"flex gap-400 max-lg:w-full items-center"}>
                     <div className={"flex gap-200 items-center"}>
                         {
                             selectedEmployees.length > 0 && selectedEmployees.map((selectedEmployee) => (
@@ -67,7 +67,7 @@ export const EmployeesLayout = (
                         }
                     </div>
                     {
-                        !isLink && <MainButton type={"button"}>
+                        !isLink && <MainButton className={"max-lg:w-full"} type={"button"}>
                             {
                                 selectedEmployees.length > 0 ? <PlusIcon></PlusIcon> : "Select Employees"
                             }

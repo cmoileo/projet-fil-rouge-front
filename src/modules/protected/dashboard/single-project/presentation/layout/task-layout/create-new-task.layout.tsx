@@ -36,15 +36,15 @@ export const CreateNewTaskLayout = (
     const {handleCreateTask, formRef} = useCreateNewTask({beginDate, endDate, selectedEmployees, categoryId, taskNameRef, setProject, projectId, setCategoryId, setSelectedEmployees})
 
     return (
-        <form ref={formRef} className={'absolute bottom-8 flex w-[75%] flex-col gap-500'} onSubmit={handleCreateTask}>
-            <div className={"flex gap-400 justify-between"}>
-                <Input ref={taskNameRef} className={"w-fit grey-200"} required type={"text"} placeholder={"Task name"}></Input>
+        <form ref={formRef} className={'lg:absolute lg:bottom-8 max-lg:mt-10 flex lg:w-[75%] max-lg:w-[90%] flex-col gap-500'} onSubmit={handleCreateTask}>
+            <div className={"flex gap-400 justify-between max-lg:flex-col"}>
+                <Input ref={taskNameRef} className={"w-fit grey-200 max-lg:w-full"} required type={"text"} placeholder={"Task name"}></Input>
                 <Popover open={isBeginOpen} onOpenChange={setIsBeginOpen}>
                     <PopoverTrigger asChild>
                         <MainButton
                             variant={"outline"}
                             className={cn(
-                                "w-[280px] justify-start text-left font-normal p-xs bg-grey-700 border-grey-600 grey-200",
+                                "lg:w-[280px] max-lg:w-full justify-start text-left font-normal p-xs bg-grey-700 border-grey-600 grey-200",
                                 !beginDate && "text-muted-foreground"
                             )}
                         >
@@ -68,7 +68,7 @@ export const CreateNewTaskLayout = (
                         <MainButton
                             variant={"outline"}
                             className={cn(
-                                "w-[280px] justify-start text-left font-normal p-xs bg-grey-700 border-grey-600 grey-200",
+                                "w-[280px] max-lg:w-full justify-start text-left font-normal p-xs bg-grey-700 border-grey-600 grey-200",
                                 !endDate && "text-muted-foreground"
                             )}
                         >
@@ -91,7 +91,7 @@ export const CreateNewTaskLayout = (
 
                 <TaskCategoryLayout setCategoryId={setCategoryId} taskId={undefined} categoryId={categoryId} />
             </div>
-            <SecondaryButton type={"submit"} className={"w-full bg-grey-700 grey-100"}>Add new Task</SecondaryButton>
+            <SecondaryButton type={"submit"} className={"w-full bg-grey-300 grey-100"}>Add new Task</SecondaryButton>
         </form>
     )
 }
