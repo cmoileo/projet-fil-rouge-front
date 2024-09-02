@@ -8,7 +8,7 @@ import {JobPillViewLayout} from "./job-pill-view.layout.tsx";
 export const JobsViewLayout = () => {
     const {jobs, handleSubmit, isOpen, setIsOpen, setJobs} = useJobs();
     return (
-        <div className={"sticky top-0"}>
+        <div className={"sticky top-0 max-lg:flex max-lg:flex-col max-lg:items-center"}>
             <Popover open={isOpen} onOpenChange={setIsOpen}>
                 <PopoverTrigger asChild>
                     <MainButton children={"Add a job"} />

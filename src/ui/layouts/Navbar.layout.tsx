@@ -61,7 +61,7 @@ export const Navbar = () => {
 
 
     return (
-        <nav ref={navbarRef} className={"lg:sticky lg:overflow-y-hidden max-lg:overflow-x-auto max-lg:min-w-full max-lg:flex-row top-0 bg-grey-800 lg:h-screen min-w-fit lg:padding-1000-bottom padding-200 flex flex-col justify-between lg:overflow-x-hidden scrollbar-hide"}>
+        <nav ref={navbarRef} className={"sticky z-10 lg:overflow-y-hidden max-lg:overflow-x-auto max-lg:min-w-full max-lg:flex-row top-0 bg-grey-800 lg:h-screen min-w-fit lg:padding-1000-bottom padding-200 flex flex-col justify-between lg:overflow-x-hidden scrollbar-hide"}>
             <div className="flex max-lg:flex-row max-lg:h-fit flex-col lg:gap-16">
                 <ul className={"flex max-lg:h-fit flex-col max-lg:flex-row w-60 gap-300 lg:mt-8 max-lg:mt-4 max-lg:ml-2 lg:overflow-x-hidden scrollbar-hide"}>
                     {
