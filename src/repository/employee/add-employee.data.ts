@@ -13,7 +13,11 @@ export const addEmployeeData = async (data: AddEmployeeDto) => {
             },
             body: JSON.stringify(data),
         })
-    const json = await res.json();
+        const json = await res.json();
+        if (json.status !== 200) {
+            toast(json.message)
+            return
+        }
         toast('✅ Employee added successfully')
     return json;
     } catch (error) {
