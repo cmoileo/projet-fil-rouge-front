@@ -12,8 +12,12 @@ import {SingleProjectPage} from "./modules/protected/dashboard/single-project/pr
 import {HomePage} from "./modules/protected/dashboard/home/presentation/Page.tsx";
 import {Bounce, ToastContainer} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import {useEffect} from "react";
 
 function App() {
+    useEffect(() => {
+        document.title = 'Task Pilot';
+    }, []);
     const router = createBrowserRouter([
         {
             path: "/signin",
