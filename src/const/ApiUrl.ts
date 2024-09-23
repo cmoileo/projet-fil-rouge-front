@@ -1,4 +1,4 @@
-const BaseUrl = 'http://localhost:3000'
+const BaseUrl = 'https://fil-rouge-api.onrender.com';
 
 export const ApiUrl = {
     Auth: {
