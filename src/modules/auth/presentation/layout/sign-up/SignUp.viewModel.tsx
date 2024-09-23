@@ -30,11 +30,6 @@ export const useSignUpViewModel = () => {
 
 
     const handleGoesForward = () => {
-        console.log(imageInputRef)
-        if (password !== passwordConfirm) {
-            setErrorMessage('Passwords must match !');
-            return;
-        }
         if (
             !email ||
             !firstname ||
@@ -49,15 +44,29 @@ export const useSignUpViewModel = () => {
         setStep(step + 1);
     };
 
-    useEffect(() => {
-        handleFillPassword();
-    }, [password, passwordConfirm]);
-    const handleFillPassword = () => {
+    const typePasswordConfirmInput = () => {
+        if (password !== passwordConfirm) {
+            setErrorMessage('Passwords must match !');
+            return;
+        }
+    }
+    const typePasswordInput = () => {
         if (!password.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W).*$/)) {
             setErrorMessage('Password must contain at least one uppercase letter, one lowercase letter, one number and one special character.')
             return;
-        } else if ((!password || !passwordConfirm) || password !== passwordConfirm) {
-            setErrorMessage('Passwords must match !')
+        } else {
+            setErrorMessage('')
+        }
+    }
+
+    useEffect(() => {
+        handleFillPassword();
+        typePasswordInput()
+        typePasswordConfirmInput()
+    }, [password, passwordConfirm]);
+    const handleFillPassword = () => {
+        if ((!password || !passwordConfirm) || password !== passwordConfirm) {
+            // setErrorMessage('Passwords must match !')
             return;
         } else {
             setErrorMessage('')
@@ -143,6 +152,8 @@ export const useSignUpViewModel = () => {
         handleKeyDown,
         imageInputRef,
         isAvatar,
-        setIsAvatar
+        setIsAvatar,
+        typePasswordInput,
+        typePasswordConfirmInput,
     };
 };

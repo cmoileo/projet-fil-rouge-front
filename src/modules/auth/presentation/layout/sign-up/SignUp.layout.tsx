@@ -7,7 +7,7 @@ import Countries from "./countries.json"
 import {Image} from "lucide-react";
 
 const SignUpLayout = () => {
-    const { handleSubmitForm, isAvatar, setIsAvatar, step, setStep, imageInputRef, handleGoesForward, errorMessage, email, setEmail, firstname, setFirstname, lastname, setLastname, password, setPassword, passwordConfirm, setPasswordConfirm, houseNumber, setHouseNumber, street, setStreet, city, setCity, zipCode, setZipCode, country, setCountry, agencyName, setAgencyName, handleKeyDown } = useSignUpViewModel();
+    const { handleSubmitForm, isAvatar, setIsAvatar, step, setStep, imageInputRef, handleGoesForward, errorMessage, email, setEmail, firstname, setFirstname, lastname, setLastname, password, setPassword, passwordConfirm, setPasswordConfirm, houseNumber, setHouseNumber, street, setStreet, city, setCity, zipCode, setZipCode, country, setCountry, agencyName, setAgencyName, handleKeyDown, typePasswordConfirmInput, typePasswordInput } = useSignUpViewModel();
     const handleAvatarChange = (e: any) => {
         if (e.target.files && e.target.files[0]) {
             const reader = new FileReader();
@@ -38,10 +38,16 @@ const SignUpLayout = () => {
                         <Input value={lastname} onChange={(e) => setLastname(e.target.value)} autoComplete={'family-name'}
                                name={"lastname"} type={"text"} placeholder={"Enter your lastname"} required/>
                         <label className={"p-m grey-100"} htmlFor="password">Password*</label>
-                        <Input value={password} onChange={(e) => setPassword(e.target.value)} name={"password"}
+                        <Input value={password} onChange={(e) => {
+                            setPassword(e.target.value);
+                            typePasswordInput();
+                        }} name={"password"}
                                type={"password"} placeholder={"Enter your password"} required/>
                         <label className={"p-m grey-100"} htmlFor="passwordConfirm">Confirm Password*</label>
-                        <Input value={passwordConfirm} onChange={(e) => setPasswordConfirm(e.target.value)}
+                        <Input value={passwordConfirm} onChange={(e) => {
+                            setPasswordConfirm(e.target.value);
+                            typePasswordConfirmInput();
+                        }}
                                name={"passwordConfirm"} type={"password"} placeholder={"Confirm your password"} required/>
                         <div className="flex items-center margin-500-left gap-500 margin-600-top">
                             <div className={"relative"}>

@@ -24,6 +24,7 @@ export const useRegisterEmployee = () => {
 
         const registeredEmployee: {token: string; role: string; userId: string} | boolean = await registerEmployeeData(data, params)
         if (registeredEmployee) {
+            console.log(registeredEmployee)
             cookieManager.setCookie(registeredEmployee.token, "token", 30)
             cookieManager.setCookie(registeredEmployee.role, "role", 30)
             cookieManager.setCookie(registeredEmployee.userId, "userId", 30)
