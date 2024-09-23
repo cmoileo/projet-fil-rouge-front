@@ -1,8 +1,9 @@
 import {cookieManager} from "../../services/coockies/CoockieManager.service.ts";
+import {ApiUrl} from "../../const/ApiUrl.ts";
 
 export const getTaskCategoriesData = async() => {
     try {
-        const res = await fetch('http://localhost:3000/task-categories', {
+        const res = await fetch(ApiUrl.TaskCategory.Get, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
