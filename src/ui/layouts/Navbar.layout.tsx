@@ -99,17 +99,18 @@ export const Navbar = () => {
                 </ul>
             </div>
             <div className={"lg:absolute flex lg:flex-col gap-300 max-lg:mt-2 max-lg:h-fit bottom-0 left-0 w-full"}>
+                <Link
+                    className={"transition hover-bg-grey-700 w-full bg-grey-800 padding-200-top"}
+                    to={"/dashboard/account"}>
+                    <div className="flex items-center gap-400 padding-300-bottom padding-300-left">
+                        <CircleUserRound color={"lightgrey"} className={"cursor-pointer w-8 h-8"}/>
+                        <p className="p-xs grey-300">{account?.firstname} {account?.lastname}</p>
+                    </div>
+                </Link>
                 <div onClick={handleLogout} className={"flex cursor-pointer gap-200 padding-400-left"}>
                     <LogOutIcon color={'white'}></LogOutIcon>
                     <p className={'p-xs grey-300'}>Logout</p>
                 </div>
-                <Link
-                    className={"transition hover-bg-grey-700 w-full bg-grey-800 padding-200-top"} to={"/dashboard/account"}>
-                    <div className="flex items-center gap-400 padding-300-bottom padding-300-left">
-                        <CircleUserRound color={"lightgrey"} className={"cursor-pointer w-8 h-8"} />
-                        <p className="p-xs grey-300">{account?.firstname} {account?.lastname}</p>
-                    </div>
-                </Link>
             </div>
         </nav>
     );

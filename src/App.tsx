@@ -17,6 +17,9 @@ import {useEffect} from "react";
 function App() {
     useEffect(() => {
         document.title = 'Task Pilot';
+        if (window.location.pathname === "/") {
+            window.location.pathname = localStorage.getItem('token') ? "/dashboard" : "/onboarding";
+        }
     }, []);
     const router = createBrowserRouter([
         {
