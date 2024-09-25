@@ -6,6 +6,10 @@ class CookieManagerService {
         document.cookie = cookieName + "=" + value + ";" + expires + ";path=/";
     }
 
+    deleteCookie(cookieName: string) {
+        document.cookie = cookieName + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    }
+
     getCookie(cookieName: string): string | null {
         const name = cookieName + "=";
         const decodedCookie = decodeURIComponent(document.cookie);

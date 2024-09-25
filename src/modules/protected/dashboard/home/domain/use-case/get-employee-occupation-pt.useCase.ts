@@ -12,5 +12,6 @@ export const getEmployeeOccupationPtUseCase = (employee: EmployeeDto): number =>
     })
     const totalDurationInDays = tasksTime.map(taskTime => taskTime / (1000 * 60 * 60 * 24)).reduce((acc, duration) => acc + duration, 0)
     const occupationPt = totalDurationInDays / nexMonthDays * 100
+    console.log(assignedTasks)
     return occupationPt < 100 ? occupationPt : 100
 }
